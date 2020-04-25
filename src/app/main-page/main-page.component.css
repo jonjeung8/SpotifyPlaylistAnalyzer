@@ -1,0 +1,86 @@
+.mainPageContent
+{
+    padding-top: 50;
+    width: 95%;
+    margin: auto;
+    text-align: center;
+}
+
+.mainPageTitle
+{
+    font-size: 24px;
+    font-weight: normal;
+    color: #efefef;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.mainPageTitle h1
+{
+    display: inline-block;
+    padding: 5px;
+    background-color: #000;
+}
+
+.mainPageInfoBox
+{
+    border-radius: 50px;
+    overflow: hidden;
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.mainPageInfoBox .infoBoxSubmitButton, .mainPageInfoBox .infoBoxTextField, .mainPageInfoBox .infoBoxBearerToken
+{
+    display: inline-block;
+    padding: 15px;
+    font-size: 16px;
+    border: none;
+}
+
+.mainPageInfoBox .infoBoxSubmitButton
+{
+    background-color: rgb(26, 26, 26);
+    color: #fff;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.mainPageInfoBox .infoBoxSubmitButton:hover
+{
+    background-color: rgb(255, 174, 0);
+}
+
+.mainPageInfoBox .infoBoxTextField
+{
+    width: 350px;
+}
+
+.mainPageInfoBox .infoBoxTextField:focus
+{
+    outline: 0;
+}
+
+.mainPageInfoBox .infoBoxBearerToken
+{
+    width: 400px;
+}
+
+.mainPageInfoBox .infoBoxBearerToken:focus
+{
+    outline: 0;
+}
+
+.responseBox
+{
+    width:650px;
+    min-height: 400px;
+    margin: auto;
+    margin-bottom: 20px;
+    background-color: rgb(19, 19, 19);
+    color: #00d100;
+    padding: 10px;
+    border-radius: 8px;
+    word-wrap: break-word;
+    text-align: left;
+}

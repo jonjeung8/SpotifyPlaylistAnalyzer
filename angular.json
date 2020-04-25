@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "SpotifyPlaylistAnalyzer"
+    }
+  },
+  "defaultProject": "SpotifyPlaylistAnalyzer",
+  "cli": {
+    "analytics": false
+  }
 }
