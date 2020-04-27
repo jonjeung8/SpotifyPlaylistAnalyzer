@@ -84,3 +84,25 @@
     word-wrap: break-word;
     text-align: left;
 }
+
+
+
+.responseTrack
+{
+    padding: 5px;
+    border-radius: 50px;
+    background-color: #efefef;
+
+    width: 95%;
+    margin: 5px auto 5px auto;
+}
+
+.responseTrack p
+{
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left:5px;
+    color: #333;
+
+    padding-left: 10px;
+}

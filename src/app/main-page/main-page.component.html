@@ -19,7 +19,23 @@
    <h2>Response:</h2>
    
    <div class="responseBox dropShadow">
-        <code>{{apiResponse | json}}</code>
+        <!--<code>{{apiResponse}}</code>-->
+
+        <div *ngIf="userPlaylist && userPlaylist.tracks">
+          <p>TrackNames:</p>
+          <div class="responseTrack" *ngFor="let track of userPlaylist.tracks">
+              <p>
+                    Track Name: {{track.name}} 
+               </p>
+               <p>
+                    Album: {{track.album.name}}
+               </p>
+<!-- 
+               <a href={{track.href}} target="_blank">{{track.name}}</a>
+               <a href={{track.album.href}} target="_blank">{{track.album.name}}</a> -->
+          </div>
+        </div>
+
    </div>
 </div>
 

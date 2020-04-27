@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SpotifyApiServiceService } from '../_services/spotify-api-service.service';
+import { Playlist } from '../_models/Playlist';
+import { Track } from '../_models/Track';
+import { Album } from '../_models/album';
 
 @Component({
   selector: 'app-main-page',
@@ -13,9 +16,13 @@ export class MainPageComponent implements OnInit {
 
   apiResponse: string;
 
+  userPlaylist: Playlist;
+
   constructor(private spotifyApi: SpotifyApiServiceService) { 
 
     this.linkSubmitStr = "";
+    this.userPlaylist = new Playlist();
+    this.userPlaylist.tracks = new Array<Track>();
   }
 
 
@@ -32,6 +39,33 @@ export class MainPageComponent implements OnInit {
       response => {
         this.apiResponse = JSON.stringify(response);
         console.log("Api call recieved");
+
+        if(response.items)
+        {
+        
+          this.userPlaylist.tracks = new Array<Track>();
+
+          for(let item of response.items)
+          {
+            // Get the album data, get the track data
+            let tmpTrack = new Track();
+            tmpTrack.href = item.track.href;
+            tmpTrack.name = item.track.name;
+            console.log(item.track.name);
+            if(item.track.album)
+            {
+              let tmpAlbum = new Album();
+              tmpAlbum.href = item.track.album.href;
+              tmpAlbum.name = item.track.album.name;
+
+              tmpTrack.album = tmpAlbum;
+            }
+            
+            this.userPlaylist.tracks.push(tmpTrack);
+            
+          }
+        }
+
       }
     )
 
