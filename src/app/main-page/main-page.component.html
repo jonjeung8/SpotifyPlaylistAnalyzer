@@ -4,12 +4,12 @@
    </div>
    <div class="mainPageInfoBox dropShadow">
         <!--Playlist button-->
-        <button class="infoBoxSubmitButton" (click)="AnalysisButtonClicked()">Analyze Playlist</button>
+        <app-category-selector></app-category-selector>
         <input type="url" name="linkSubmit" id="linkSubmit" [(ngModel)]="linkSubmitStr" [value]="linkSubmitStr" class="infoBoxTextField" placeholder="enter playlist id here">
-        
+        <button class="infoBoxSubmitButton" (click)="AnalysisButtonClicked()">Analyze Playlist</button>
    </div>
    <div>
-        <div class="mainPageInfoBox dropShadow">
+        <div class="mainPageInfoBox">
             <!--Bearer token input-->
             <input type="text" name="bearerToken" id="bearerToken" [(ngModel)]="bearerTokenStr" [value]="bearerTokenStr" class="infoBoxBearerToken" placeholder="enter bearer token">
         </div>

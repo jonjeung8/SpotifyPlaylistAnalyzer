@@ -3,6 +3,8 @@ import { SpotifyApiServiceService } from '../_services/spotify-api-service.servi
 import { Playlist } from '../_models/Playlist';
 import { Track } from '../_models/Track';
 import { Album } from '../_models/album';
+//components
+import { CategorySelectorComponent } from '../main-page/category-selector/category-selector.component';
 
 @Component({
   selector: 'app-main-page',
