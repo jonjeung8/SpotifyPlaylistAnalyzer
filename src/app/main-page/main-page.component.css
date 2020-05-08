@@ -80,10 +80,9 @@
   width:85%;
   min-height: 400px;
   margin: auto;
-  margin-bottom: 20px;
   background-color: rgb(19, 19, 19);
   color: #00d100;
-  padding: 10px;
+  padding: 10px 10px 0px 10px;
   border-radius: 8px;
   word-wrap: break-word;
   text-align: left;
@@ -124,8 +123,8 @@
 .tracklist
 {
   margin:0 auto;
-  padding:5px; 
-  max-height: 550px; 
+  padding:5px;
+  height: 550px;
   overflow: auto; 
   text-align:justify; 
 }
