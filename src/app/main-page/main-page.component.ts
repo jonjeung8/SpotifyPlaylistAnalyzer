@@ -6,29 +6,44 @@ import { Album } from '../_models/album';
 //components
 import { CategorySelectorComponent } from '../main-page/category-selector/category-selector.component';
 
+
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.css']
 })
+
 export class MainPageComponent implements OnInit {
 
-  linkSubmitStr : string;
+  linkSubmitStr: string;
   bearerTokenStr: string;
-
+  widgetSubmitStr: string;
   apiResponse: string;
+  hidden: boolean;
 
   userPlaylist: Playlist;
 
   constructor(private spotifyApi: SpotifyApiServiceService) { 
 
     this.linkSubmitStr = "";
+    this.widgetSubmitStr = "";
     this.userPlaylist = new Playlist();
     this.userPlaylist.tracks = new Array<Track>();
+    this.hidden = true;
   }
-
+  
 
   ngOnInit(): void {
+  }
+
+  FunctionsOnClick()
+  {
+    this.AnalysisButtonClicked();
+  }
+
+  ShowPlaylistElements()
+  {
+    this.hidden = false;
   }
 
   AnalysisButtonClicked()
@@ -44,7 +59,7 @@ export class MainPageComponent implements OnInit {
 
         if(response.items)
         {
-        
+          this.widgetSubmitStr = "https://open.spotify.com/embed/playlist/" + this.linkSubmitStr;
           this.userPlaylist.tracks = new Array<Track>();
 
           for(let item of response.items)
@@ -66,11 +81,9 @@ export class MainPageComponent implements OnInit {
             this.userPlaylist.tracks.push(tmpTrack);
             
           }
+          this.ShowPlaylistElements();
         }
-
       }
-    )
-
+    );
   }
-
 }

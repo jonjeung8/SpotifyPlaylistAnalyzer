@@ -7,13 +7,15 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TestComponentComponent } from './_test/test-component/test-component.component';
 import { CategorySelectorComponent } from './main-page/category-selector/category-selector.component';
+import { SafePipe } from './safe.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainPageComponent,
     TestComponentComponent,
-    CategorySelectorComponent
+    CategorySelectorComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,
