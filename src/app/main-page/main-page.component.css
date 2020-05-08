@@ -110,3 +110,12 @@
 
     padding-left: 10px;
 }
+
+.mainPageInfoBox .loginBox
+{
+    width: 50px;
+    height: 25px;
+    margin: auto;
+    margin-top: 2px;
+    cursor: pointer;
+}

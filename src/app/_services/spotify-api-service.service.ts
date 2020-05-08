@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 import { map } from 'rxjs/operators';
 
@@ -48,4 +49,51 @@ export class SpotifyApiServiceService {
       )
     );
   }
+
+  LoginRedirect()
+  {
+    //===================
+    // client id:
+    //===================
+    var client_id = environment.client_id_key 
+
+    //===================
+    // redirect uri:
+    //===================
+    var redirect_uri = 'http://localhost:4200/'
+    
+    //===================
+    // scope:
+    //===================
+    var scope = 'user-read-private%20user-read-email';
+    
+    //===================
+    // state:
+    //===================
+    var state = 123;
+
+
+    //===================
+    // url:
+    //===================
+    var url = 'https://accounts.spotify.com/authorize';
+    url += '?client_id=' + client_id;
+    url += '&redirect_uri=' + redirect_uri;
+    url += '&scope=' + scope;
+    url += '&response_type=token';
+    url += '&state=' + state;
+    
+    //====================
+    // Actual API call:
+    //====================
+    return this.http.get<any>(url)
+    .pipe(
+      map (
+        response => {
+          return response;
+        }
+      )
+    );
+  }
+
 }

@@ -72,5 +72,15 @@ export class MainPageComponent implements OnInit {
     )
 
   }
-
+  LoginButtonClicked()
+  {
+    console.log("Calling to spotify login api service");
+    this.spotifyApi.LoginRedirect()
+    .subscribe(
+      response => {
+        this.apiResponse = JSON.stringify(response);
+        console.log("Api call recieved");
+      }
+    )
+  }
 }
