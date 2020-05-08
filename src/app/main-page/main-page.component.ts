@@ -1,10 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { SpotifyApiServiceService } from '../_services/spotify-api-service.service';
 import { Playlist } from '../_models/Playlist';
 import { Track } from '../_models/Track';
 import { Album } from '../_models/album';
 //components
 import { CategorySelectorComponent } from '../main-page/category-selector/category-selector.component';
+
 
 @Component({
   selector: 'app-main-page',
@@ -20,7 +23,10 @@ export class MainPageComponent implements OnInit {
 
   userPlaylist: Playlist;
 
-  constructor(private spotifyApi: SpotifyApiServiceService) { 
+  constructor(
+    private spotifyApi: SpotifyApiServiceService,
+    private router: Router
+    ) { 
 
     this.linkSubmitStr = "";
     this.userPlaylist = new Playlist();
@@ -29,6 +35,8 @@ export class MainPageComponent implements OnInit {
 
 
   ngOnInit(): void {
+    console.log(this.router.url);
+
   }
 
   AnalysisButtonClicked()
@@ -75,12 +83,14 @@ export class MainPageComponent implements OnInit {
   LoginButtonClicked()
   {
     console.log("Calling to spotify login api service");
-    this.spotifyApi.LoginRedirect()
+    /*this.spotifyApi.LoginRedirect()
     .subscribe(
       response => {
         this.apiResponse = JSON.stringify(response);
         console.log("Api call recieved");
       }
-    )
+    )*/
+    window.location.href = this.spotifyApi.LoginRedirect();
+
   }
 }

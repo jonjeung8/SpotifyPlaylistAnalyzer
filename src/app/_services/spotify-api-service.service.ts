@@ -50,7 +50,7 @@ export class SpotifyApiServiceService {
     );
   }
 
-  LoginRedirect()
+  LoginRedirect(): string
   {
     //===================
     // client id:
@@ -60,13 +60,13 @@ export class SpotifyApiServiceService {
     //===================
     // redirect uri:
     //===================
-    var redirect_uri = 'http://localhost:4200/'
-    
+    //var redirect_uri = 'http:%2F%2Flocalhost%3A4200%2F'
+    var redirect_uri = 'http://localhost:4200/callback';
     //===================
     // scope:
     //===================
-    var scope = 'user-read-private%20user-read-email';
-    
+    //var scope = 'user-read-private%20user-read-email';
+    var scope = 'user-read-private user-read-email';
     //===================
     // state:
     //===================
@@ -77,23 +77,32 @@ export class SpotifyApiServiceService {
     // url:
     //===================
     var url = 'https://accounts.spotify.com/authorize';
-    url += '?client_id=' + client_id;
-    url += '&redirect_uri=' + redirect_uri;
-    url += '&scope=' + scope;
+    url += '?client_id=' + encodeURIComponent(client_id);
+    url += '&redirect_uri=' + encodeURIComponent(redirect_uri);
+    url += '&scope=' + encodeURIComponent(scope);
     url += '&response_type=token';
-    url += '&state=' + state;
+    url += '&state=' + encodeURIComponent(state);
     
+    //==================
+    // Header:
+    //==================
+    //let httpOptions = { headers :new HttpHeaders({"Content-Type": "application/json", "Accept":"application/json"}) };
+
+
     //====================
     // Actual API call:
     //====================
-    return this.http.get<any>(url)
+    /*return this.http.get<any>(url, httpOptions)
     .pipe(
       map (
         response => {
           return response;
         }
       )
-    );
+    );*/
+
+    return url;
+
   }
 
 }
