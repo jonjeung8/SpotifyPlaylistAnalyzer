@@ -1,12 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { SpotifyApiServiceService } from '../_services/spotify-api-service.service';
 import { Playlist } from '../_models/Playlist';
 import { Track } from '../_models/Track';
 import { Album } from '../_models/album';
+import { Callback } from '../_models/logincallback'
 //components
 import { CategorySelectorComponent } from '../main-page/category-selector/category-selector.component';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
@@ -23,9 +25,12 @@ export class MainPageComponent implements OnInit {
 
   userPlaylist: Playlist;
 
+  loginCallback : Callback;
+
   constructor(
     private spotifyApi: SpotifyApiServiceService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
     ) { 
 
     this.linkSubmitStr = "";
@@ -36,6 +41,32 @@ export class MainPageComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.router.url);
+  if (this.route.snapshot.queryParamMap.has('access_token') && this.route.snapshot.queryParamMap.has('expires_in') && this.route.snapshot.queryParamMap.has('state'))
+  {
+    this.loginCallback = new Callback();
+
+    let tmpAccessToken = this.route.snapshot.queryParamMap.get('access_token');
+    let tmpExpiresIn = this.route.snapshot.queryParamMap.get('expires_in');
+    let tmpState = this.route.snapshot.queryParamMap.get('state');
+
+    if (tmpAccessToken != "" && tmpExpiresIn != "" && tmpState != "")
+    {
+      this.loginCallback.access_token = tmpAccessToken;
+      this.loginCallback.expires_in = parseInt(tmpExpiresIn);
+      this.loginCallback.state = tmpState;
+    }
+    else{
+      console.log("login failed 1");
+      this.router.navigate([""])
+      console.log("login failed 2");
+      
+    }
+  }
+  else {
+    console.log("login failed 3");
+    this.router.navigate([""])
+    console.log("login failed 4");
+  }
 
   }
 
@@ -80,17 +111,17 @@ export class MainPageComponent implements OnInit {
     )
 
   }
-  LoginButtonClicked()
-  {
-    console.log("Calling to spotify login api service");
-    /*this.spotifyApi.LoginRedirect()
-    .subscribe(
-      response => {
-        this.apiResponse = JSON.stringify(response);
-        console.log("Api call recieved");
-      }
-    )*/
-    window.location.href = this.spotifyApi.LoginRedirect();
+  // LoginButtonClicked()
+  // {
+  //   console.log("Calling to spotify login api service");
+  //   /*this.spotifyApi.LoginRedirect()
+  //   .subscribe(
+  //     response => {
+  //       this.apiResponse = JSON.stringify(response);
+  //       console.log("Api call recieved");
+  //     }
+  //   )*/
+  //   window.location.href = this.spotifyApi.LoginRedirect();
 
-  }
+  // }
 }

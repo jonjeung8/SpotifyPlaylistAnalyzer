@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainPageComponent } from './main-page/main-page.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 
 const routes: Routes = [
   {
     path:'',
-    component: MainPageComponent
+    component: LoginPageComponent
   },
   {
     path:"callback",
