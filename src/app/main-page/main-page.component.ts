@@ -40,33 +40,48 @@ export class MainPageComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log(this.router.url);
-  if (this.route.snapshot.queryParamMap.has('access_token') && this.route.snapshot.queryParamMap.has('expires_in') && this.route.snapshot.queryParamMap.has('state'))
-  {
-    this.loginCallback = new Callback();
+    
+  console.log(this.router.url);
 
-    let tmpAccessToken = this.route.snapshot.queryParamMap.get('access_token');
-    let tmpExpiresIn = this.route.snapshot.queryParamMap.get('expires_in');
-    let tmpState = this.route.snapshot.queryParamMap.get('state');
 
-    if (tmpAccessToken != "" && tmpExpiresIn != "" && tmpState != "")
-    {
-      this.loginCallback.access_token = tmpAccessToken;
-      this.loginCallback.expires_in = parseInt(tmpExpiresIn);
-      this.loginCallback.state = tmpState;
-    }
-    else{
-      console.log("login failed 1");
-      this.router.navigate([""])
-      console.log("login failed 2");
+  console.log(this.route.snapshot.fragment); // only update on component creation
+  this.route.fragment.subscribe(
+    fragment => {
+      // Convert to Url search params:
+      let params = new URLSearchParams("?" + fragment);
+
+      //console.log(params);
+
+      if (params.has('access_token') && params.has('expires_in') && params.has('state') )
+      {
+        this.loginCallback = new Callback();
+
+        let tmpAccessToken = params.get('access_token');
+        let tmpExpiresIn = params.get('expires_in');
+        let tmpState = params.get('state');
+
+        if (tmpAccessToken != "" && tmpExpiresIn != "" && tmpState != "")
+        {
+          this.loginCallback.access_token = tmpAccessToken;
+          this.loginCallback.expires_in = parseInt(tmpExpiresIn);
+          this.loginCallback.state = tmpState;
+        }
+        else{
+          console.log("login failed 1");
+          this.router.navigate([""])
+          console.log("login failed 2");
+          
+        }
+      }
+      else {
+        console.log("login failed 3");
+        this.router.navigate([""])
+        console.log("login failed 4");
+      }
       
+
     }
-  }
-  else {
-    console.log("login failed 3");
-    this.router.navigate([""])
-    console.log("login failed 4");
-  }
+  ); 
 
   }
 
