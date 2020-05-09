@@ -29,7 +29,7 @@ export class SpotifyApiServiceService {
     //===================
     // url:
     //===================
-    let url = "https://api.spotify.com/v1/playlists/" + playlist_id + "/tracks?market=ES&fields=items(added_by.id%2Ctrack(name%2Chref%2Calbum(name%2Chref)))&limit=20&offset=5";
+    let url = "https://api.spotify.com/v1/playlists/" + playlist_id + "/tracks?market=ES&fields=items(added_by.id%2Ctrack(name%2Chref%2Calbum(name%2Chref)))&limit=20&offset=0";
 
     //====================
     // Headers:
@@ -66,7 +66,7 @@ export class SpotifyApiServiceService {
     // scope:
     //===================
     //var scope = 'user-read-private%20user-read-email';
-    var scope = 'user-read-private user-read-email';
+    var scope = 'user-read-private user-read-email playlist-read-private playlist-read-collaborative';
     //===================
     // state:
     //===================

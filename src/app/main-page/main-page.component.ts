@@ -90,12 +90,12 @@ export class MainPageComponent implements OnInit {
 
     console.log("Calling to spotify api service");
 
-    this.spotifyApi.GetPlaylistResults(this.linkSubmitStr, this.bearerTokenStr)
+    this.spotifyApi.GetPlaylistResults(this.linkSubmitStr, this.loginCallback.access_token)
     .subscribe(
       response => {
         this.apiResponse = JSON.stringify(response);
         console.log("Api call recieved");
-
+        console.log(this.loginCallback.access_token);
         if(response.items)
         {
         
