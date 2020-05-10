@@ -9,9 +9,22 @@ import { CategorySelectorComponent } from '../main-page/category-selector/catego
 import { from } from 'rxjs';
 
 export const CATEGORIES: Array<Category> = Array(
-  new Category("Party", "Party"), 
+  // Categories for when we switch over later on:
+/*  new Category("Party", "Party"), 
   new Category("Focus", "Focus"),
-  new Category("Relax", "Relax"));
+  new Category("Relax", "Relax")*/
+  new Category("Danceability", "danceability"),
+  new Category("Energy", "energy"),
+  new Category("Key", "key"),
+  new Category("Loudness","loudness"),
+  new Category("Mode", "mode"),
+  new Category("Speechiness", "speechiness"),
+  new Category("Acousticness", "acousticness"),
+  new Category("Instrumentalness", "instrumentalness"),
+  new Category("Liveness", "liveness"),
+  new Category("Valence", "valence"),
+  new Category("Tempo", "tempo")
+  );
 
 @Component({
   selector: 'app-main-page',
