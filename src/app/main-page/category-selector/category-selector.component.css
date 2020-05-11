@@ -1,25 +1,28 @@
 .category-dropdown {
-    position: relative;
-    display: inline-block;
-    height: 100%;
+  position: relative;
+  display: inline-block;
+  height: 100%;
+
 }
 
 .category-dropdown select {
-    appearance: none;
-    -moz-appearance: none;
-    height: 100%;
-    width: 150px;
-    border: none;
-    padding: 0 15px 0 15px;
-    border-right: 1px solid #777;
-    text-align: left;
+  appearance: none;
+  -moz-appearance: none;
+  height: 100%;
+  width: 150px;
+  border: none;
+  padding: 0 15px 0 15px;
+  border-right: 1px solid #777;
+  text-align: left;
+
+  cursor: pointer;
 }
 
 .select-arrow {
-    position: absolute;
-    right: 0px;
-    top: 15px;
-    width: 15px;
-    padding-right: 15px;
+  position: absolute;
+  right: 0px;
+  top: 15px;
+  width: 15px;
+  padding-right: 15px;
+  pointer-events: none;
 }
-
