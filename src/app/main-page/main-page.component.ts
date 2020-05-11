@@ -13,6 +13,8 @@ export const CATEGORIES: Array<Category> = Array(
 /*  new Category("Party", "Party"), 
   new Category("Focus", "Focus"),
   new Category("Relax", "Relax")*/
+  new Category("Duration", "duration_ms"),
+  new Category("Time Signature", "time_signature"),
   new Category("Danceability", "danceability"),
   new Category("Energy", "energy"),
   new Category("Key", "key"),
