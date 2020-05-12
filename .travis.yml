@@ -7,7 +7,12 @@ sudo: false
 
 branches:
   only:
+    - CI
     - master
 
+addons:
+  chrome: stable
+
 script:
+  ng test --watch=false --browsers=ChromeHeadless
   ng build
