@@ -1,4 +1,4 @@
-# SpotifyPlaylistAnalyzer [![Build Status](https://travis-ci.org/AndrewMcShane/SpotifyPlaylistAnalyzer.svg?branch=master)](https://travis-ci.org/AndrewMcShane/SpotifyPlaylistAnalyzer/)
+# SpotifyPlaylistAnalyzer [![Build Status](https://travis-ci.org/AndrewMcShane/SpotifyPlaylistAnalyzer.svg?branch=CI)](https://travis-ci.org/AndrewMcShane/SpotifyPlaylistAnalyzer/)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0.
 
