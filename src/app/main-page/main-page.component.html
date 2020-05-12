@@ -6,7 +6,7 @@
     <!--Playlist button-->
     <app-category-selector #appCategorySelector [categoriesIn]="categories"></app-category-selector>
     <input type="url" name="linkSubmit" id="linkSubmit" [(ngModel)]="linkSubmitStr" [value]="linkSubmitStr" class="infoBoxTextField" placeholder="enter playlist id here">
-    <button class="infoBoxSubmitButton" (click)="FunctionsOnClick()">Analyze Playlist</button>
+    <button class="infoBoxSubmitButton" (click)="AnalysisButtonClicked()">Analyze Playlist</button>
   </div>
   <div>
     <div class="mainPageInfoBox">
@@ -27,8 +27,11 @@
       </div>
 
       <div class="composite-score">
-        <p>
-          placeholder for composite score
+        <p #metricSelectedDisplay *ngIf="metricSelected">
+          {{metricSelected}}:
+        </p>
+        <p #averageDisplay *ngIf="average">
+          {{average}}
         </p>
       </div>
 
@@ -47,3 +50,4 @@
   </div>
 </div>
 
+<!-- <app-cards [items]="apiResponse"></app-cards> -->

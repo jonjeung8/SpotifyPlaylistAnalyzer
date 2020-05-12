@@ -35,40 +35,29 @@ export const CATEGORIES: Array<Category> = Array(
 })
 
 export class MainPageComponent implements OnInit {
-
-  linkSubmitStr: string;
-  bearerTokenStr: string;
-  widgetSubmitStr: string;
-  apiResponse: string;
-  hidden: boolean;
-  // apiResponse2: string;
-
-  userPlaylist: Playlist;
+  linkSubmitStr: string; //link of the playlist
+  bearerTokenStr: string; //bearertoken
+  widgetSubmitStr: string; //link created for the widget
+  trackIDArray: string; //stringified array of track ids in playlist
+  hidden: boolean; // determines when to reveal the response
+  userPlaylist: Playlist; // to store the playlist
   categories: Array<Category> = CATEGORIES;
+  metricSelected: string; //metric selected in dropdown
+  average: string; //the composite score in string
 
   @ViewChild("appCategorySelector") appCategorySelector: CategorySelectorComponent;
 
-  trackIDArray: string;
-
-
   constructor(private spotifyApi: SpotifyApiServiceService) { 
-
     this.linkSubmitStr = "";
     this.widgetSubmitStr = "";
+    this.trackIDArray = "";
     this.userPlaylist = new Playlist();
     this.userPlaylist.tracks = new Array<Track>();
     this.hidden = true;
-    this.trackIDArray = "";
     this.userPlaylist.metrics = new Array<RawMetrics>();
   }
   
-
   ngOnInit(): void {
-  }
-
-  FunctionsOnClick()
-  {
-    this.AnalysisButtonClicked();
   }
 
   ShowPlaylistElements()
@@ -76,132 +65,115 @@ export class MainPageComponent implements OnInit {
     this.hidden = false;
   }
 
-  JoinMetricsToTracks(arrayOfTracks: Array<Track>, arrayOfMetrics: Array<RawMetrics>)
-  {
-    for (let metric of arrayOfMetrics)
-    {
-      for (let track of arrayOfTracks)
-      {
-        if (metric.id == track.id)
-        {
-          track.metrics = metric;
-          // console.log(track.metrics.key)
-          // console.log(track.id)
-        }
-      }
-    }
-  }
-
   CalculateCompositeScore(arrayOfMetrics: Array<RawMetrics>)
   {
-    let value = (<HTMLSelectElement>document.getElementById('metricSelected')).value;
-    console.log("Hey I made it to this statement");
-    console.log(value);
+    //store the element selected
+    this.metricSelected = (<HTMLSelectElement>document.getElementById('metricSelected')).value;
+    console.log("Hey I made it to calculating composite score");
     // iterate over the array of metrics
     // pull the values of the selected metric into a new array to perform stats
     // we need an average to get started
     // add outliers here later
-    var arrayLen = arrayOfMetrics.length;
-    console.log(arrayLen);
-    var average = 0;
+    let total = 0;
     for (let trackMetric of arrayOfMetrics)
     {
-      switch(value)
+      switch(this.metricSelected)
       {
         case "danceability":
           {
-            average += trackMetric.danceability;
+            total += trackMetric.danceability;
             break;
           }
         case "energy":
           {
-            average += trackMetric.energy;
+            total += trackMetric.energy;
             break;
           }
         case "key":
           {
-            average += trackMetric.key;
+            total += trackMetric.key;
             break;
           }
         case "loudness":
           {
-            average += trackMetric.loudness;
+            total += trackMetric.loudness;
             break;
           }
         case "mode":
           {
-            average += trackMetric.mode;
+            total += trackMetric.mode;
             break;
           }
         case "speechiness":
           {
-            average += trackMetric.speechiness;
+            total += trackMetric.speechiness;
             break;
           }
         case "acousticness":
           {
-            average += trackMetric.acousticness;
+            total += trackMetric.acousticness;
             break;
           }
         case "instrumentalness":
           {
-            average += trackMetric.instrumentalness;
+            total += trackMetric.instrumentalness;
             break;
           }
         case "liveness":
           {
-            average += trackMetric.liveness;
+            total += trackMetric.liveness;
             break;
           }
         case "valence":
           {
-            average += trackMetric.valence;
+            total += trackMetric.valence;
             break;
           }
         case "tempo":
           {
-            average += trackMetric.tempo;
+            total += trackMetric.tempo;
             break;
           }
         case "time_signature":
           {
-            average += trackMetric.time_signature;
+            total += trackMetric.time_signature;
             break;
           }
         case "duration_ms":
           {
-            average += trackMetric.duration_ms;
+            total += trackMetric.duration_ms;
             break;
           }
         default:
-        {
-          console.log("hello, I've experienced an error somehow, this is a default message inside a massive switch statement");
-        } 
+          {
+            console.log("hello, I've experienced an error somehow, or the user didn't select a category");
+          } 
       }
-      console.log(average);
     }
-    average = average / arrayLen;
-    console.log(average);
+    console.log(total);
+    console.log(arrayOfMetrics.length);
+    this.average = parseFloat((total / arrayOfMetrics.length).toFixed(2)).toFixed(2);
+    console.log(this.average);
+    // console.log(average);
     // (<HTMLSelectElement>document.getElementById('metricSelected')).value = "0";
     //TODO: add valueable stats to user here (standard deviation, regression analysis)
     //TODO: get fix for CORS policy error
   }
-
+  
   AnalysisButtonClicked()
   {
+    this.widgetSubmitStr = `https://open.spotify.com/embed/playlist/${this.linkSubmitStr}`;
+    
     console.log("Calling to spotify api service");
-
+    
     this.spotifyApi.GetPlaylistResults(this.linkSubmitStr, this.bearerTokenStr)
-    .subscribe(
-      response => {
-        this.apiResponse = JSON.stringify(response);
-        console.log("Api call recieved");
+    .subscribe({
+      next: (response: any) => {
+        console.log("I MADE IT TO the get playlist api response");
+        console.log("Api call recieved for first");
 
-        if(response.items)
+        if (response.items)
         {
-          this.widgetSubmitStr = "https://open.spotify.com/embed/playlist/" + this.linkSubmitStr;
-          this.userPlaylist.tracks = new Array<Track>();
-
           for(let item of response.items)
           {
             // Get the album data, get the track data
@@ -210,8 +182,6 @@ export class MainPageComponent implements OnInit {
             tmpTrack.name = item.track.name;
             tmpTrack.id = item.track.id;
             this.trackIDArray += tmpTrack.id + "%2C";
-            // console.log(item.track.name);
-            // console.log(tmpTrack.id);
             if(item.track.album)
             {
               let tmpAlbum = new Album();
@@ -222,53 +192,49 @@ export class MainPageComponent implements OnInit {
             }
             
             this.userPlaylist.tracks.push(tmpTrack);
-            
           }
-          //loop through array, grab track IDs
-          this.spotifyApi.GetFeatures(this.trackIDArray)
-            .subscribe(
-              response => {
-                this.apiResponse = JSON.stringify(response);
-                // console.log("THIS IS WORKING")
-                //this.trackID.trackidNum.push(track.id);
-                if(response.audio_features)
-                {
-
-                this.userPlaylist.metrics = new Array<RawMetrics>();
-
-                  // console.log(response2.items)
-                  for(let item of response.audio_features)
-                  {
-                    let tmpMetrics = new RawMetrics();
-
-                    tmpMetrics.acousticness = item.acousticness;
-                    tmpMetrics.danceability = item.danceability;
-                    tmpMetrics.duration_ms = item.duration_ms;
-                    tmpMetrics.energy = item.energy;
-                    tmpMetrics.id = item.id;
-                    tmpMetrics.instrumentalness = item.intrumentalness;
-                    tmpMetrics.key = item.key;
-                    tmpMetrics.liveness = item.liveness;
-                    tmpMetrics.loudness = item.loudness;
-                    tmpMetrics.mode = item.mode;
-                    tmpMetrics.speechiness = item.speechiness;
-                    tmpMetrics.tempo = item.tempo;
-                    tmpMetrics.time_signature = item.time_signature;
-                    tmpMetrics.valence = item.valence;
-                
-                    console.log(item.tempo);
-                    console.log(item.id);
-
-                    this.userPlaylist.metrics.push(tmpMetrics);
-                  }
-                  this.JoinMetricsToTracks(this.userPlaylist.tracks, this.userPlaylist.metrics);
-                  this.CalculateCompositeScore(this.userPlaylist.metrics);
-                }
-              }
-            )  
         }
-        this.ShowPlaylistElements();
-      }  
-    )
+      },
+      complete: () =>
+      {
+        this.spotifyApi.GetFeatures(this.trackIDArray)
+        .subscribe({
+          next: (response: any) => {
+            console.log("I MADE IT TO the get features response");
+            console.log("Api call recieved for second");
+
+            if (response.audio_features)
+            {
+              console.log(response.audio_features);
+              for(let item of response.audio_features)
+              {
+                let tmpMetrics = new RawMetrics();
+                tmpMetrics.acousticness = item.acousticness;
+                tmpMetrics.danceability = item.danceability;
+                tmpMetrics.duration_ms = item.duration_ms;
+                tmpMetrics.energy = item.energy;
+                tmpMetrics.id = item.id;
+                tmpMetrics.instrumentalness = item.intrumentalness;
+                tmpMetrics.key = item.key;
+                tmpMetrics.liveness = item.liveness;
+                tmpMetrics.loudness = item.loudness;
+                tmpMetrics.mode = item.mode;
+                tmpMetrics.speechiness = item.speechiness;
+                tmpMetrics.tempo = item.tempo;
+                tmpMetrics.time_signature = item.time_signature;
+                tmpMetrics.valence = item.valence;
+                this.userPlaylist.metrics.push(tmpMetrics);
+              }
+            }
+            // this.JoinMetricToTracks(tmpMetrics, this.userPlaylist.metrics);
+          },
+          complete: () => 
+          {
+            this.CalculateCompositeScore(this.userPlaylist.metrics); 
+            this.ShowPlaylistElements();
+          }
+        })
+      }
+    })
   }
 }
