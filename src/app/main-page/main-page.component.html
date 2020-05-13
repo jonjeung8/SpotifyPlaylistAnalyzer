@@ -1,4 +1,5 @@
 <div class="mainPageContent">
+
    <div class="mainPageTitle">
         <h1>#Spotify Playlist Analyzer</h1>
    </div>
@@ -16,29 +17,38 @@
    </div>
 
 
-   <h2>Response:</h2>
-   
-   <div class="responseBox dropShadow">
-        <!--<code>{{apiResponse}}</code>-->
+  <h2>Response:</h2>
 
-        <div *ngIf="userPlaylist && userPlaylist.tracks">
-          <p>TrackNames:</p>
-          <div class="responseTrack" *ngFor="let track of userPlaylist.tracks">
-              <p>
-                    Track Name: {{track.name}} 
-               </p>
-               <p>
-                    Album: {{track.album.name}}
-               </p>
-<!-- 
-               <a href={{track.href}} target="_blank">{{track.name}}</a>
-               <a href={{track.album.href}} target="_blank">{{track.album.name}}</a> -->
-          </div>
+  <div class="responseBox dropShadow" [hidden]="hidden">
+
+    <!--<code>{{apiResponse}}</code>-->
+
+    <div *ngIf="userPlaylist && userPlaylist.tracks">
+      <div class="widget">
+        <iframe [src]="widgetSubmitStr | safe" width="300" height="500" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+      </div>
+      <div class="composite-score">
+        <p>
+          placeholder for composite score
+        </p>
+      </div>
+
+      <div class="tracklist">
+        <p>TrackNames:</p>
+        <div class="responseTrack" *ngFor="let track of userPlaylist.tracks">
+          <p>
+                Track Name: {{track.name}} 
+          </p>
+          <p>
+                Album: {{track.album.name}}
+          </p>
+  <!-- 
+          <a href={{track.href}} target="_blank">{{track.name}}</a>
+          <a href={{track.album.href}} target="_blank">{{track.album.name}}</a> -->
         </div>
+      </div>
+    </div>
+  </div>
 
-   </div>
-   <!-- <div class="loginBox">
-     <button class="loginButton" (click)="LoginButtonClicked()">LOGIN</button>
-   </div> -->
 </div>
 

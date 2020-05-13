@@ -35,17 +35,20 @@ export const CATEGORIES: Array<Category> = Array(
   );
 
 
+
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.css']
 })
+
 export class MainPageComponent implements OnInit {
 
   linkSubmitStr: string;
   bearerTokenStr: string;
-
+  widgetSubmitStr: string;
   apiResponse: string;
+  hidden: boolean;
 
   userPlaylist: Playlist;
   categories: Array<Category> = CATEGORIES;
@@ -61,10 +64,12 @@ export class MainPageComponent implements OnInit {
     ) { 
 
     this.linkSubmitStr = "";
+    this.widgetSubmitStr = "";
     this.userPlaylist = new Playlist();
     this.userPlaylist.tracks = new Array<Track>();
+    this.hidden = true;
   }
-
+  
 
   ngOnInit(): void {
     
@@ -112,6 +117,16 @@ export class MainPageComponent implements OnInit {
 
   }
 
+  FunctionsOnClick()
+  {
+    this.AnalysisButtonClicked();
+  }
+
+  ShowPlaylistElements()
+  {
+    this.hidden = false;
+  }
+
   AnalysisButtonClicked()
   {
 
@@ -128,7 +143,7 @@ export class MainPageComponent implements OnInit {
         console.log(this.loginCallback.access_token);
         if(response.items)
         {
-        
+          this.widgetSubmitStr = "https://open.spotify.com/embed/playlist/" + this.linkSubmitStr;
           this.userPlaylist.tracks = new Array<Track>();
 
           for(let item of response.items)
@@ -150,23 +165,9 @@ export class MainPageComponent implements OnInit {
             this.userPlaylist.tracks.push(tmpTrack);
             
           }
+          this.ShowPlaylistElements();
         }
-
       }
-    )
-
+    );
   }
-  // LoginButtonClicked()
-  // {
-  //   console.log("Calling to spotify login api service");
-  //   /*this.spotifyApi.LoginRedirect()
-  //   .subscribe(
-  //     response => {
-  //       this.apiResponse = JSON.stringify(response);
-  //       console.log("Api call recieved");
-  //     }
-  //   )*/
-  //   window.location.href = this.spotifyApi.LoginRedirect();
-
-  // }
 }
