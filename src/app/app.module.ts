@@ -9,8 +9,6 @@ import { TestComponentComponent } from './_test/test-component/test-component.co
 import { CategorySelectorComponent } from './main-page/category-selector/category-selector.component';
 import { SafePipe } from './safe.pipe';
 
-import { SafePipe } from './safe.pipe';
-
 import { AppRoutingModule } from './app-routing.module';
 import { LoginPageComponent } from './login-page/login-page.component';
 
