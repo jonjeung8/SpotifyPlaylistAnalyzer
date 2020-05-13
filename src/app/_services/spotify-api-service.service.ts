@@ -26,7 +26,7 @@ export class SpotifyApiServiceService {
     //headers
     const headers = new HttpHeaders({
       "Authorization":
-        `Bearer ${bearToken}`
+        `Bearer ${this.bearToken}`
     });
 
     //api call
