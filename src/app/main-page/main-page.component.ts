@@ -46,7 +46,7 @@ export const CATEGORIES: Array<Category> = Array(
 
 export class MainPageComponent implements OnInit {
   linkSubmitStr: string; //link of the playlist
-  bearerTokenStr: string; //bearertoken
+
   widgetSubmitStr: string; //link created for the widget
   trackIDArray: string; //stringified array of track ids in playlist
   hidden: boolean; // determines when to reveal the response
@@ -227,7 +227,7 @@ export class MainPageComponent implements OnInit {
     
     console.log("Calling to spotify api service");
     
-    this.spotifyApi.GetPlaylistResults(this.linkSubmitStr, this.bearerTokenStr)
+    this.spotifyApi.GetPlaylistResults(this.linkSubmitStr, this.loginCallback.access_token)
     .subscribe({
       next: (response: any) => {
         console.log("I MADE IT TO the get playlist api response");
