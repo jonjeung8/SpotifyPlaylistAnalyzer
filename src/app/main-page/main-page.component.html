@@ -1,19 +1,21 @@
 <div class="mainPageContent">
-  <div class="mainPageTitle">
-    <h1>#Spotify Playlist Analyzer</h1>
-  </div>
-  <div class="mainPageInfoBox dropShadow">
-    <!--Playlist button-->
-    <app-category-selector></app-category-selector>
-    <input type="url" name="linkSubmit" id="linkSubmit" [(ngModel)]="linkSubmitStr" [value]="linkSubmitStr" class="infoBoxTextField" placeholder="enter playlist id here">
-    <button class="infoBoxSubmitButton" (click)="FunctionsOnClick()">Analyze Playlist</button>
-  </div>
-  <div>
-    <div class="mainPageInfoBox">
-        <!--Bearer token input-->
-        <input type="text" name="bearerToken" id="bearerToken" [(ngModel)]="bearerTokenStr" [value]="bearerTokenStr" class="infoBoxBearerToken" placeholder="enter bearer token">
-    </div>
-  </div>
+
+   <div class="mainPageTitle">
+        <h1>#Spotify Playlist Analyzer</h1>
+   </div>
+   <div class="mainPageInfoBox dropShadow">
+        <!--Playlist button-->
+        <app-category-selector #appCategorySelector [categoriesIn]="categories"></app-category-selector>
+        <input type="url" name="linkSubmit" id="linkSubmit" [(ngModel)]="linkSubmitStr" [value]="linkSubmitStr" class="infoBoxTextField" placeholder="enter playlist id here">
+        <button class="infoBoxSubmitButton" (click)="AnalysisButtonClicked()">Analyze Playlist</button>
+   </div>
+   <div>
+        <div class="mainPageInfoBox">
+            <!--Bearer token input-->
+            <input type="text" name="bearerToken" id="bearerToken" [(ngModel)]="bearerTokenStr" [value]="bearerTokenStr" class="infoBoxBearerToken" placeholder="enter bearer token">
+        </div>
+   </div>
+
 
   <h2>Response:</h2>
 
@@ -25,7 +27,6 @@
       <div class="widget">
         <iframe [src]="widgetSubmitStr | safe" width="300" height="500" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
       </div>
-
       <div class="composite-score">
         <p>
           placeholder for composite score
@@ -48,5 +49,6 @@
       </div>
     </div>
   </div>
+
 </div>
 
