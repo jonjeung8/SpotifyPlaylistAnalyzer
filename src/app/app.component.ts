@@ -6,5 +6,10 @@ import { MainPageComponent } from './main-page/main-page.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  title: string;
+
+  constructor() {
+    this.title="SpotifyPlaylistAnalyzer";
+  }
   
 }

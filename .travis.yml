@@ -8,6 +8,11 @@ sudo: false
 branches:
   only:
     - master
+    - CI
+
+addons:
+  chrome: stable
 
 script:
-  ng build
+  - ng test --watch=false --browsers=ChromeHeadless
+  - ng build
