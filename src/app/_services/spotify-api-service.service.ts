@@ -7,49 +7,50 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
+
 export class SpotifyApiServiceService {
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  httpOptions: Object;
+  private bearToken: string;
+
+  constructor(private http: HttpClient) 
+  {
+    this.httpOptions = "";
+  }
+
+
+  getQuery(query: string)
+  {
+    const url = `https://api.spotify.com/v1/${query}`;
+
+    //headers
+    const headers = new HttpHeaders({
+      "Authorization":
+        `Bearer ${this.bearToken}`
+    });
+
+    //api call
+    console.log("Making api call");
+    return this.http.get(url, { headers }).pipe(
+      map(response => response)
+    );
+  }
+
 
   GetPlaylistResults(playlist_id:string, bearerToken: string)
   {
-    // REFERENCE:
-    // https://api.spotify.com/v1/playlists/37i9dQZF1DWXRqgorJj26U/tracks?market=ES&fields=items(added_by.id%2Ctrack(name%2Chref%2Calbum(name%2Chref)))&limit=20&offset=5" -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer
+    console.log("GET PLAYLIST RESULTS API CALL");
+    this.bearToken = `${bearerToken}`;
+    let playlistResultsString = `playlists/${playlist_id}/tracks?market=ES&fields=items(added_by.id%2Ctrack(name%2Chref%2Calbum(name%2Chref)%2Cid))&limit=100&offset=0`;
+    return this.getQuery(playlistResultsString)
+  }
 
-    /*
-     * 
-     *
-     * Messy messy.. but I'm just trying to get something working.
-     * 
-     * 
-     */
-    
-    //===================
-    // url:
-    //===================
-
-    let url = "https://api.spotify.com/v1/playlists/" + playlist_id + "/tracks?market=ES&fields=items(added_by.id%2Ctrack(name%2Chref%2Calbum(name%2Chref)))&limit=100&offset=0";
-
-
-    //====================
-    // Headers:
-    //====================
-    let httpOptions = { headers :new HttpHeaders({"Content-Type": "application/json", "Accept":"application/json", "Authorization": "Bearer " + bearerToken}) };
-    console.log("Making api call");
-
-    //====================
-    // Actual API call:
-    //====================
-    return this.http.get<any>(url, httpOptions)
-    .pipe(
-      map (
-        response => {
-          return response;
-        }
-      )
-    );
+  GetFeatures(track_id:string)
+  {
+    console.log("GET MY FEATURES API CALL");
+    //grab track_id string url
+    let tracksIdString = `audio-features?ids=${track_id}`;
+    return this.getQuery(tracksIdString);
   }
 
   LoginRedirect(): string

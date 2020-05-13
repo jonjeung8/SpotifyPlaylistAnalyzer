@@ -1,0 +1,50 @@
+<div class="score-breakdown">
+<!--
+    Metric score components
+        var string for catagory title
+        empty score line
+        score from the api (float)
+
+        grab key metrics
+            -party
+            -focus
+            -relax
+
+        Metric score for each catagory is an average score of all songs in the playlist
+    
+    composite score component
+        var string for title
+        
+        x-axis is metric per song
+        y-axis is individual song score
+        least squares model
+
+        var float for sum of least squares (may need to multiply by some value)
+ -->
+
+    <div class="metric-score">
+        
+        <div *ngIf="metricScores && metricScores.number">
+            <p>Metric Score:</p>
+            <div>
+           <div class="scoreTrack" *ngFor="let number of metricScores.number">
+                <p>
+                  6<!-- {{metricsDisplay.numbers}} -->
+                 </p>
+            </div>
+          </div>
+    </div>
+
+    <div class="composite-score">
+        
+        <div *ngIf="compositeScore">
+            <p>Playlist Score:</p>
+                <p>
+                   6<!--  {{compositeScore}} -->
+                </p>
+        </div>
+        <div class="outlier-button">
+            <button id="genericbutton" type="button">Click to see outliers</button>
+        </div>
+    </div>
+</div>

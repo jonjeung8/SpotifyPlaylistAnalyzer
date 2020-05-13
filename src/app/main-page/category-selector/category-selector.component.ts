@@ -1,11 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Category } from 'src/app/_models/category';
+
+import { Category } from '../../_models/category';
+
 
 @Component({
   selector: 'app-category-selector',
   templateUrl: './category-selector.component.html',
   styleUrls: ['./category-selector.component.css']
 })
+
 export class CategorySelectorComponent implements OnInit {
   category: string;
   @Input() categoriesIn: Array<Category>;
@@ -29,5 +32,5 @@ export class CategorySelectorComponent implements OnInit {
       return true;
     }
   }
-
 }
+

@@ -1,35 +1,37 @@
 <div class="mainPageContent">
-
-   <div class="mainPageTitle">
-        <h1>#Spotify Playlist Analyzer</h1>
-   </div>
-   <div class="mainPageInfoBox dropShadow">
-        <!--Playlist button-->
-        <app-category-selector #appCategorySelector [categoriesIn]="categories"></app-category-selector>
-        <input type="url" name="linkSubmit" id="linkSubmit" [(ngModel)]="linkSubmitStr" [value]="linkSubmitStr" class="infoBoxTextField" placeholder="enter playlist id here">
-        <button class="infoBoxSubmitButton" (click)="AnalysisButtonClicked()">Analyze Playlist</button>
-   </div>
-   <div>
-        <div class="mainPageInfoBox">
-            <!--Bearer token input-->
-            <input type="text" name="bearerToken" id="bearerToken" [(ngModel)]="bearerTokenStr" [value]="bearerTokenStr" class="infoBoxBearerToken" placeholder="enter bearer token">
-        </div>
-   </div>
+  <div class="mainPageTitle">
+    <h1>#Spotify Playlist Analyzer</h1>
+  </div>
+  <div class="mainPageInfoBox dropShadow">
+    <!--Playlist button-->
+    <app-category-selector #appCategorySelector [categoriesIn]="categories"></app-category-selector>
+    <input type="url" name="linkSubmit" id="linkSubmit" [(ngModel)]="linkSubmitStr" [value]="linkSubmitStr" class="infoBoxTextField" placeholder="enter playlist id here">
+    <button class="infoBoxSubmitButton" (click)="AnalysisButtonClicked()">Analyze Playlist</button>
+  </div>
+  <div>
+    <div class="mainPageInfoBox">
+        <!--Bearer token input-->
+        <input type="text" name="bearerToken" id="bearerToken" [(ngModel)]="bearerTokenStr" [value]="bearerTokenStr" class="infoBoxBearerToken" placeholder="enter bearer token">
+    </div>
+  </div>
 
 
   <h2>Response:</h2>
+  
 
   <div class="responseBox dropShadow" [hidden]="hidden">
 
-    <!--<code>{{apiResponse}}</code>-->
-
     <div *ngIf="userPlaylist && userPlaylist.tracks">
       <div class="widget">
-        <iframe [src]="widgetSubmitStr | safe" width="300" height="500" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        <iframe [src]="widgetSubmitStr | safe" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
       </div>
+
       <div class="composite-score">
-        <p>
-          placeholder for composite score
+        <p #metricSelectedDisplay *ngIf="metricSelected">
+          {{metricSelected}}:
+        </p>
+        <p #averageDisplay *ngIf="average">
+          {{average}}
         </p>
       </div>
 
@@ -42,9 +44,6 @@
           <p>
                 Album: {{track.album.name}}
           </p>
-  <!-- 
-          <a href={{track.href}} target="_blank">{{track.name}}</a>
-          <a href={{track.album.href}} target="_blank">{{track.album.name}}</a> -->
         </div>
       </div>
     </div>
@@ -52,3 +51,4 @@
 
 </div>
 
+<!-- <app-cards [items]="apiResponse"></app-cards> -->

@@ -1,9 +1,10 @@
 <div class="category-dropdown">
-    <select (change)="onCategorySelect($event)">
-      <option value="0">Choose Category </option>
-      <option *ngFor="let cat of categoriesIn" value={{cat.value}}>{{cat.name}}</option>
-    </select>
-    <div class="select-arrow">
-      &#x25BC;
-    </div>
+  <select (change)="onCategorySelect($event)" id="metricSelected">
+    <option value="0">Choose Category </option>
+    <option *ngFor="let cat of categoriesIn" value={{cat.value}}>{{cat.name}}</option>
+  </select>
+  <div class="select-arrow">
+    &#x25BC;
   </div>
+</div>
+
