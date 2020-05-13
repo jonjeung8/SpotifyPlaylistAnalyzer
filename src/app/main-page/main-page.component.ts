@@ -1,10 +1,32 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { SpotifyApiServiceService } from '../_services/spotify-api-service.service';
 import { Playlist } from '../_models/Playlist';
 import { Track } from '../_models/Track';
 import { Album } from '../_models/album';
+import { Category } from '../_models/category';
 //components
 import { CategorySelectorComponent } from '../main-page/category-selector/category-selector.component';
+import { from } from 'rxjs';
+
+export const CATEGORIES: Array<Category> = Array(
+  // Categories for when we switch over later on:
+/*  new Category("Party", "Party"), 
+  new Category("Focus", "Focus"),
+  new Category("Relax", "Relax")*/
+  new Category("Duration", "duration_ms"),
+  new Category("Time Signature", "time_signature"),
+  new Category("Danceability", "danceability"),
+  new Category("Energy", "energy"),
+  new Category("Key", "key"),
+  new Category("Loudness","loudness"),
+  new Category("Mode", "mode"),
+  new Category("Speechiness", "speechiness"),
+  new Category("Acousticness", "acousticness"),
+  new Category("Instrumentalness", "instrumentalness"),
+  new Category("Liveness", "liveness"),
+  new Category("Valence", "valence"),
+  new Category("Tempo", "tempo")
+  );
 
 @Component({
   selector: 'app-main-page',
@@ -13,12 +35,15 @@ import { CategorySelectorComponent } from '../main-page/category-selector/catego
 })
 export class MainPageComponent implements OnInit {
 
-  linkSubmitStr : string;
+  linkSubmitStr: string;
   bearerTokenStr: string;
 
   apiResponse: string;
 
   userPlaylist: Playlist;
+  categories: Array<Category> = CATEGORIES;
+
+  @ViewChild("appCategorySelector") appCategorySelector: CategorySelectorComponent;
 
   constructor(private spotifyApi: SpotifyApiServiceService) { 
 
@@ -35,6 +60,9 @@ export class MainPageComponent implements OnInit {
   {
 
     console.log("Calling to spotify api service");
+    //TODO display error if category validation fails
+    console.log(this.appCategorySelector.validateCategory());
+    console.log(this.appCategorySelector.category);
 
     this.spotifyApi.GetPlaylistResults(this.linkSubmitStr, this.bearerTokenStr)
     .subscribe(
