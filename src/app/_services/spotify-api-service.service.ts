@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 import { map } from 'rxjs/operators';
 
@@ -17,6 +18,7 @@ export class SpotifyApiServiceService {
     this.httpOptions = "";
   }
 
+
   getQuery(query: string)
   {
     const url = `https://api.spotify.com/v1/${query}`;
@@ -24,7 +26,7 @@ export class SpotifyApiServiceService {
     //headers
     const headers = new HttpHeaders({
       "Authorization":
-        "Bearer BQDfhmx5C26j9TXkaIF8Lb8lsAvEuZgshGRdE2xZ95-ydpWYBO0T2T64O3Cwgp_z3qlQ6plw9CYPooIjeguf18svwzTkxmDDrFBsRcmJDZWEN_04vty77tQnl8g4l7ggHM2TVaywSjSMLS-h1Ya7NgVBzQtMZuU"
+        `Bearer ${bearToken}`
     });
 
     //api call
@@ -33,6 +35,7 @@ export class SpotifyApiServiceService {
       map(response => response)
     );
   }
+
 
   GetPlaylistResults(playlist_id:string, bearerToken: string)
   {
@@ -49,4 +52,60 @@ export class SpotifyApiServiceService {
     let tracksIdString = `audio-features?ids=${track_id}`;
     return this.getQuery(tracksIdString);
   }
+
+  LoginRedirect(): string
+  {
+    //===================
+    // client id:
+    //===================
+    var client_id = environment.client_id_key 
+
+    //===================
+    // redirect uri:
+    //===================
+    //var redirect_uri = 'http:%2F%2Flocalhost%3A4200%2F'
+    var redirect_uri = 'http://localhost:4200/callback';
+    //===================
+    // scope:
+    //===================
+    //var scope = 'user-read-private%20user-read-email';
+    var scope = 'user-read-private user-read-email playlist-read-private playlist-read-collaborative';
+    //===================
+    // state:
+    //===================
+    var state = 123;
+
+
+    //===================
+    // url:
+    //===================
+    var url = 'https://accounts.spotify.com/authorize';
+    url += '?client_id=' + encodeURIComponent(client_id);
+    url += '&redirect_uri=' + encodeURIComponent(redirect_uri);
+    url += '&scope=' + encodeURIComponent(scope);
+    url += '&response_type=token';
+    url += '&state=' + encodeURIComponent(state);
+    
+    //==================
+    // Header:
+    //==================
+    //let httpOptions = { headers :new HttpHeaders({"Content-Type": "application/json", "Accept":"application/json"}) };
+
+
+    //====================
+    // Actual API call:
+    //====================
+    /*return this.http.get<any>(url, httpOptions)
+    .pipe(
+      map (
+        response => {
+          return response;
+        }
+      )
+    );*/
+
+    return url;
+
+  }
+
 }

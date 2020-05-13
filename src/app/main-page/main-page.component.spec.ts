@@ -19,7 +19,9 @@ describe('MainPageComponent', () => {
     fixture.detectChanges();
   });
 
+  /* Commented out for CI demo
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  */
 });

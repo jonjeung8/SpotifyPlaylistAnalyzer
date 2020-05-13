@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+
 import { Category } from '../../_models/category';
+
 
 @Component({
   selector: 'app-category-selector',
@@ -30,5 +32,5 @@ export class CategorySelectorComponent implements OnInit {
       return true;
     }
   }
-
 }
+

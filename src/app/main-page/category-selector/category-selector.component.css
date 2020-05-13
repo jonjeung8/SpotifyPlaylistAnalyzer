@@ -2,7 +2,6 @@
   position: relative;
   display: inline-block;
   height: 100%;
-
 }
 
 .category-dropdown select {
@@ -25,4 +24,5 @@
   width: 15px;
   padding-right: 15px;
   pointer-events: none;
+
 }

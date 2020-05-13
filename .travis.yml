@@ -9,5 +9,9 @@ branches:
   only:
     - master
 
+addons:
+  chrome: stable
+
 script:
-  ng build
+  - ng test --watch=false --browsers=ChromeHeadless
+  - ng build

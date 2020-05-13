@@ -1,8 +1,11 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+
 import { SpotifyApiServiceService } from '../_services/spotify-api-service.service';
 import { Playlist } from '../_models/Playlist';
 import { Track } from '../_models/Track';
 import { Album } from '../_models/album';
+
 import { RawMetrics } from '../_models/RawMetrics';
 import { Category } from '../_models/category';
 
@@ -12,7 +15,13 @@ import { CategorySelectorComponent } from '../main-page/category-selector/catego
 import { CompositeScoreComponent } from '../main-page/composite-score/composite-score.component';
 
 
+import { Callback } from '../_models/logincallback'
+
+import { from } from 'rxjs';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 export const CATEGORIES: Array<Category> = Array(
+
   new Category("Danceability", "danceability"),
   new Category("Energy", "energy"),
   new Category("Key", "key"),
@@ -27,6 +36,7 @@ export const CATEGORIES: Array<Category> = Array(
   new Category("Time Signature", "time_signature"),
   new Category("Duration", "duration_ms")
 );
+
 
 @Component({
   selector: 'app-main-page',
@@ -47,7 +57,13 @@ export class MainPageComponent implements OnInit {
 
   @ViewChild("appCategorySelector") appCategorySelector: CategorySelectorComponent;
 
-  constructor(private spotifyApi: SpotifyApiServiceService) { 
+  loginCallback: Callback;
+
+  constructor(
+    private spotifyApi: SpotifyApiServiceService,
+    private router: Router,
+    private route: ActivatedRoute
+    ) { 
     this.linkSubmitStr = "";
     this.widgetSubmitStr = "";
     this.trackIDArray = "";
@@ -57,7 +73,61 @@ export class MainPageComponent implements OnInit {
     this.userPlaylist.metrics = new Array<RawMetrics>();
   }
   
+
   ngOnInit(): void {
+    
+  console.log(this.router.url);
+
+
+  console.log(this.route.snapshot.fragment); // only update on component creation
+  this.route.fragment.subscribe(
+    fragment => {
+      // Convert to Url search params:
+      let params = new URLSearchParams("?" + fragment);
+
+      //console.log(params);
+
+      if (params.has('access_token') && params.has('expires_in') && params.has('state') )
+      {
+        this.loginCallback = new Callback();
+
+        let tmpAccessToken = params.get('access_token');
+        let tmpExpiresIn = params.get('expires_in');
+        let tmpState = params.get('state');
+
+        if (tmpAccessToken != "" && tmpExpiresIn != "" && tmpState != "")
+        {
+          this.loginCallback.access_token = tmpAccessToken;
+          this.loginCallback.expires_in = parseInt(tmpExpiresIn);
+          this.loginCallback.state = tmpState;
+        }
+        else{
+          console.log("login failed 1");
+          this.router.navigate([""])
+          console.log("login failed 2");
+          
+        }
+      }
+      else {
+        console.log("login failed 3");
+        this.router.navigate([""])
+        console.log("login failed 4");
+      }
+      
+
+    }
+  ); 
+
+  }
+
+  FunctionsOnClick()
+  {
+    this.AnalysisButtonClicked();
+  }
+
+  ShowPlaylistElements()
+  {
+    this.hidden = false;
   }
 
   ShowPlaylistElements()
@@ -174,6 +244,7 @@ export class MainPageComponent implements OnInit {
 
         if (response.items)
         {
+
           for(let item of response.items)
           {
             // Get the album data, get the track data
@@ -193,6 +264,7 @@ export class MainPageComponent implements OnInit {
             
             this.userPlaylist.tracks.push(tmpTrack);
           }
+          this.ShowPlaylistElements();
         }
       },
       complete: () =>

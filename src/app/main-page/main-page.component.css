@@ -134,3 +134,13 @@
   float: left;
   width: 30%;
 }
+
+.mainPageInfoBox .loginBox
+{
+  width: 50px;
+  height: 25px;
+  margin: auto;
+  margin-top: 2px;
+  cursor: pointer;
+
+}
