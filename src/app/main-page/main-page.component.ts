@@ -120,15 +120,6 @@ export class MainPageComponent implements OnInit {
 
   }
 
-  FunctionsOnClick()
-  {
-    this.AnalysisButtonClicked();
-  }
-
-  ShowPlaylistElements()
-  {
-    this.hidden = false;
-  }
 
   ShowPlaylistElements()
   {
