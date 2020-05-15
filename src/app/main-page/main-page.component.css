@@ -11,7 +11,7 @@
   font-size: 24px;
   font-weight: normal;
   color: #efefef;
-  font-style: italic;
+  font-style: bold;
   margin-bottom: 10px;
 }
 
@@ -19,7 +19,7 @@
 {
   display: inline-block;
   padding: 5px;
-  background-color: #000;
+  /* background-color: #000; */
 }
 
 .mainPageInfoBox
@@ -42,7 +42,7 @@
 
 .mainPageInfoBox .infoBoxSubmitButton
 {
-  background-color: rgb(26, 26, 26);
+  background-color: #1DB954;
   color: #fff;
   cursor: pointer;
   transition: 0.25s;

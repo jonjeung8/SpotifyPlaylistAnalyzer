@@ -8,19 +8,19 @@
 
 .mainPageTitle
 {
-    font-size: 24px;
+    font-size: 50px;
     font-weight: normal;
     color: #efefef;
-    font-style: italic;
+    font-style: bold;
     margin-bottom: 10px;
 }
 
-.mainPageTitle h1
+/* .mainPageTitle h1
 {
     display: inline-block;
     padding: 5px;
     background-color: #000;
-}
+} */
 
 .mainPageInfoBox
 {
@@ -118,4 +118,33 @@
     margin: auto;
     margin-top: 2px;
     cursor: pointer;
+}
+
+.loginBox .loginButton
+{
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  display: inline-block;
+  padding: 15px;
+  font-family: 'Nunito';
+  font-style: bold;
+  font-size: 25px;
+  border: none;
+}
+
+.loginBox .loginButton
+{
+  background-color: #1DB954;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.25s;
+  width: 300px;
+  height: 75px;
+}
+
+.loginBox .loginButton:hover
+{
+  background-color: rgb(255, 174, 0);
 }
