@@ -1,4 +1,6 @@
 .category-dropdown {
+  font-family: 'Nunito';
+  font-weight: bold;
   position: relative;
   display: inline-block;
   height: 100%;
@@ -11,6 +13,8 @@
   width: 150px;
   border: none;
   padding: 0 15px 0 15px;
+  font-family: 'Nunito';
+  font-weight: bold;
   border-right: 1px solid #777;
   text-align: left;
 

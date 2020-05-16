@@ -11,7 +11,7 @@
   font-size: 24px;
   font-weight: normal;
   color: #efefef;
-  font-style: bold;
+  font-weight: bold;
   margin-bottom: 10px;
 }
 
@@ -36,6 +36,8 @@
 {
   display: inline-block;
   padding: 15px;
+  font-family: 'Nunito';
+  font-weight: bold;
   font-size: 16px;
   border: none;
 }
@@ -57,6 +59,8 @@
 .mainPageInfoBox .infoBoxTextField
 {
   width: 350px;
+  font-family: 'Nunito';
+  font-weight: bold;
 }
 
 .mainPageInfoBox .infoBoxTextField:focus
@@ -80,12 +84,13 @@
   width:85%;
   min-height: 400px;
   margin: auto;
-  background-color: rgb(19, 19, 19);
-  color: #00d100;
+  /* background-color: rgb(19, 19, 19); */
+  font-family: 'Nunito';
+  color: #ffffff;
   padding: 10px 10px 0px 10px;
   border-radius: 8px;
   word-wrap: break-word;
-  text-align: left;
+  text-align: center;
 }
 
 .responseTrack
@@ -122,6 +127,8 @@
 
 .tracklist
 {
+  font-family: 'Nunito';
+  font-weight: bold;
   margin:0 auto;
   padding:5px;
   height: 550px;
@@ -131,6 +138,8 @@
 
 .composite-score
 {
+  font-family: 'Nunito';
+  font-weight: bold;
   float: left;
   width: 30%;
 }
