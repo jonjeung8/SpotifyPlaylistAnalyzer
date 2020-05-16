@@ -11,12 +11,14 @@ import { Callback } from '../_models/logincallback'
 //components
 import { CategorySelectorComponent } from '../main-page/category-selector/category-selector.component';
 import { CompositeScoreComponent } from '../main-page/composite-score/composite-score.component';
+import { Observable, Subscription } from 'rxjs';
+import { first } from 'rxjs/operators';
 
 export const CATEGORIES: Array<Category> = Array(
   new Category("Danceability", "danceability"),
   new Category("Energy", "energy"),
-  new Category("Key", "key"),
-  new Category("Loudness","loudness"),
+  //new Category("Key", "key"),
+  //new Category("Loudness","loudness"),
   new Category("Mode", "mode"),
   new Category("Speechiness", "speechiness"),
   new Category("Acousticness", "acousticness"),
@@ -42,6 +44,7 @@ export class MainPageComponent implements OnInit {
   hidden: boolean; // determines when to reveal the response
   userPlaylist: Playlist; // to store the playlist
   categories: Array<Category> = CATEGORIES;
+
 
   @ViewChild("appCategorySelector") appCategorySelector: CategorySelectorComponent;
   @ViewChild("appCompositeScore") appCompositeScore: CompositeScoreComponent;
@@ -115,10 +118,15 @@ export class MainPageComponent implements OnInit {
   
   AnalysisButtonClicked()
   {
+    // Reset the data containers:
+    this.userPlaylist.tracks = new Array<Track>();
+    this.userPlaylist.metrics = new Array<RawMetrics>();
+    this.trackIDArray = "";
+
     this.widgetSubmitStr = `https://open.spotify.com/embed/playlist/${this.linkSubmitStr}`;
     
     console.log("Calling to spotify api service");
-    
+
     this.spotifyApi.GetPlaylistResults(this.linkSubmitStr, this.loginCallback.access_token)
     .subscribe({
       next: (response: any) => {
@@ -147,7 +155,7 @@ export class MainPageComponent implements OnInit {
             
             this.userPlaylist.tracks.push(tmpTrack);
           }
-          this.ShowPlaylistElements();
+          //this.ShowPlaylistElements();
         }
       },
       complete: () =>
@@ -169,7 +177,7 @@ export class MainPageComponent implements OnInit {
                 tmpMetrics.duration_ms = item.duration_ms;
                 tmpMetrics.energy = item.energy;
                 tmpMetrics.id = item.id;
-                tmpMetrics.instrumentalness = item.intrumentalness;
+                tmpMetrics.instrumentalness = item.instrumentalness;
                 tmpMetrics.key = item.key;
                 tmpMetrics.liveness = item.liveness;
                 tmpMetrics.loudness = item.loudness;
@@ -188,9 +196,16 @@ export class MainPageComponent implements OnInit {
             // console.log(`hey, the category is verified: ${this.appCategorySelector.validateCategory()}`);
             this.appCompositeScore.CalculateCompositeScore(this.userPlaylist.metrics, this.appCategorySelector.category); 
             this.ShowPlaylistElements();
+            
+            //this.getFeaturesSubscription.unsubscribe();
+            //this.getPlaylistSubscription.unsubscribe();
+
           }
         })
       }
     })
+
+
+
   }
 }
