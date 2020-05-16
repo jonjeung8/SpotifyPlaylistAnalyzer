@@ -7,12 +7,11 @@ import { Album } from '../_models/album';
 import { RawMetrics } from '../_models/RawMetrics';
 import { Category } from '../_models/category';
 import { Callback } from '../_models/logincallback'
-
+import { SafePipe } from "../safe.pipe";
 //components
 import { CategorySelectorComponent } from '../main-page/category-selector/category-selector.component';
 import { CompositeScoreComponent } from '../main-page/composite-score/composite-score.component';
-import { Observable, Subscription } from 'rxjs';
-import { first } from 'rxjs/operators';
+
 
 export const CATEGORIES: Array<Category> = Array(
   new Category("Danceability", "danceability"),

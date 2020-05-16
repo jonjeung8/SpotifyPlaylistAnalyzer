@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MainPageComponent } from './main-page.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import {RouterTestingModule } from '@angular/router/testing';
+import { SafePipe } from '../safe.pipe';
 
 describe('MainPageComponent', () => {
   let component: MainPageComponent;
@@ -8,7 +11,14 @@ describe('MainPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MainPageComponent ]
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule
+      ],
+      declarations: [ 
+        MainPageComponent,
+        SafePipe
+       ]
     })
     .compileComponents();
   }));
@@ -20,7 +30,7 @@ describe('MainPageComponent', () => {
   });
 
   //* Commented out for CI demo
-  /*/
+  //*/
   it('should create', () => {
     expect(component).toBeTruthy();
   });
