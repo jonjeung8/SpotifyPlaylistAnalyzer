@@ -6,6 +6,6 @@ export class Track
     album: Album;
     href: string;
     name: string;
-    id: string; //Spotify track ID
+    id: string; // Spotify track ID
     metrics: RawMetrics;
 }

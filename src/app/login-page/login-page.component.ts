@@ -17,13 +17,12 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.router.url);
-    
   }
 
 
   LoginButtonClicked()
   {
-    console.log("Calling to spotify login api service");
+    console.log('Calling to spotify login api service');
     /*this.spotifyApi.LoginRedirect()
     .subscribe(
       response => {

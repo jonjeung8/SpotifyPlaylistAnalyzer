@@ -6,8 +6,8 @@ import { Playlist } from '../../_models/Playlist';
 import { Track } from '../../_models/Track';
 import { Album } from '../../_models/album';
 
-//imports html and css files
-@Component({ 
+// imports html and css files
+@Component({
   selector: 'app-composite-score',
   templateUrl: './composite-score.component.html',
   styleUrls: ['./composite-score.component.css']
@@ -16,18 +16,17 @@ import { Album } from '../../_models/album';
 
 export class CompositeScoreComponent implements OnInit {
 
-    //declared variables
+    // declared variables
     metricsDisplay: MetricScores;
     compositeScore: number;
     apiResponse: string;
 
-    linkSubmitStr : string;
+    linkSubmitStr: string;
     bearerTokenStr: string;
-  
-    constructor(private spotifyApi: SpotifyApiServiceService) { 
+    constructor(private spotifyApi: SpotifyApiServiceService) {
 
-    //initialize variables
-    this.linkSubmitStr = "";
+    // initialize variables
+    this.linkSubmitStr = '';
     this.metricsDisplay = new MetricScores();
     this.metricsDisplay.numbers = new Array<number>();
     this.compositeScore = 0;

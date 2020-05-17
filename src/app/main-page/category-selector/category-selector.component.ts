@@ -24,9 +24,9 @@ export class CategorySelectorComponent implements OnInit {
   }
 
   validateCategory(): boolean {
-    if(this.category == undefined) {
+    if (this.category === undefined) {
       return false;
-    } else if(this.category === "0") {
+    } else if (this.category === '0') {
       return false;
     } else {
       return true;
