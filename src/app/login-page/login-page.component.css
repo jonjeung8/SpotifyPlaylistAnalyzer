@@ -1,22 +1,22 @@
 .mainPageContent
 {
-    padding-top: 50;
-    width: 95%;
-    margin: auto;
-    text-align: center;
+  padding-top: 50;
+  width: 95%;
+  margin: auto;
+  text-align: center;
 }
 
 .loginPageTitle
 {
-    padding-top: 4em;
-    margin: 1em auto;
-    font-size: 50px;
-    font-weight: bold;
-    color: #efefef;
-
+  padding-top: 4em;
+  margin: 1em auto;
+  font-size: 50px;
+  font-weight: bold;
+  color: #efefef;
 }
 
-span{
+span
+{
   display:inline-block;
   border-bottom:8px solid #1DB954;
   padding-bottom:2px;
@@ -24,10 +24,10 @@ span{
 
 .loginBox .loginButton
 {
-    width: 50px;
-    height: 25px;
-    margin: auto;
-    cursor: pointer;
+  width: 50px;
+  height: 25px;
+  margin: auto;
+  cursor: pointer;
 }
 
 .loginBox .loginButton

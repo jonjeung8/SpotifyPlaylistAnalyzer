@@ -9,6 +9,7 @@
 .category-dropdown select {
   appearance: none;
   -moz-appearance: none;
+  -webkit-appearance: none;
   height: 100%;
   width: 150px;
   border: none;
@@ -17,16 +18,14 @@
   font-weight: bold;
   border-right: 1px solid #777;
   text-align: left;
-
   cursor: pointer;
 }
 
 .select-arrow {
   position: absolute;
-  right: 0px;
+  right: 0;
   top: 15px;
   width: 15px;
   padding-right: 15px;
   pointer-events: none;
-
 }
