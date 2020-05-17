@@ -1,6 +1,6 @@
 <div class="mainPageContent">
   <div class="mainPageTitle">
-    <h1>#Spotify Playlist Analyzer</h1>
+    <h1>Spotify Playlist Analyzer</h1>
   </div>
   <div class="mainPageInfoBox dropShadow">
     <!--Playlist button-->
@@ -10,7 +10,7 @@
   </div>
 
 
-  <h2>Response:</h2>
+  <!-- <h2>Response:</h2> -->
   
 
   <div class="responseBox dropShadow" [hidden]="hidden">
@@ -22,7 +22,7 @@
 
       <div class="composite-score">
         <p #metricSelectedDisplay *ngIf="metricSelected">
-          {{metricSelected}}:
+          {{metricSelected}} Score
         </p>
         <p #averageDisplay *ngIf="average">
           {{average}}
