@@ -1,1 +1,5 @@
-<p>outliers works!</p>
+<div *ngIf="outlierTracks" class="allOutliersContainer">
+  <div *ngFor="let track of outlierTracks" class="outlierContainer" >
+    {{track.name}}
+  </div>
+</div>

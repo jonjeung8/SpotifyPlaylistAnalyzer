@@ -39,7 +39,7 @@ export class RawMetrics
             toReturn = this.energy;
             break;
           } 
-        case "instrimentalness":
+        case "instrumentalness":
           {
             toReturn = this.instrumentalness;
             break;

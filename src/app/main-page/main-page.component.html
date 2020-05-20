@@ -30,7 +30,7 @@
         </p>
       </div> -->
 
-      <div class="tracklist">
+      <!-- <div class="tracklist">
         <p>TrackNames:</p>
         <div class="responseTrack" *ngFor="let track of userPlaylist.tracks">
           <p>
@@ -40,7 +40,11 @@
                 Album: {{track.album.name}}
           </p>
         </div>
-      </div>
+      </div> -->
+
+      <!-- Display the outliers: -->
+      <app-outliers #outlierList></app-outliers>
+
     </div>
   </div>
 
