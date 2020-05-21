@@ -6,13 +6,13 @@ import { Track } from '../_models/Track';
 import { Album } from '../_models/album';
 import { RawMetrics } from '../_models/RawMetrics';
 import { Category } from '../_models/category';
+
 import { Callback } from '../_models/logincallback'
 import { SafePipe } from "../safe.pipe";
 //components
 import { CategorySelectorComponent } from '../main-page/category-selector/category-selector.component';
 import { CompositeScoreComponent } from '../main-page/composite-score/composite-score.component';
 import { OutliersComponent } from '../outliers/outliers.component';
-
 
 export const CATEGORIES: Array<Category> = Array(
   new Category("Danceability", "danceability"),
@@ -45,7 +45,6 @@ export class MainPageComponent implements OnInit {
   userPlaylist: Playlist; // to store the playlist
   categories: Array<Category> = CATEGORIES;
 
-
   @ViewChild("appCategorySelector") appCategorySelector: CategorySelectorComponent;
   @ViewChild("appCompositeScore") appCompositeScore: CompositeScoreComponent;
   @ViewChild("outlierList") outlierList: OutliersComponent;
@@ -56,67 +55,60 @@ export class MainPageComponent implements OnInit {
     private spotifyApi: SpotifyApiServiceService,
     private router: Router,
     private route: ActivatedRoute
-    ) { 
-    this.linkSubmitStr = "";
-    this.widgetSubmitStr = "";
-    this.trackIDArray = "";
+    ) {
+    this.linkSubmitStr = '';
+    this.widgetSubmitStr = '';
+    this.trackIDArray = '';
     this.userPlaylist = new Playlist();
     this.userPlaylist.tracks = new Array<Track>();
     this.hidden = true;
     this.userPlaylist.metrics = new Array<RawMetrics>();
   }
-  
 
   ngOnInit(): void {
-    
   console.log(this.router.url);
-
 
   console.log(this.route.snapshot.fragment); // only update on component creation
   this.route.fragment.subscribe(
     fragment => {
       // Convert to Url search params:
-      let params = new URLSearchParams("?" + fragment);
+      const params = new URLSearchParams('?' + fragment);
 
-      //console.log(params);
+      // console.log(params);
 
       if (params.has('access_token') && params.has('expires_in') && params.has('state') )
       {
         this.loginCallback = new Callback();
 
-        let tmpAccessToken = params.get('access_token');
-        let tmpExpiresIn = params.get('expires_in');
-        let tmpState = params.get('state');
+        const tmpAccessToken = params.get('access_token');
+        const tmpExpiresIn = params.get('expires_in');
+        const tmpState = params.get('state');
 
-        if (tmpAccessToken != "" && tmpExpiresIn != "" && tmpState != "")
+        if (tmpAccessToken !== '' && tmpExpiresIn !== '' && tmpState !== '')
         {
           this.loginCallback.access_token = tmpAccessToken;
-          this.loginCallback.expires_in = parseInt(tmpExpiresIn);
+          this.loginCallback.expires_in = Number(tmpExpiresIn);
           this.loginCallback.state = tmpState;
         }
         else{
-          console.log("login failed 1");
-          this.router.navigate([""])
-          console.log("login failed 2");
-          
+          console.log('login failed 1');
+          this.router.navigate(['']);
+          console.log('login failed 2');
         }
       }
       else {
-        console.log("login failed 3");
-        this.router.navigate([""])
-        console.log("login failed 4");
+        console.log('login failed 3');
+        this.router.navigate(['']);
+        console.log('login failed 4');
       }
     }
-  ); 
-
+  );
   }
-
-
   ShowPlaylistElements()
   {
     this.hidden = false;
   }
-  
+
   AnalysisButtonClicked()
   {
     // Reset the data containers:
@@ -126,34 +118,32 @@ export class MainPageComponent implements OnInit {
 
     this.widgetSubmitStr = `https://open.spotify.com/embed/playlist/${this.linkSubmitStr}`;
     
-    console.log("Calling to spotify api service");
+    console.log('Calling to spotify api service');
 
     this.spotifyApi.GetPlaylistResults(this.linkSubmitStr, this.loginCallback.access_token)
     .subscribe({
       next: (response: any) => {
-        console.log("I MADE IT TO the get playlist api response");
-        console.log("Api call recieved for first");
+        console.log('I MADE IT TO the get playlist api response');
+        console.log('Api call recieved for first');
 
         if (response.items)
         {
 
-          for(let item of response.items)
+          for (const item of response.items)
           {
             // Get the album data, get the track data
-            let tmpTrack = new Track();
+            const tmpTrack = new Track();
             tmpTrack.href = item.track.href;
             tmpTrack.name = item.track.name;
             tmpTrack.id = item.track.id;
-            this.trackIDArray += tmpTrack.id + "%2C";
-            if(item.track.album)
+            this.trackIDArray += tmpTrack.id + '%2C';
+            if (item.track.album)
             {
-              let tmpAlbum = new Album();
+              const tmpAlbum = new Album();
               tmpAlbum.href = item.track.album.href;
               tmpAlbum.name = item.track.album.name;
-              
               tmpTrack.album = tmpAlbum;
             }
-            
             this.userPlaylist.tracks.push(tmpTrack);
           }
           //this.ShowPlaylistElements();
@@ -164,15 +154,15 @@ export class MainPageComponent implements OnInit {
         this.spotifyApi.GetFeatures(this.trackIDArray)
         .subscribe({
           next: (response: any) => {
-            console.log("I MADE IT TO the get features response");
-            console.log("Api call recieved for second");
+            console.log('I MADE IT TO the get features response');
+            console.log('Api call recieved for second');
 
             if (response.audio_features)
             {
               console.log(response.audio_features);
-              for(let item of response.audio_features)
+              for (const item of response.audio_features)
               {
-                let tmpMetrics = new RawMetrics();
+                const tmpMetrics = new RawMetrics();
                 tmpMetrics.acousticness = item.acousticness;
                 tmpMetrics.danceability = item.danceability;
                 tmpMetrics.duration_ms = item.duration_ms;
@@ -192,7 +182,7 @@ export class MainPageComponent implements OnInit {
             }
             // this.JoinMetricToTracks(tmpMetrics, this.userPlaylist.metrics);
           },
-          complete: () => 
+          complete: () =>
           {
             // console.log(`hey, the category is verified: ${this.appCategorySelector.validateCategory()}`);
             this.appCompositeScore.CalculateCompositeScore(this.userPlaylist.metrics, this.appCategorySelector.category); 
@@ -209,11 +199,8 @@ export class MainPageComponent implements OnInit {
             //this.getPlaylistSubscription.unsubscribe();
 
           }
-        })
+        });
       }
-    })
-
-
-
+    });
   }
 }

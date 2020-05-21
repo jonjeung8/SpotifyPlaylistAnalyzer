@@ -1,5 +1,5 @@
-import {Track} from "./Track";
-import {RawMetrics} from "./RawMetrics";
+import {Track} from './Track';
+import {RawMetrics} from './RawMetrics';
 
 export class Playlist
 {

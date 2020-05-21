@@ -1,121 +1,56 @@
 .mainPageContent
 {
-    padding-top: 50;
-    width: 95%;
-    margin: auto;
-    text-align: center;
+  padding-top: 50;
+  width: 95%;
+  margin: auto;
+  text-align: center;
 }
 
-.mainPageTitle
+.loginPageTitle
 {
-    font-size: 24px;
-    font-weight: normal;
-    color: #efefef;
-    font-style: italic;
-    margin-bottom: 10px;
+  padding-top: 4em;
+  margin: 1em auto;
+  font-size: 50px;
+  font-weight: bold;
+  color: #efefef;
 }
 
-.mainPageTitle h1
+span
 {
-    display: inline-block;
-    padding: 5px;
-    background-color: #000;
+  display:inline-block;
+  border-bottom:8px solid #1DB954;
+  padding-bottom:2px;
 }
 
-.mainPageInfoBox
+.loginBox .loginButton
 {
-    border-top-right-radius: 50px;
-    border-bottom-right-radius: 50px;
-    height: 49px;
-    overflow: hidden;
-    display: inline-block;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-.mainPageInfoBox .infoBoxSubmitButton, .mainPageInfoBox .infoBoxTextField, .mainPageInfoBox .infoBoxBearerToken
-{
-    display: inline-block;
-    padding: 15px;
-    font-size: 16px;
-    border: none;
+  width: 50px;
+  height: 25px;
+  margin: auto;
+  cursor: pointer;
 }
 
-.mainPageInfoBox .infoBoxSubmitButton
+.loginBox .loginButton
 {
-    background-color: rgb(26, 26, 26);
-    color: #fff;
-    cursor: pointer;
-    transition: 0.25s;
-    width: 150px;
+  border-radius: 50px;
+  display: inline-block;
+  font-family: 'Nunito';
+  font-weight: bold;
+  font-size: 25px;
+  border: none;
 }
 
-.mainPageInfoBox .infoBoxSubmitButton:hover
+.loginBox .loginButton
 {
-    background-color: rgb(255, 174, 0);
+  background-color: #1DB954;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.25s;
+  width: 300px;
+  height: 75px;
 }
 
-.mainPageInfoBox .infoBoxTextField
+.loginBox .loginButton:hover
 {
-    width: 350px;
-}
-
-.mainPageInfoBox .infoBoxTextField:focus
-{
-    outline: 0;
-}
-
-.mainPageInfoBox .infoBoxBearerToken
-{
-    border-radius: 50px;
-    width: 400px;
-}
-
-.mainPageInfoBox .infoBoxBearerToken:focus
-{
-    outline: 0;
-}
-
-.responseBox
-{
-    width:650px;
-    min-height: 400px;
-    margin: auto;
-    margin-bottom: 20px;
-    background-color: rgb(19, 19, 19);
-    color: #00d100;
-    padding: 10px;
-    border-radius: 8px;
-    word-wrap: break-word;
-    text-align: left;
-}
-
-
-
-.responseTrack
-{
-    padding: 5px;
-    border-radius: 50px;
-    background-color: #efefef;
-
-    width: 95%;
-    margin: 5px auto 5px auto;
-}
-
-.responseTrack p
-{
-    margin-top: 2px;
-    margin-bottom: 2px;
-    margin-left:5px;
-    color: #333;
-
-    padding-left: 10px;
-}
-
-.mainPageInfoBox .loginBox
-{
-    width: 50px;
-    height: 25px;
-    margin: auto;
-    margin-top: 2px;
-    cursor: pointer;
+  background-color: rgb(255, 174, 0);
 }

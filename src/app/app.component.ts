@@ -12,6 +12,6 @@ export class AppComponent {
   title: string;
 
   constructor() {
-    this.title="SpotifyPlaylistAnalyzer";
+    this.title = 'SpotifyPlaylistAnalyzer';
   }
 }
