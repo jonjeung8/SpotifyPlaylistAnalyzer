@@ -64,7 +64,7 @@ export class SpotifyApiServiceService {
     // redirect uri:
     //===================
     //var redirect_uri = 'http:%2F%2Flocalhost%3A4200%2F'
-    var redirect_uri = 'http://localhost:4200/callback';
+    var redirect_uri = environment.redirect_uri;
     //===================
     // scope:
     //===================
