@@ -20,14 +20,15 @@
         <iframe [src]="widgetSubmitStr | safe" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
       </div>
 
-      <div class="composite-score">
+      <app-composite-score #appCompositeScore></app-composite-score>
+      <!-- <div class="composite-score">
         <p #metricSelectedDisplay *ngIf="metricSelected">
           {{metricSelected}} Score
         </p>
         <p #averageDisplay *ngIf="average">
           {{average}}
         </p>
-      </div>
+      </div> -->
 
       <div class="tracklist">
         <p>TrackNames:</p>

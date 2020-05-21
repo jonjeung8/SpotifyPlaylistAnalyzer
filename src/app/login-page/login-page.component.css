@@ -32,10 +32,7 @@ span
 
 .loginBox .loginButton
 {
-  border-top-right-radius: 50px;
-  border-bottom-right-radius: 50px;
-  border-top-left-radius: 50px;
-  border-bottom-left-radius: 50px;
+  border-radius: 50px;
   display: inline-block;
   font-family: 'Nunito';
   font-weight: bold;
