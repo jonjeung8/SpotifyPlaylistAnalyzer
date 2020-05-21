@@ -9,17 +9,9 @@
 .mainPageTitle
 {
   font-size: 24px;
-  font-weight: normal;
   color: #efefef;
-  font-style: italic;
+  font-weight: bold;
   margin-bottom: 10px;
-}
-
-.mainPageTitle h1
-{
-  display: inline-block;
-  padding: 5px;
-  background-color: #000;
 }
 
 .mainPageInfoBox
@@ -36,13 +28,15 @@
 {
   display: inline-block;
   padding: 15px;
+  font-family: 'Nunito';
+  font-weight: bold;
   font-size: 16px;
   border: none;
 }
 
 .mainPageInfoBox .infoBoxSubmitButton
 {
-  background-color: rgb(26, 26, 26);
+  background-color: #1DB954;
   color: #fff;
   cursor: pointer;
   transition: 0.25s;
@@ -57,22 +51,8 @@
 .mainPageInfoBox .infoBoxTextField
 {
   width: 350px;
-}
-
-.mainPageInfoBox .infoBoxTextField:focus
-{
-  outline: 0;
-}
-
-.mainPageInfoBox .infoBoxBearerToken
-{
-  border-radius: 50px;
-  width: 400px;
-}
-
-.mainPageInfoBox .infoBoxBearerToken:focus
-{
-  outline: 0;
+  font-family: 'Nunito';
+  font-weight: bold;
 }
 
 .responseBox
@@ -80,12 +60,12 @@
   width:85%;
   min-height: 400px;
   margin: auto;
-  background-color: rgb(19, 19, 19);
-  color: #00d100;
-  padding: 10px 10px 0px 10px;
+  font-family: 'Nunito';
+  color: #ffffff;
+  padding: 10px 10px 0 10px;
   border-radius: 8px;
   word-wrap: break-word;
-  text-align: left;
+  text-align: center;
 }
 
 .responseTrack
@@ -122,6 +102,8 @@
 
 .tracklist
 {
+  font-family: 'Nunito';
+  font-weight: bold;
   margin:0 auto;
   padding:5px;
   height: 550px;
@@ -131,6 +113,8 @@
 
 .composite-score
 {
+  font-family: 'Nunito';
+  font-weight: bold;
   float: left;
   width: 30%;
 }
@@ -142,5 +126,4 @@
   margin: auto;
   margin-top: 2px;
   cursor: pointer;
-
 }

@@ -19,7 +19,6 @@ export class LoginPageComponent implements OnInit {
     console.log(this.router.url);
   }
 
-
   LoginButtonClicked()
   {
     console.log('Calling to spotify login api service');

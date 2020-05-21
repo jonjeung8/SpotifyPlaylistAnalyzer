@@ -1,11 +1,18 @@
 .genericbutton {
-    background-color: #1DB954; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-  }
+  background-color: #1DB954; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: 'Nunito';
+  font-size: 16px;
+}
+  
+.score-breakdown
+{
+  float: left;
+  width: 30%;
+}
   
