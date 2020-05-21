@@ -12,6 +12,7 @@ import { SafePipe } from "../safe.pipe";
 //components
 import { CategorySelectorComponent } from '../main-page/category-selector/category-selector.component';
 import { CompositeScoreComponent } from '../main-page/composite-score/composite-score.component';
+import { OutliersComponent } from '../outliers/outliers.component';
 
 export const CATEGORIES: Array<Category> = Array(
   new Category("Danceability", "danceability"),
@@ -46,6 +47,7 @@ export class MainPageComponent implements OnInit {
 
   @ViewChild("appCategorySelector") appCategorySelector: CategorySelectorComponent;
   @ViewChild("appCompositeScore") appCompositeScore: CompositeScoreComponent;
+  @ViewChild("outlierList") outlierList: OutliersComponent;
 
   loginCallback: Callback;
 
@@ -185,6 +187,13 @@ export class MainPageComponent implements OnInit {
             // console.log(`hey, the category is verified: ${this.appCategorySelector.validateCategory()}`);
             this.appCompositeScore.CalculateCompositeScore(this.userPlaylist.metrics, this.appCategorySelector.category); 
             this.ShowPlaylistElements();
+
+            // Find and display outliers on the screen:
+            this.outlierList.getOutliers(
+              this.userPlaylist, 
+              this.appCompositeScore.average, 
+              this.appCategorySelector.category
+            );
             
             //this.getFeaturesSubscription.unsubscribe();
             //this.getPlaylistSubscription.unsubscribe();

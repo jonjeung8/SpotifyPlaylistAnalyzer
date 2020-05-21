@@ -1,0 +1,15 @@
+.allOutliersContainer
+{
+  display: inline-block;
+  width: 30%;
+  height: 100%;
+}
+
+.outlierContainer
+{
+  padding: 5px;
+  margin: 5px 0 5px 0;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  max-width: 100%;
+}
