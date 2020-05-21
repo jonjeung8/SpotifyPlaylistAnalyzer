@@ -18,8 +18,8 @@ import { DurationStrategy } from 'src/app/_models/MetricStrategies/DurationStrat
 
 
 
-//imports html and css files
-@Component({ 
+// imports html and css files
+@Component({
   selector: 'app-composite-score',
   templateUrl: './composite-score.component.html',
   styleUrls: ['./composite-score.component.css']
@@ -119,6 +119,7 @@ export class CompositeScoreComponent implements OnInit {
             console.log("hello, I've experienced an error somehow, or the user didn't select a category");
           } 
       }
+
     }
     console.log(total);
     console.log(arrayOfMetrics.length);
