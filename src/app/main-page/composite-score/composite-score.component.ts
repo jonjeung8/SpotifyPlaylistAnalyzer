@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MetricScores } from '../../_models/metricScores';
 
 import { RawMetrics } from '../../_models/RawMetrics';
@@ -16,8 +16,6 @@ import { TempoStrategy } from 'src/app/_models/MetricStrategies/TempoStrategy';
 import { TimeSignatureStrategy } from 'src/app/_models/MetricStrategies/TimeSignatureStrategy';
 import { DurationStrategy } from 'src/app/_models/MetricStrategies/DurationStrategy';
 
-
-
 // imports html and css files
 @Component({
   selector: 'app-composite-score',
@@ -31,6 +29,14 @@ export class CompositeScoreComponent implements OnInit {
   compositeScoreTitle: string; // Title associated with the type of metric being displayed
   compositeScore: string; //the composite score in string
   average: number;  // The raw value from the average metrics
+
+  @Output() onOutliersRequested = new EventEmitter<Boolean>();
+
+  getOutliers() {
+    this.onOutliersRequested.emit(true);
+    console.log("getOutliers has been called");
+  }
+
   constructor() { }
 
   ngOnInit(): void {
