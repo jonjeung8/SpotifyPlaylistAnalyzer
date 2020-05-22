@@ -3,7 +3,7 @@ import { IMetricStrategy } from './IMetricStrategy';
 export class DurationStrategy implements IMetricStrategy
 {
   GetDisplayTitle(): string {
-    return "Average song length";
+    return "Average Song Length";
   }
   
   ConvertToValue(metric: number): string {

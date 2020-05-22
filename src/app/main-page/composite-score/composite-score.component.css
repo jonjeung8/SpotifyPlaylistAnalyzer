@@ -1,5 +1,6 @@
 .genericbutton {
   background-color: #1DB954; /* Green */
+  border-radius: 50px;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -8,11 +9,38 @@
   display: inline-block;
   font-family: 'Nunito';
   font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
 }
-  
+
+.genericbutton:hover
+{
+  background-color: rgb(255, 174, 0);
+}
+
 .score-breakdown
 {
   float: left;
   width: 30%;
+  font-family: 'Nunito';
+  font-size: 25px;
+  font-weight: bold;
 }
   
+.averageDisplay
+{
+  background-color: #1DB954; /* Green */
+  border-radius: 50%;
+  border: none;
+  color: white;
+  width: 200px;
+  height: 200px;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: 'Nunito';
+  font-size: 35px;
+  font-weight: bold;
+}
+

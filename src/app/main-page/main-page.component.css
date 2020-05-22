@@ -130,7 +130,7 @@
 
 .container 
 {
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
   font-family: 'Nunito';
   font-weight: bold;
@@ -157,8 +157,6 @@ header::after{
 nav
 {
 float: right;
-padding-right: 70px;
-
 }
 
 nav a
@@ -166,18 +164,6 @@ nav a
 text-decoration: none;
 border-bottom: 3px solid transparent;
 }
-
-nav ul{
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  }
-  nav li
-  {
-  display: inline-block;
-  margin-left: 35px;
-  padding-top: 25px;
-  }
 
 nav a:visited
 {
@@ -196,4 +182,14 @@ nav a.active {
   border-bottom: 3px solid white;
 }
 
-
+nav ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  }
+  nav li
+  {
+  display: inline-block;
+  margin-left: 35px;
+  padding-top: 25px;
+  }

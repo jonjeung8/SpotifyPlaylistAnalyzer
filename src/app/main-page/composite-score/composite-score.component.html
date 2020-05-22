@@ -3,11 +3,16 @@
     <p #metricSelectedDisplay *ngIf="compositeScoreTitle">
       {{compositeScoreTitle}}:
     </p>
-    <p #averageDisplay *ngIf="compositeScore">
+    <div class="averageDisplay">  
+      <p #averageDisplay *ngIf="compositeScore">
       {{compositeScore}}
-    </p>
+      </p>
+    </div>
+  </div>
+  <div class="spacer">
+    <p></p>
   </div>
   <div class="outlier-button">
-    <button id="genericbutton" type="button">Click to see outliers</button>
+    <button class="genericbutton" type="button">Click To See Outliers</button>
   </div>
 </div>
