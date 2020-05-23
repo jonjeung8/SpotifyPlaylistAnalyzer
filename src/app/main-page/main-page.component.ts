@@ -44,6 +44,7 @@ export class MainPageComponent implements OnInit {
   hidden: boolean; // determines when to reveal the response
   userPlaylist: Playlist; // to store the playlist
   categories: Array<Category> = CATEGORIES;
+  hideOutliers: Boolean = true;
 
   @ViewChild("appCategorySelector") appCategorySelector: CategorySelectorComponent;
   @ViewChild("appCompositeScore") appCompositeScore: CompositeScoreComponent;
@@ -115,6 +116,7 @@ export class MainPageComponent implements OnInit {
     this.userPlaylist.tracks = new Array<Track>();
     this.userPlaylist.metrics = new Array<RawMetrics>();
     this.trackIDArray = "";
+    this.hideOutliers = true;
 
     this.linkSubmitStr = this.parseID(this.linkSubmitStr);
 
@@ -218,6 +220,11 @@ export class MainPageComponent implements OnInit {
       }
     } 
     return linkSubmitStr;
+  }
+
+  outliersButtonClicked(clicked: Boolean) {
+    this.hideOutliers = !clicked;
+
   }
 
 }

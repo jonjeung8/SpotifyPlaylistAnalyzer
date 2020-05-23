@@ -69,7 +69,7 @@ export class SpotifyApiServiceService {
     // scope:
     // ===================
     // var scope = 'user-read-private%20user-read-email';
-    const scope = 'user-read-private user-read-email playlist-read-private playlist-read-collaborative';
+    const scope = 'user-read-private user-read-email playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public';
     // ===================
     // state:
     // ===================
