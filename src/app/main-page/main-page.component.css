@@ -90,6 +90,7 @@
 
 .widget 
 {
+  padding-top: 20px;
   width: 30%;
   float: right;
 }
