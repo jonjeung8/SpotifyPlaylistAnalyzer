@@ -116,6 +116,8 @@ export class MainPageComponent implements OnInit {
     this.userPlaylist.metrics = new Array<RawMetrics>();
     this.trackIDArray = "";
 
+    this.linkSubmitStr = this.parseID(this.linkSubmitStr);
+
     this.widgetSubmitStr = `https://open.spotify.com/embed/playlist/${this.linkSubmitStr}`;
     
     console.log('Calling to spotify api service');
@@ -203,4 +205,19 @@ export class MainPageComponent implements OnInit {
       }
     });
   }
+
+  parseID(linkSubmitStr: string): string {
+    var idParsed: string = "";
+
+    if(linkSubmitStr.length > 22) {
+      var playlistPosition: number = linkSubmitStr.toLowerCase().search("playlist");
+      if(playlistPosition > -1) {
+        var idPosition: number = playlistPosition + 9;
+        idParsed = linkSubmitStr.slice(idPosition, idPosition + 22);
+        return idParsed;
+      }
+    } 
+    return linkSubmitStr;
+  }
+
 }
