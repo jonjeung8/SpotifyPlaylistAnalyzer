@@ -1,4 +1,7 @@
 <div *ngIf="outlierTracks" class="allOutliersContainer">
+  <div class="outlierstitle">
+    List of Outliers:
+  </div>
   <div *ngFor="let track of outlierTracks" class="outlierContainer" >
     {{track.name}}
   </div>

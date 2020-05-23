@@ -90,6 +90,7 @@
 
 .widget 
 {
+  padding-top: 20px;
   width: 30%;
   float: right;
 }
@@ -127,3 +128,72 @@
   margin-top: 2px;
   cursor: pointer;
 }
+
+.container 
+{
+  width: 90%;
+  margin: 0 auto;
+  font-family: 'Nunito';
+  font-weight: bold;
+  font-size: 25px;
+}
+header{
+  background-color: #333 0;
+}
+
+header::after{
+  content:'';
+  display: table;
+  clear: both;
+}
+
+.logo
+{
+  float: left;
+  height: 65px;
+  width: auto;
+  padding: 10px 0;
+}
+
+nav
+{
+text-decoration: none;
+float: right;
+}
+
+nav a
+{
+color: white;
+text-decoration: none;
+border-bottom: 3px solid transparent;
+}
+
+nav a:visited
+{
+  text-decoration: none;
+  color: white;
+
+} 
+nav a:hover
+{
+  background-color:transparent; 
+  text-decoration:none;
+  border-bottom: 3px solid #1DB954;
+  color: #1DB954;
+}
+
+nav a.active {
+  border-bottom: 3px solid white;
+}
+
+nav ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  }
+  nav li
+  {
+  display: inline-block;
+  margin-left: 35px;
+  padding-top: 25px;
+  }

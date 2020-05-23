@@ -13,6 +13,7 @@ import { SafePipe } from './safe.pipe';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { OutliersComponent } from './outliers/outliers.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { OutliersComponent } from './outliers/outliers.component';
     CompositeScoreComponent,
     SafePipe,
     LoginPageComponent,
-    OutliersComponent
+    OutliersComponent,
+    ErrorPageComponent
   ],
   imports: [
     AppRoutingModule,
