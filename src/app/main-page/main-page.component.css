@@ -146,13 +146,13 @@ header::after{
   clear: both;
 }
 
-/* .logo
+.logo
 {
   float: left;
   height: 50px;
-  width: 50px;
+  width: auto;
   padding: 10px 0;
-} */
+}
 
 nav
 {
