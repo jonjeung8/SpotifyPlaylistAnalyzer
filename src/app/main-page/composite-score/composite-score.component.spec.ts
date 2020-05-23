@@ -104,7 +104,7 @@ describe('CompositeScoreComponent', () => {
   component.CalculateCompositeScore(rawMetrics, metric);
 
   // Assert
-  expect(component.compositeScoreTitle).toBe('Acousticness rating');
+  expect(component.compositeScoreTitle).toBe('Acousticness Rating');
   });
 
   it('should change the title to acousticness (bad input)', () => {
