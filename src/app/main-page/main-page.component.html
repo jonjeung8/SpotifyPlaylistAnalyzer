@@ -21,7 +21,7 @@
   <div class="mainPageInfoBox dropShadow">
     <!--Playlist button-->
     <app-category-selector #appCategorySelector [categoriesIn]="categories"></app-category-selector>
-    <input type="url" name="linkSubmit" id="linkSubmit" [(ngModel)]="linkSubmitStr" [value]="linkSubmitStr" class="infoBoxTextField" placeholder="enter playlist id here">
+    <input type="url" name="linkSubmit" id="linkSubmit" [(ngModel)]="linkSubmitStr" [value]="linkSubmitStr" class="infoBoxTextField" placeholder="Enter playlist URL/URI/ID here">
     <button class="infoBoxSubmitButton" (click)="AnalysisButtonClicked()">Analyze Playlist</button>
   </div>
 
