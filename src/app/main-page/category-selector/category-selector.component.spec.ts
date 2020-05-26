@@ -22,4 +22,27 @@ describe('CategorySelectorComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
+  /*// Metric Selection Tests for null/bad data
+  it('should calculate the average acousticness (bad data input)', () => {
+    // Arrange
+    component.category = 'key';
+    var booleanCategory = component.validateCategory();
+    
+    // Act
+
+    // Assert
+    expect(component.average).toBe(0);
+  });
+
+  it('should calculate the average acousticness (null data input)', () => {
+    // Arrange
+    const metric = '0';
+    
+    // Act
+    component.CalculateCompositeScore(rawMetrics, metric);
+
+    // Assert
+    expect(component.average).toBe(0);
+  }); //*/
 });

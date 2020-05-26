@@ -3,21 +3,22 @@ import { IMetricStrategy } from './IMetricStrategy';
 export class SpeechinessStrategy implements IMetricStrategy
 {
   GetDisplayTitle(): string {
-    return "On Average, Tracks in this Playlist Contain";
+    return 'On Average, Tracks in this Playlist Contain';
   }
+
   ConvertToValue(metric: number): string {
-    var res = "";
+    var res = '';
     if(metric > 0.66)
     {
-      res = "Spoken Word";
+      res = 'Spoken Word';
     }
     else if(metric > 0.33)
     {
-      res = "Rhythmic Spoken Word"
+      res = 'Rhythmic Spoken Word';
     }
     else
     {
-      res = "Musical Tracks";
+      res = 'Musical Tracks';
     }
     return res;
   }
