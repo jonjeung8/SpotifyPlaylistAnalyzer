@@ -7,12 +7,12 @@ export class SpeechinessStrategy implements IMetricStrategy
   }
 
   ConvertToValue(metric: number): string {
-    var res = '';
-    if(metric > 0.66)
+    let res = '';
+    if (metric > 0.66)
     {
       res = 'Spoken Word';
     }
-    else if(metric > 0.33)
+    else if (metric > 0.33)
     {
       res = 'Rhythmic Spoken Word';
     }
@@ -22,5 +22,4 @@ export class SpeechinessStrategy implements IMetricStrategy
     }
     return res;
   }
-  
 }

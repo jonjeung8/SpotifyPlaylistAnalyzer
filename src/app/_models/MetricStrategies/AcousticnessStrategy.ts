@@ -3,7 +3,7 @@ import { IMetricStrategy } from './IMetricStrategy';
 export class AcousticnessStrategy implements IMetricStrategy
 {
   GetDisplayTitle(): string {
-    return "Acousticness Rating";
+    return 'Acousticness Rating';
   }
 
   ConvertToValue(metric: number): string {

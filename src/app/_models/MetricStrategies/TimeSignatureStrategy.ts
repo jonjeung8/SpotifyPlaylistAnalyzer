@@ -5,7 +5,6 @@ export class TimeSignatureStrategy implements IMetricStrategy
   GetDisplayTitle(): string {
     return 'Average Beats per Bar';
   }
-
   ConvertToValue(metric: number): string {
     metric = Number(metric.toFixed(2));
     return `${metric}`;

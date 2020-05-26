@@ -36,7 +36,7 @@
         <iframe [src]="widgetSubmitStr | safe" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
       </div>
 
-      <app-composite-score #appCompositeScore (onOutliersRequested)="outliersButtonClicked($event)"></app-composite-score>
+      <app-composite-score #appCompositeScore (OutliersRequested)="outliersButtonClicked($event)"></app-composite-score>
       <!-- <div class="composite-score">
         <p #metricSelectedDisplay *ngIf="metricSelected">
           {{metricSelected}} Score
