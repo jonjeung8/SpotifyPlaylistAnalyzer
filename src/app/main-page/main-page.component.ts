@@ -13,6 +13,8 @@ import { SafePipe } from '../safe.pipe';
 import { CategorySelectorComponent } from '../main-page/category-selector/category-selector.component';
 import { CompositeScoreComponent } from '../main-page/composite-score/composite-score.component';
 import { OutliersComponent } from '../outliers/outliers.component';
+import { PlaylistNode } from '../_models/PlaylistNode';
+import { UserPlaylistsComponent } from '../main-page/user-playlists/user-playlists.component';
 
 export const CATEGORIES: Array<Category> = Array(
   new Category('Danceability', 'danceability'),
@@ -45,10 +47,13 @@ export class MainPageComponent implements OnInit {
   userPlaylist: Playlist; // to store the playlist
   categories: Array<Category> = CATEGORIES;
   hideOutliers = true;
+  allPlaylists: Array<PlaylistNode>;
+  hideAllPlaylists: boolean;
 
-  @ViewChild('appCategorySelector') appCategorySelector: CategorySelectorComponent;
-  @ViewChild('appCompositeScore') appCompositeScore: CompositeScoreComponent;
-  @ViewChild('outlierList') outlierList: OutliersComponent;
+  @ViewChild("appCategorySelector") appCategorySelector: CategorySelectorComponent;
+  @ViewChild("appCompositeScore") appCompositeScore: CompositeScoreComponent;
+  @ViewChild("outlierList") outlierList: OutliersComponent;
+  @ViewChild('appUserPlaylists') appUserPlaylists: UserPlaylistsComponent;
 
   loginCallback: Callback;
 
@@ -64,6 +69,8 @@ export class MainPageComponent implements OnInit {
     this.userPlaylist.tracks = new Array<Track>();
     this.hidden = true;
     this.userPlaylist.metrics = new Array<RawMetrics>();
+    this.allPlaylists = new Array<PlaylistNode>();
+    this.hideAllPlaylists = true;
   }
 
   ngOnInit(): void {
@@ -90,6 +97,13 @@ export class MainPageComponent implements OnInit {
           this.loginCallback.access_token = tmpAccessToken;
           this.loginCallback.expires_in = Number(tmpExpiresIn);
           this.loginCallback.state = tmpState;
+
+          // Supply the API service with the bearer token:
+          this.spotifyApi.SetBearerToken(this.loginCallback.access_token);
+
+          // API call to get the user playlists
+          this.GetAllUserPlaylists();
+          
         }
         else{
           console.log('login failed 1');
@@ -102,6 +116,9 @@ export class MainPageComponent implements OnInit {
         this.router.navigate(['']);
         console.log('login failed 4');
       }
+
+
+
     }
   );
   }
@@ -117,6 +134,7 @@ export class MainPageComponent implements OnInit {
     this.userPlaylist.metrics = new Array<RawMetrics>();
     this.trackIDArray = '';
     this.hideOutliers = true;
+    this.hideAllPlaylists = true;
 
     this.linkSubmitStr = this.parseID(this.linkSubmitStr);
 
@@ -225,6 +243,46 @@ export class MainPageComponent implements OnInit {
   outliersButtonClicked(clicked: boolean) {
     this.hideOutliers = !clicked;
 
+  }
+
+
+  GetAllUserPlaylists()
+  {
+    this.hideAllPlaylists = true;
+    this.allPlaylists = new Array<PlaylistNode>();
+
+    // Make API call:
+    this.spotifyApi.GetUserPlaylists()
+    .subscribe({
+      next: (response: any) =>
+      {
+        console.log("Got all user playlists returned");
+        // Parse the response:
+        if(response.items)
+        {
+          // Iterate Playlist objects:
+          for(const item of response.items)
+          {
+            const node: PlaylistNode = new PlaylistNode();
+            node.id = item.id;
+            node.name = item.name;
+
+            this.allPlaylists.push(node);
+          }
+        }
+
+      },
+      complete: () =>
+      {
+        this.hideAllPlaylists = false;
+        console.log(this.allPlaylists);
+      }
+    });
+  }
+
+  OnPlaylistClicked(playlistID: string)
+  {
+    this.linkSubmitStr = playlistID;
   }
 
 }
