@@ -13,6 +13,7 @@ import { SafePipe } from "../safe.pipe";
 import { CategorySelectorComponent } from '../main-page/category-selector/category-selector.component';
 import { CompositeScoreComponent } from '../main-page/composite-score/composite-score.component';
 import { OutliersComponent } from '../outliers/outliers.component';
+import { PlaylistNode } from '../_models/PlaylistNode';
 
 export const CATEGORIES: Array<Category> = Array(
   new Category("Danceability", "danceability"),
@@ -44,7 +45,9 @@ export class MainPageComponent implements OnInit {
   hidden: boolean; // determines when to reveal the response
   userPlaylist: Playlist; // to store the playlist
   categories: Array<Category> = CATEGORIES;
-  hideOutliers: Boolean = true;
+  hideOutliers: boolean = true;
+  allPlaylists: Array<PlaylistNode>;
+  hideAllPlaylists: boolean;
 
   @ViewChild("appCategorySelector") appCategorySelector: CategorySelectorComponent;
   @ViewChild("appCompositeScore") appCompositeScore: CompositeScoreComponent;
@@ -64,6 +67,8 @@ export class MainPageComponent implements OnInit {
     this.userPlaylist.tracks = new Array<Track>();
     this.hidden = true;
     this.userPlaylist.metrics = new Array<RawMetrics>();
+    this.allPlaylists = new Array<PlaylistNode>();
+    this.hideAllPlaylists = true;
   }
 
   ngOnInit(): void {
@@ -102,6 +107,13 @@ export class MainPageComponent implements OnInit {
         this.router.navigate(['']);
         console.log('login failed 4');
       }
+
+      // Supply the API service with the bearer token:
+      this.spotifyApi.SetBearerToken(this.loginCallback.access_token);
+
+      // API call to get the user playlists
+      this.GetAllUserPlaylists();
+
     }
   );
   }
@@ -225,6 +237,41 @@ export class MainPageComponent implements OnInit {
   outliersButtonClicked(clicked: Boolean) {
     this.hideOutliers = !clicked;
 
+  }
+
+
+  GetAllUserPlaylists()
+  {
+    this.hideAllPlaylists = true;
+    this.allPlaylists = new Array<PlaylistNode>();
+
+    // Make API call:
+    this.spotifyApi.GetUserPlaylists()
+    .subscribe({
+      next: (response: any) =>
+      {
+        console.log("Got all user playlists returned");
+        // Parse the response:
+        if(response.items)
+        {
+          // Iterate Playlist objects:
+          for(const item of response.items)
+          {
+            const node: PlaylistNode = new PlaylistNode();
+            node.id = item.id;
+            node.name = item.name;
+
+            this.allPlaylists.push(node);
+          }
+        }
+
+      },
+      complete: () =>
+      {
+        this.hideAllPlaylists = false;
+        console.log(this.allPlaylists);
+      }
+    });
   }
 
 }
