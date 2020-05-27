@@ -14,6 +14,7 @@ import { CategorySelectorComponent } from '../main-page/category-selector/catego
 import { CompositeScoreComponent } from '../main-page/composite-score/composite-score.component';
 import { OutliersComponent } from '../outliers/outliers.component';
 import { PlaylistNode } from '../_models/PlaylistNode';
+import { UserPlaylistsComponent } from '../main-page/user-playlists/user-playlists.component';
 
 export const CATEGORIES: Array<Category> = Array(
   new Category("Danceability", "danceability"),
@@ -129,6 +130,7 @@ export class MainPageComponent implements OnInit {
     this.userPlaylist.metrics = new Array<RawMetrics>();
     this.trackIDArray = "";
     this.hideOutliers = true;
+    this.hideAllPlaylists = true;
 
     this.linkSubmitStr = this.parseID(this.linkSubmitStr);
 

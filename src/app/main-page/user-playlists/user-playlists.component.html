@@ -1,0 +1,9 @@
+<div *ngIf="userPlaylists" class="user-playlists">
+  <div class="playlistsTitle">
+    Your Playlists
+  </div>
+    <div *ngFor="let playlist of userPlaylists" class="playlistContainer">
+      Playlist: {{playlist.name}} <br>
+      ID: {{playlist.id}} 
+    </div>
+  </div>

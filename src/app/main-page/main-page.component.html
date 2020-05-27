@@ -28,6 +28,9 @@
 
   <!-- <h2>Response:</h2> -->
   
+  <div class="userPlaylists" [hidden]="hideAllPlaylists">
+    <app-user-playlists #appUserPlaylists [userPlaylists]="allPlaylists"></app-user-playlists>
+  </div>
 
   <div class="responseBox dropShadow" [hidden]="hidden">
 
