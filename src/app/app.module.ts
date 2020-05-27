@@ -14,7 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { OutliersComponent } from './outliers/outliers.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
-
+import { UserPlaylistsComponent } from './main-page/user-playlists/user-playlists.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,8 @@ import { ErrorPageComponent } from './error-page/error-page.component';
     SafePipe,
     LoginPageComponent,
     OutliersComponent,
-    ErrorPageComponent
+    ErrorPageComponent,
+    UserPlaylistsComponent,
   ],
   imports: [
     AppRoutingModule,

@@ -1,0 +1,40 @@
+.playlistsTitle {
+  color: white;
+  padding-top: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-family: 'Nunito';
+  font-size: 30px;
+  font-weight: bold; 
+}
+
+.playlistContainer {
+  color: white;
+  padding: 20px;
+  text-align: left;
+  text-decoration: none;
+  display: block;
+  font-family: 'Nunito';
+  font-size: 20px;
+  max-width: 95%;
+  width: 400px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #1DB954; /* Green */
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.playlistContainer:hover
+{
+  background-color: rgb(255, 174, 0);
+}
+
+.playlistContainer:focus
+{
+  outline: none;
+}

@@ -18,6 +18,10 @@ export class SpotifyApiServiceService {
     this.httpOptions = '';
   }
 
+  SetBearerToken(token: string)
+  {
+    this.bearToken = token;
+  }
 
   getQuery(query: string)
   {
@@ -105,6 +109,14 @@ export class SpotifyApiServiceService {
 
     return url;
 
+  }
+
+
+  GetUserPlaylists()
+  {
+    console.log('Getting User playlists');
+    const apiEndpoint = 'me/playlists';
+    return this.getQuery(apiEndpoint);
   }
 
 }

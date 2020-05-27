@@ -1,0 +1,9 @@
+<div *ngIf="userPlaylists" class="user-playlists">
+  <div class="playlistsTitle">
+    Your Playlists
+  </div>
+    <button *ngFor="let playlist of userPlaylists" class="playlistContainer" (click)="playlistButtonPressed(playlist.id)">
+      Playlist: {{playlist.name}} 
+      <br>ID: {{playlist.id}}
+    </button>
+  </div>
