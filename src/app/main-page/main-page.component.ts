@@ -97,6 +97,13 @@ export class MainPageComponent implements OnInit {
           this.loginCallback.access_token = tmpAccessToken;
           this.loginCallback.expires_in = Number(tmpExpiresIn);
           this.loginCallback.state = tmpState;
+
+          // Supply the API service with the bearer token:
+          this.spotifyApi.SetBearerToken(this.loginCallback.access_token);
+
+          // API call to get the user playlists
+          this.GetAllUserPlaylists();
+          
         }
         else{
           console.log('login failed 1');
@@ -110,11 +117,7 @@ export class MainPageComponent implements OnInit {
         console.log('login failed 4');
       }
 
-      // Supply the API service with the bearer token:
-      this.spotifyApi.SetBearerToken(this.loginCallback.access_token);
 
-      // API call to get the user playlists
-      this.GetAllUserPlaylists();
 
     }
   );
