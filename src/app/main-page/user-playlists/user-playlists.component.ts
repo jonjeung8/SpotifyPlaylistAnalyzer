@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PlaylistNode } from 'src/app/_models/PlaylistNode';
 
 @Component({
@@ -9,6 +9,14 @@ import { PlaylistNode } from 'src/app/_models/PlaylistNode';
 export class UserPlaylistsComponent implements OnInit {
   @Input() userPlaylists: Array<PlaylistNode>;
 
+  @Output() onPlaylistSelected = new EventEmitter<String>();
+
+  playlistButtonPressed(playlistID: string)
+  {
+    this.onPlaylistSelected.emit(playlistID);
+    console.log("playlist was selected from loaded playlists.");
+  }
+  
   constructor() { }
 
   ngOnInit(): void {

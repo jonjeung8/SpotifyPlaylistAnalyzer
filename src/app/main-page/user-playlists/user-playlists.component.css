@@ -25,4 +25,16 @@
   margin-right: auto;
   background-color: #1DB954; /* Green */
   border-radius: 50px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.playlistContainer:hover
+{
+  background-color: rgb(255, 174, 0);
+}
+
+.playlistContainer:focus
+{
+  outline: none;
 }
