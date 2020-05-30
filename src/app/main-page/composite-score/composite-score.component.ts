@@ -30,6 +30,30 @@ export class CompositeScoreComponent implements OnInit {
   compositeScore: string; // the composite score in string
   average: number;  // The raw value from the average metrics
 
+  compositeAcousticnessScore: string;  // The string from the composite metrics
+  compositeDanceabilityScore: string;  // The string from the composite metrics
+  compositeDurationScore: string;  // The string from the composite metrics
+  compositeEnergyScore: string;  // The string from the composite metrics
+  compositeInstrumentalnessScore: string;  // The string from the composite metrics
+  compositeLivenessScore: string;  // The string from the composite metrics
+  compositeModeScore: string;  // The string from the composite metrics
+  compositeSpeechinessScore: string;  // The string from the composite metrics
+  compositeTempoScore: string;  // The string from the composite metrics
+  compositeTimeSignatureScore: string;  // The string from the composite metrics
+  compositeValenceScore: string;  // The string from the composite metrics
+
+  compositeAcousticnessTitle: string;  // The Title associated with the composite metrics
+  compositeDanceabilityTitle: string;  // The Title associated with the composite metrics
+  compositeDurationTitle: string;  // The Title associated with the composite metrics
+  compositeEnergyTitle: string;  // The Title associated with the composite metrics
+  compositeInstrumentalnessTitle: string;  // The Title associated with the composite metrics
+  compositeLivenessTitle: string;  // The Title associated with the composite metrics
+  compositeModeTitle: string;  // The Title associated with the composite metrics
+  compositeSpeechinessTitle: string;  // The Title associated with the composite metrics
+  compositeTempoTitle: string;  // The Title associated with the composite metrics
+  compositeTimeSignatureTitle: string;  // The Title associated with the composite metrics
+  compositeValenceTitle: string;  // The Title associated with the composite metrics
+  
   @Output() OutliersRequested = new EventEmitter<boolean>();
 
   getOutliers() {
@@ -40,6 +64,125 @@ export class CompositeScoreComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  CalculateAllMetrics(arrayOfMetrics: Array<RawMetrics>)
+  {
+    let lengthOfPlaylist = arrayOfMetrics.length;
+    let totalAcousticness = 0;
+    let totalDanceability = 0;
+    let totalDuration = 0;
+    let totalEnergy = 0;
+    let totalInstrumentalness = 0;
+    let totalLiveness = 0;
+    let totalMode = 0;
+    let totalSpeechiness = 0;
+    let totalTempo = 0;
+    let totalTimeSignature = 0;
+    let totalValence = 0;
+
+    for (const trackMetric of arrayOfMetrics)
+    {
+      totalAcousticness += trackMetric.acousticness;
+      totalDanceability += trackMetric.danceability;
+      totalDuration += trackMetric.duration_ms;
+      totalEnergy += trackMetric.energy;
+      if (trackMetric.instrumentalness > 0.2)
+      {
+        totalInstrumentalness += 1;
+      }
+      if (trackMetric.liveness > 0.4)
+      {
+        totalLiveness += 1;
+      }
+      totalMode += trackMetric.mode;
+      totalSpeechiness += trackMetric.speechiness;
+      totalTempo += trackMetric.tempo;
+      totalTimeSignature += trackMetric.time_signature;
+      totalValence += trackMetric.valence;
+    }
+
+    let averageAcousticness = totalAcousticness / lengthOfPlaylist;
+    let averageDanceability = totalDanceability / lengthOfPlaylist;
+    let averageDuration = totalDuration / lengthOfPlaylist;
+    let averageEnergy = totalEnergy / lengthOfPlaylist;
+    let averageInstrumentalness = totalInstrumentalness / lengthOfPlaylist;
+    let averageLiveness = totalLiveness / lengthOfPlaylist;
+    let averageMode = totalMode / lengthOfPlaylist;
+    let averageSpeechiness = totalSpeechiness / lengthOfPlaylist;
+    let averageTempo = totalTempo / lengthOfPlaylist;
+    let averageTimeSignature = totalTimeSignature / lengthOfPlaylist;
+    let averageValence = totalValence / lengthOfPlaylist;
+
+    let AcousticnessMetricStrategy = new AcousticnessStrategy();
+    let DanceabilityMetricStrategy = new DanceabilityStrategy();
+    let DurationMetricStrategy = new DurationStrategy();
+    let EnergyMetricStrategy = new EnergyStrategy();
+    let InstrumentalnessMetricStrategy = new InstrumentalnessStrategy();
+    let LivenessMetricStrategy = new LivenessStrategy();
+    let ModeMetricStrategy = new ModeStrategy();
+    let SpeechinessMetricStrategy = new SpeechinessStrategy();
+    let TempoMetricStrategy = new TempoStrategy();
+    let TimeSignatureMetricStrategy = new TimeSignatureStrategy();
+    let ValenceMetricStrategy = new ValenceStrategy();
+
+    this.compositeAcousticnessScore = AcousticnessMetricStrategy.GetDisplayTitle();
+    this.compositeAcousticnessTitle = AcousticnessMetricStrategy.ConvertToValue(averageAcousticness);
+    this.compositeDanceabilityScore = DanceabilityMetricStrategy.GetDisplayTitle();
+    this.compositeDanceabilityTitle = DanceabilityMetricStrategy.ConvertToValue(averageDanceability);
+    this.compositeDurationScore = DurationMetricStrategy.GetDisplayTitle();
+    this.compositeDurationTitle = DurationMetricStrategy.ConvertToValue(averageDuration);
+    this.compositeEnergyScore = EnergyMetricStrategy.GetDisplayTitle();
+    this.compositeEnergyTitle = EnergyMetricStrategy.ConvertToValue(averageEnergy);
+    this.compositeInstrumentalnessScore = InstrumentalnessMetricStrategy.GetDisplayTitle();
+    this.compositeInstrumentalnessTitle = InstrumentalnessMetricStrategy.ConvertToValue(averageInstrumentalness);
+    this.compositeLivenessScore = LivenessMetricStrategy.GetDisplayTitle();
+    this.compositeLivenessTitle = LivenessMetricStrategy.ConvertToValue(averageLiveness);
+    this.compositeModeScore = ModeMetricStrategy.GetDisplayTitle();
+    this.compositeModeTitle = ModeMetricStrategy.ConvertToValue(averageMode);
+    this.compositeSpeechinessScore = SpeechinessMetricStrategy.GetDisplayTitle();
+    this.compositeSpeechinessTitle = SpeechinessMetricStrategy.ConvertToValue(averageSpeechiness);
+    this.compositeTempoScore = TempoMetricStrategy.GetDisplayTitle();
+    this.compositeTempoTitle = TempoMetricStrategy.ConvertToValue(averageTempo);
+    this.compositeTimeSignatureScore = TimeSignatureMetricStrategy.GetDisplayTitle();
+    this.compositeTimeSignatureTitle = TimeSignatureMetricStrategy.ConvertToValue(averageTimeSignature);
+    this.compositeValenceScore = ValenceMetricStrategy.GetDisplayTitle();
+    this.compositeValenceTitle = ValenceMetricStrategy.ConvertToValue(averageValence);
+    
+    console.log(this.compositeAcousticnessScore);
+    console.log(this.compositeAcousticnessTitle);
+    console.log(this.compositeDanceabilityScore);
+    console.log(this.compositeDanceabilityTitle);
+    console.log(this.compositeDurationScore);
+    console.log(this.compositeDurationTitle);
+    console.log(this.compositeEnergyScore);
+    console.log(this.compositeEnergyTitle);
+    console.log(this.compositeInstrumentalnessScore);
+    console.log(this.compositeInstrumentalnessTitle);
+    console.log(this.compositeLivenessScore);
+    console.log(this.compositeLivenessTitle);
+    console.log(this.compositeModeScore);
+    console.log(this.compositeModeTitle);
+    console.log(this.compositeSpeechinessScore);
+    console.log(this.compositeSpeechinessTitle);
+    console.log(this.compositeTempoScore);
+    console.log(this.compositeTempoTitle);
+    console.log(this.compositeTimeSignatureScore);
+    console.log(this.compositeTimeSignatureTitle);
+    console.log(this.compositeValenceScore);
+    console.log(this.compositeValenceTitle);
+    
+    /*/console.log(this.averageAcousticness);
+    console.log(this.averageDanceability);
+    console.log(this.averageDuration);
+    console.log(this.averageEnergy);
+    console.log(this.averageInstrumentalness);
+    console.log(this.averageLiveness);
+    console.log(this.averageMode);
+    console.log(this.averageSpeechiness);
+    console.log(this.averageTempo);
+    console.log(this.averageTimeSignature);
+    console.log(this.averageValence); //*/
   }
 
   CalculateCompositeScore(arrayOfMetrics: Array<RawMetrics>, categorySelected: string)

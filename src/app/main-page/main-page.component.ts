@@ -208,6 +208,7 @@ export class MainPageComponent implements OnInit {
           {
             // console.log(`hey, the category is verified: ${this.appCategorySelector.validateCategory()}`);
             this.appCompositeScore.CalculateCompositeScore(this.userPlaylist.metrics, this.appCategorySelector.category);
+            this.appCompositeScore.CalculateAllMetrics(this.userPlaylist.metrics);
             this.ShowPlaylistElements();
 
             // Find and display outliers on the screen:
