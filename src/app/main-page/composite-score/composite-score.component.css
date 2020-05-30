@@ -51,3 +51,84 @@ height: 200px;
 vertical-align: middle;
 /* line-height: 200px; */
 }
+
+.all-metric-title
+{
+  padding-top: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: 'Nunito';
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.all-metrics-breakdown
+{
+  display: inline-block;
+  width: 30%;
+  height: 100%;
+}
+
+.metric
+{
+  padding: 5px;
+  margin: 5px 0 5px 0;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+/* .danceability
+{
+  padding: 5px;
+  margin: 5px 0 5px 0;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.duration
+{
+  padding: 5px;
+  margin: 5px 0 5px 0;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.energy
+{
+  padding: 5px;
+  margin: 5px 0 5px 0;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.instrumentalness
+{
+  padding: 5px;
+  margin: 5px 0 5px 0;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.liveness
+{
+  padding: 5px;
+  margin: 5px 0 5px 0;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.mode
+{
+  padding: 5px;
+  margin: 5px 0 5px 0;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  max-width: 100%;
+} */
