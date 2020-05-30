@@ -1,12 +1,12 @@
 <div class="score-breakdown">
   <div class="composite-score">
-    <p #metricSelectedDisplay *ngIf="compositeScoreTitle">
-      {{compositeScoreTitle}}:
+    <p #metricSelectedDisplay>
+      Overall Playlist Synergy:
     </p>
-    <div class="circleBorder">  
+    <div class="circleBorder">
       <div class="results">
-      <p id="averageDisplay" #averageDisplay *ngIf="compositeScore">
-        {{compositeScore}}
+      <p id="averageDisplay" #averageDisplay *ngIf="synergyScore">
+        {{synergyScore}}
       </p>
     </div>
     </div>
@@ -27,10 +27,10 @@
 
   <div class="metric">  
     <div class="acousticness-title">
-    {{compositeAcousticnessTitle}}
+      {{compositeAcousticnessTitle}}
     </div>
     <div class="acousticness-score">
-    {{compositeAcousticnessScore}}
+      {{compositeAcousticnessScore}}
     </div>
   </div>
 

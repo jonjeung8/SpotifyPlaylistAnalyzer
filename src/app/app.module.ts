@@ -12,7 +12,7 @@ import { SafePipe } from './safe.pipe';
 
 import { AppRoutingModule } from './app-routing.module';
 import { LoginPageComponent } from './login-page/login-page.component';
-import { OutliersComponent } from './outliers/outliers.component';
+import { OutliersComponent } from './main-page/outliers/outliers.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { UserPlaylistsComponent } from './main-page/user-playlists/user-playlists.component';
 

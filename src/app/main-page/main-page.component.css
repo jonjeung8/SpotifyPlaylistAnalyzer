@@ -173,7 +173,8 @@ nav a:visited
   text-decoration: none;
   color: white;
 
-} 
+}
+
 nav a:hover
 {
   background-color:transparent; 
@@ -182,18 +183,21 @@ nav a:hover
   color: #1DB954;
 }
 
-nav a.active {
+nav a.active 
+{
   border-bottom: 3px solid white;
 }
 
-nav ul{
+nav ul
+{
   margin: 0;
   padding: 0;
   list-style: none;
-  }
-  nav li
-  {
+}
+
+nav li
+{
   display: inline-block;
   margin-left: 35px;
   padding-top: 25px;
-  }
+}

@@ -12,7 +12,7 @@ import { SafePipe } from '../safe.pipe';
 // components
 import { CategorySelectorComponent } from '../main-page/category-selector/category-selector.component';
 import { CompositeScoreComponent } from '../main-page/composite-score/composite-score.component';
-import { OutliersComponent } from '../outliers/outliers.component';
+import { OutliersComponent } from './outliers/outliers.component';
 import { PlaylistNode } from '../_models/PlaylistNode';
 import { UserPlaylistsComponent } from '../main-page/user-playlists/user-playlists.component';
 
@@ -207,14 +207,14 @@ export class MainPageComponent implements OnInit {
           complete: () =>
           {
             // console.log(`hey, the category is verified: ${this.appCategorySelector.validateCategory()}`);
-            this.appCompositeScore.CalculateCompositeScore(this.userPlaylist.metrics, this.appCategorySelector.category);
+            // this.appCompositeScore.CalculateCompositeScore(this.userPlaylist.metrics, this.appCategorySelector.category);
             this.appCompositeScore.CalculateAllMetrics(this.userPlaylist.metrics);
             this.ShowPlaylistElements();
 
             // Find and display outliers on the screen:
             this.outlierList.getOutliers(
               this.userPlaylist,
-              this.appCompositeScore.average,
+              this.appCompositeScore.synergyAverage,
               this.appCategorySelector.category
             );
 
