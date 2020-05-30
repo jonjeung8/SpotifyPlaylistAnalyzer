@@ -50,9 +50,9 @@ export class MainPageComponent implements OnInit {
   allPlaylists: Array<PlaylistNode>;
   hideAllPlaylists: boolean;
 
-  @ViewChild("appCategorySelector") appCategorySelector: CategorySelectorComponent;
-  @ViewChild("appCompositeScore") appCompositeScore: CompositeScoreComponent;
-  @ViewChild("outlierList") outlierList: OutliersComponent;
+  @ViewChild('appCategorySelector') appCategorySelector: CategorySelectorComponent;
+  @ViewChild('appCompositeScore') appCompositeScore: CompositeScoreComponent;
+  @ViewChild('outlierList') outlierList: OutliersComponent;
   @ViewChild('appUserPlaylists') appUserPlaylists: UserPlaylistsComponent;
 
   loginCallback: Callback;
@@ -103,7 +103,7 @@ export class MainPageComponent implements OnInit {
 
           // API call to get the user playlists
           this.GetAllUserPlaylists();
-          
+
         }
         else{
           console.log('login failed 1');
@@ -257,12 +257,12 @@ export class MainPageComponent implements OnInit {
     .subscribe({
       next: (response: any) =>
       {
-        console.log("Got all user playlists returned");
+        console.log('Got all user playlists returned');
         // Parse the response:
-        if(response.items)
+        if (response.items)
         {
           // Iterate Playlist objects:
-          for(const item of response.items)
+          for (const item of response.items)
           {
             const node: PlaylistNode = new PlaylistNode();
             node.id = item.id;

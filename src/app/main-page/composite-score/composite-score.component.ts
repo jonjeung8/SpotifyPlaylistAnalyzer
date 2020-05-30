@@ -54,7 +54,7 @@ export class CompositeScoreComponent implements OnInit {
   compositeTempoTitle: string;  // The Title associated with the composite metrics
   compositeTimeSignatureTitle: string;  // The Title associated with the composite metrics
   compositeValenceTitle: string;  // The Title associated with the composite metrics
-  
+
   @Output() OutliersRequested = new EventEmitter<boolean>();
 
   getOutliers() {
@@ -69,7 +69,7 @@ export class CompositeScoreComponent implements OnInit {
 
   CalculateAllMetrics(arrayOfMetrics: Array<RawMetrics>)
   {
-    let lengthOfPlaylist = arrayOfMetrics.length;
+    const lengthOfPlaylist = arrayOfMetrics.length;
     let totalAcousticness = 0;
     let totalDanceability = 0;
     let totalDuration = 0;
@@ -103,29 +103,29 @@ export class CompositeScoreComponent implements OnInit {
       totalValence += trackMetric.valence;
     }
 
-    let averageAcousticness = totalAcousticness / lengthOfPlaylist;
-    let averageDanceability = totalDanceability / lengthOfPlaylist;
-    let averageDuration = totalDuration / lengthOfPlaylist;
-    let averageEnergy = totalEnergy / lengthOfPlaylist;
-    let averageInstrumentalness = totalInstrumentalness / lengthOfPlaylist;
-    let averageLiveness = totalLiveness / lengthOfPlaylist;
-    let averageMode = totalMode / lengthOfPlaylist;
-    let averageSpeechiness = totalSpeechiness / lengthOfPlaylist;
-    let averageTempo = totalTempo / lengthOfPlaylist;
-    let averageTimeSignature = totalTimeSignature / lengthOfPlaylist;
-    let averageValence = totalValence / lengthOfPlaylist;
+    const averageAcousticness = totalAcousticness / lengthOfPlaylist;
+    const averageDanceability = totalDanceability / lengthOfPlaylist;
+    const averageDuration = totalDuration / lengthOfPlaylist;
+    const averageEnergy = totalEnergy / lengthOfPlaylist;
+    const averageInstrumentalness = totalInstrumentalness / lengthOfPlaylist;
+    const averageLiveness = totalLiveness / lengthOfPlaylist;
+    const averageMode = totalMode / lengthOfPlaylist;
+    const averageSpeechiness = totalSpeechiness / lengthOfPlaylist;
+    const averageTempo = totalTempo / lengthOfPlaylist;
+    const averageTimeSignature = totalTimeSignature / lengthOfPlaylist;
+    const averageValence = totalValence / lengthOfPlaylist;
 
-    let AcousticnessMetricStrategy = new AcousticnessStrategy();
-    let DanceabilityMetricStrategy = new DanceabilityStrategy();
-    let DurationMetricStrategy = new DurationStrategy();
-    let EnergyMetricStrategy = new EnergyStrategy();
-    let InstrumentalnessMetricStrategy = new InstrumentalnessStrategy();
-    let LivenessMetricStrategy = new LivenessStrategy();
-    let ModeMetricStrategy = new ModeStrategy();
-    let SpeechinessMetricStrategy = new SpeechinessStrategy();
-    let TempoMetricStrategy = new TempoStrategy();
-    let TimeSignatureMetricStrategy = new TimeSignatureStrategy();
-    let ValenceMetricStrategy = new ValenceStrategy();
+    const AcousticnessMetricStrategy = new AcousticnessStrategy();
+    const DanceabilityMetricStrategy = new DanceabilityStrategy();
+    const DurationMetricStrategy = new DurationStrategy();
+    const EnergyMetricStrategy = new EnergyStrategy();
+    const InstrumentalnessMetricStrategy = new InstrumentalnessStrategy();
+    const LivenessMetricStrategy = new LivenessStrategy();
+    const ModeMetricStrategy = new ModeStrategy();
+    const SpeechinessMetricStrategy = new SpeechinessStrategy();
+    const TempoMetricStrategy = new TempoStrategy();
+    const TimeSignatureMetricStrategy = new TimeSignatureStrategy();
+    const ValenceMetricStrategy = new ValenceStrategy();
 
     this.compositeAcousticnessTitle = AcousticnessMetricStrategy.GetDisplayTitle();
     this.compositeAcousticnessScore = AcousticnessMetricStrategy.ConvertToValue(averageAcousticness);
@@ -149,7 +149,8 @@ export class CompositeScoreComponent implements OnInit {
     this.compositeTimeSignatureScore = TimeSignatureMetricStrategy.ConvertToValue(averageTimeSignature);
     this.compositeValenceTitle = ValenceMetricStrategy.GetDisplayTitle();
     this.compositeValenceScore = ValenceMetricStrategy.ConvertToValue(averageValence);
-    
+
+    /*/
     console.log(this.compositeAcousticnessScore);
     console.log(this.compositeAcousticnessTitle);
     console.log(this.compositeDanceabilityScore);
@@ -172,17 +173,6 @@ export class CompositeScoreComponent implements OnInit {
     console.log(this.compositeTimeSignatureTitle);
     console.log(this.compositeValenceScore);
     console.log(this.compositeValenceTitle);
-    
-    /*/console.log(this.averageAcousticness);
-    console.log(this.averageDanceability);
-    console.log(this.averageDuration);
-    console.log(this.averageEnergy);
-    console.log(this.averageInstrumentalness);
-    console.log(this.averageLiveness);
-    console.log(this.averageMode);
-    console.log(this.averageSpeechiness);
-    console.log(this.averageTempo);
-    console.log(this.averageTimeSignature);
-    console.log(this.averageValence); //*/
+    //*/
   }
 }
