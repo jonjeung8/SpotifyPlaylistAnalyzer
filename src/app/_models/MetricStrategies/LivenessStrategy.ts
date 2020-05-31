@@ -9,4 +9,9 @@ export class LivenessStrategy implements IMetricStrategy
     metric = parseFloat((metric * 100).toFixed(0));
     return `${metric}%`;
   }
+
+  ConvertToBar(metric: number): string {
+    metric = parseFloat((metric * 100).toFixed(0));
+    return `${metric}%`;
+  }
 }

@@ -55,6 +55,18 @@ export class CompositeScoreComponent implements OnInit {
   compositeTimeSignatureTitle: string;  // The Title associated with the composite metrics
   compositeValenceTitle: string;  // The Title associated with the composite metrics
 
+  compositeAcousticnessBar: string;  // The bar from the composite metrics
+  compositeDanceabilityBar: string;  // The bar from the composite metrics
+  compositeDurationBar: string;  // The bar from the composite metrics
+  compositeEnergyBar: string;  // The bar from the composite metrics
+  compositeInstrumentalnessBar: string;  // The bar from the composite metrics
+  compositeLivenessBar: string;  // The bar from the composite metrics
+  compositeModeBar: string;  // The bar from the composite metrics
+  compositeSpeechinessBar: string;  // The bar from the composite metrics
+  compositeTempoBar: string;  // The bar from the composite metrics
+  compositeTimeSignatureBar: string;  // The bar from the composite metrics
+  compositeValenceBar: string;  // The bar from the composite metrics
+
   @Output() OutliersRequested = new EventEmitter<boolean>();
 
   getOutliers() {
@@ -129,16 +141,21 @@ export class CompositeScoreComponent implements OnInit {
 
     this.compositeAcousticnessTitle = AcousticnessMetricStrategy.GetDisplayTitle();
     this.compositeAcousticnessScore = AcousticnessMetricStrategy.ConvertToValue(averageAcousticness);
+    this.compositeAcousticnessBar = AcousticnessMetricStrategy.ConvertToBar(averageAcousticness);
     this.compositeDanceabilityTitle = DanceabilityMetricStrategy.GetDisplayTitle();
     this.compositeDanceabilityScore = DanceabilityMetricStrategy.ConvertToValue(averageDanceability);
+    this.compositeDanceabilityBar = AcousticnessMetricStrategy.ConvertToBar(averageDanceability);
     this.compositeDurationTitle = DurationMetricStrategy.GetDisplayTitle();
     this.compositeDurationScore = DurationMetricStrategy.ConvertToValue(averageDuration);
     this.compositeEnergyTitle = EnergyMetricStrategy.GetDisplayTitle();
     this.compositeEnergyScore = EnergyMetricStrategy.ConvertToValue(averageEnergy);
+    this.compositeEnergyBar = AcousticnessMetricStrategy.ConvertToBar(averageEnergy);
     this.compositeInstrumentalnessTitle = InstrumentalnessMetricStrategy.GetDisplayTitle();
     this.compositeInstrumentalnessScore = InstrumentalnessMetricStrategy.ConvertToValue(averageInstrumentalness);
+    this.compositeInstrumentalnessBar = AcousticnessMetricStrategy.ConvertToBar(averageInstrumentalness);
     this.compositeLivenessTitle = LivenessMetricStrategy.GetDisplayTitle();
     this.compositeLivenessScore = LivenessMetricStrategy.ConvertToValue(averageLiveness);
+    this.compositeLivenessBar = AcousticnessMetricStrategy.ConvertToBar(averageLiveness);
     this.compositeModeTitle = ModeMetricStrategy.GetDisplayTitle();
     this.compositeModeScore = ModeMetricStrategy.ConvertToValue(averageMode);
     this.compositeSpeechinessTitle = SpeechinessMetricStrategy.GetDisplayTitle();
