@@ -8,4 +8,9 @@ export class ModeStrategy implements IMetricStrategy
   ConvertToValue(metric: number): string {
     return metric > 0.5 ? 'Major key' : 'Minor key';
   }
+
+  ConvertToBar(metric: number): string {
+    metric = parseFloat((metric * 100).toFixed(1));
+    return `${metric}%`;
+  }
 }

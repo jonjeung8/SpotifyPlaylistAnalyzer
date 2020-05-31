@@ -22,4 +22,9 @@ export class SpeechinessStrategy implements IMetricStrategy
     }
     return res;
   }
+
+  ConvertToBar(metric: number): string {
+    metric = parseFloat((metric * 100).toFixed(1));
+    return `${metric}%`;
+  }
 }

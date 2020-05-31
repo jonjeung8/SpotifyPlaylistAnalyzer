@@ -144,29 +144,34 @@ export class CompositeScoreComponent implements OnInit {
     this.compositeAcousticnessBar = AcousticnessMetricStrategy.ConvertToBar(averageAcousticness);
     this.compositeDanceabilityTitle = DanceabilityMetricStrategy.GetDisplayTitle();
     this.compositeDanceabilityScore = DanceabilityMetricStrategy.ConvertToValue(averageDanceability);
-    this.compositeDanceabilityBar = AcousticnessMetricStrategy.ConvertToBar(averageDanceability);
+    this.compositeDanceabilityBar = DanceabilityMetricStrategy.ConvertToBar(averageDanceability);
     this.compositeDurationTitle = DurationMetricStrategy.GetDisplayTitle();
     this.compositeDurationScore = DurationMetricStrategy.ConvertToValue(averageDuration);
+    
     this.compositeEnergyTitle = EnergyMetricStrategy.GetDisplayTitle();
     this.compositeEnergyScore = EnergyMetricStrategy.ConvertToValue(averageEnergy);
-    this.compositeEnergyBar = AcousticnessMetricStrategy.ConvertToBar(averageEnergy);
+    this.compositeEnergyBar = EnergyMetricStrategy.ConvertToBar(averageEnergy);
     this.compositeInstrumentalnessTitle = InstrumentalnessMetricStrategy.GetDisplayTitle();
     this.compositeInstrumentalnessScore = InstrumentalnessMetricStrategy.ConvertToValue(averageInstrumentalness);
-    this.compositeInstrumentalnessBar = AcousticnessMetricStrategy.ConvertToBar(averageInstrumentalness);
+    this.compositeInstrumentalnessBar = InstrumentalnessMetricStrategy.ConvertToBar(averageInstrumentalness);
     this.compositeLivenessTitle = LivenessMetricStrategy.GetDisplayTitle();
     this.compositeLivenessScore = LivenessMetricStrategy.ConvertToValue(averageLiveness);
-    this.compositeLivenessBar = AcousticnessMetricStrategy.ConvertToBar(averageLiveness);
+    this.compositeLivenessBar = LivenessMetricStrategy.ConvertToBar(averageLiveness);
     this.compositeModeTitle = ModeMetricStrategy.GetDisplayTitle();
     this.compositeModeScore = ModeMetricStrategy.ConvertToValue(averageMode);
+    this.compositeModeBar = ModeMetricStrategy.ConvertToBar(averageMode);
     this.compositeSpeechinessTitle = SpeechinessMetricStrategy.GetDisplayTitle();
     this.compositeSpeechinessScore = SpeechinessMetricStrategy.ConvertToValue(averageSpeechiness);
+    this.compositeSpeechinessBar = SpeechinessMetricStrategy.ConvertToBar(averageSpeechiness);
     this.compositeTempoTitle = TempoMetricStrategy.GetDisplayTitle();
     this.compositeTempoScore = TempoMetricStrategy.ConvertToValue(averageTempo);
+    
     this.compositeTimeSignatureTitle = TimeSignatureMetricStrategy.GetDisplayTitle();
     this.compositeTimeSignatureScore = TimeSignatureMetricStrategy.ConvertToValue(averageTimeSignature);
+    
     this.compositeValenceTitle = ValenceMetricStrategy.GetDisplayTitle();
     this.compositeValenceScore = ValenceMetricStrategy.ConvertToValue(averageValence);
-
+    this.compositeValenceBar = ValenceMetricStrategy.ConvertToBar(averageValence);
     /*/
     console.log(this.compositeAcousticnessScore);
     console.log(this.compositeAcousticnessTitle);
