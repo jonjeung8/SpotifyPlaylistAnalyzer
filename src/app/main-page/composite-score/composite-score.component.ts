@@ -147,7 +147,7 @@ export class CompositeScoreComponent implements OnInit {
     this.compositeDanceabilityBar = DanceabilityMetricStrategy.ConvertToBar(averageDanceability);
     this.compositeDurationTitle = DurationMetricStrategy.GetDisplayTitle();
     this.compositeDurationScore = DurationMetricStrategy.ConvertToValue(averageDuration);
-    
+    this.compositeDurationBar = DurationMetricStrategy.ConvertToBar(averageDuration);
     this.compositeEnergyTitle = EnergyMetricStrategy.GetDisplayTitle();
     this.compositeEnergyScore = EnergyMetricStrategy.ConvertToValue(averageEnergy);
     this.compositeEnergyBar = EnergyMetricStrategy.ConvertToBar(averageEnergy);
@@ -165,10 +165,10 @@ export class CompositeScoreComponent implements OnInit {
     this.compositeSpeechinessBar = SpeechinessMetricStrategy.ConvertToBar(averageSpeechiness);
     this.compositeTempoTitle = TempoMetricStrategy.GetDisplayTitle();
     this.compositeTempoScore = TempoMetricStrategy.ConvertToValue(averageTempo);
-    
+    this.compositeTempoBar = TempoMetricStrategy.ConvertToBar(averageTempo);
     this.compositeTimeSignatureTitle = TimeSignatureMetricStrategy.GetDisplayTitle();
     this.compositeTimeSignatureScore = TimeSignatureMetricStrategy.ConvertToValue(averageTimeSignature);
-    
+    this.compositeTimeSignatureBar =TimeSignatureMetricStrategy.ConvertToBar(averageTimeSignature);
     this.compositeValenceTitle = ValenceMetricStrategy.GetDisplayTitle();
     this.compositeValenceScore = ValenceMetricStrategy.ConvertToValue(averageValence);
     this.compositeValenceBar = ValenceMetricStrategy.ConvertToBar(averageValence);
