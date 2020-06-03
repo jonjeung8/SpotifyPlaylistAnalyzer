@@ -201,3 +201,26 @@ nav li
   margin-left: 35px;
   padding-top: 25px;
 }
+
+
+.left .right
+{
+  display: inline-block;
+  padding: 15px;
+  border: 0.5px;
+}
+
+.left
+{
+  float: left;
+  width: 33.33%;
+  margin: auto;
+  display: block;
+}
+.right
+{
+  float: right;
+  width: 33.33%;
+  margin: auto;
+  display: block;
+}

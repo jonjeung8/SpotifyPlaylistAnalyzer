@@ -29,6 +29,12 @@
   <!-- <h2>Response:</h2> -->
   
   <div class="userPlaylists" [hidden]="hideAllPlaylists">
+    <div class="left">
+      <br>
+    </div>
+    <div class="right">
+      <br>
+    </div>
     <app-user-playlists #appUserPlaylists [userPlaylists]="allPlaylists" (onPlaylistSelected)="OnPlaylistClicked($event)"></app-user-playlists>
   </div>
 
@@ -39,10 +45,12 @@
         <iframe [src]="widgetSubmitStr | safe" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
       </div>
 
-      <app-composite-score #appCompositeScore (OutliersRequested)="outliersButtonClicked($event)"></app-composite-score>
+      <app-composite-score #appCompositeScore (OutliersRequested)="outliersButtonClicked($event)" (PlaylistsRequested)="OnInnerPlaylistClicked($event)"></app-composite-score>
 
       <!-- Display the outliers: -->
       <app-outliers #outlierList [hidden]="hideOutliers" (MetricsRequested)="metricsButtonClicked($event)"></app-outliers>
+
+      <app-user-playlists #appInnerUserPlaylists [userPlaylists]="allPlaylists" (onPlaylistSelected)="OnPlaylistClicked($event)" [hidden]="hideInnerAllPlaylists"></app-user-playlists>
 
     </div>
   </div>

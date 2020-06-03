@@ -70,12 +70,20 @@ export class CompositeScoreComponent implements OnInit {
   hideMetrics: boolean;
 
   @Output() OutliersRequested = new EventEmitter<string>();
+  @Output() PlaylistsRequested = new EventEmitter<boolean>();
 
   getOutliers(metric: string) { 
     this.hideMetrics = true;
     this.OutliersRequested.emit(metric);
     //this.hideMetrics = true;
     console.log('getOutliers has been called');
+  }
+
+  getPlaylists()
+  {
+    this.hideMetrics = true;
+    this.PlaylistsRequested.emit(true);
+    console.log('getPlaylists has been called');
   }
 
   constructor() { }

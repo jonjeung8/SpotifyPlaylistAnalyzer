@@ -2,12 +2,12 @@
   Your Playlists
 </div>
 
-<div class="left">
+<!-- <div class="left">
   <br>
 </div>
 <div class="right">
   <br>
-</div>
+</div> -->
 <div *ngIf="userPlaylists" class="user-playlists">
     <button *ngFor="let playlist of userPlaylists" class="playlistContainer" (click)="playlistButtonPressed(playlist.id)">
       <!-- Playlist: {{playlist.name}} 
