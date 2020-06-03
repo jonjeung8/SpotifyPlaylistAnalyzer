@@ -67,6 +67,8 @@ export class CompositeScoreComponent implements OnInit {
   compositeTimeSignatureBar: string;  // The bar from the composite metrics
   compositeValenceBar: string;  // The bar from the composite metrics
 
+
+  playlistToggleString: string = '';
   hideMetrics: boolean;
 
   @Output() OutliersRequested = new EventEmitter<string>();
@@ -81,8 +83,9 @@ export class CompositeScoreComponent implements OnInit {
 
   getPlaylists()
   {
-    this.hideMetrics = true;
-    this.PlaylistsRequested.emit(true);
+    this.hideMetrics = !this.hideMetrics;
+    this.setPlaylistToggleString();
+    this.PlaylistsRequested.emit(this.hideMetrics);
     console.log('getPlaylists has been called');
   }
 
@@ -90,6 +93,13 @@ export class CompositeScoreComponent implements OnInit {
 
   ngOnInit(): void {
     this.hideMetrics = false;
+    this.setPlaylistToggleString();
+  }
+
+  setPlaylistToggleString()
+  {
+    this.playlistToggleString = this.hideMetrics ? 'Show Playlist Metrics' : 'Show Your Playlists';
+    console.log("Setting playlist toggle string to " + this.playlistToggleString);
   }
 
   CalculateAllMetrics(arrayOfMetrics: Array<RawMetrics>)

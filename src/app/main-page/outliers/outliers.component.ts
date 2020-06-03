@@ -30,6 +30,13 @@ export class OutliersComponent implements OnInit {
 
     this.outlierTracks = new Array<Track>();
 
+
+    // There must be at least 2 songs to have outliers:
+    if(playlist.metrics.length < 2)
+    {
+      return;
+    }
+    
     // Special cases where we did some extra math to bend the average before hand:
     if (metric === 'instrumentalness')
     {

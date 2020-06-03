@@ -51,7 +51,7 @@ export class MainPageComponent implements OnInit {
   hideAllPlaylists: boolean;
   hideInnerAllPlaylists: boolean;
 
-  @ViewChild('appCategorySelector') appCategorySelector: CategorySelectorComponent;
+  //@ViewChild('appCategorySelector') appCategorySelector: CategorySelectorComponent;
   @ViewChild('appCompositeScore') appCompositeScore: CompositeScoreComponent;
   @ViewChild('outlierList') outlierList: OutliersComponent;
   @ViewChild('appUserPlaylists') appUserPlaylists: UserPlaylistsComponent;
@@ -138,13 +138,17 @@ export class MainPageComponent implements OnInit {
     this.trackIDArray = '';
     this.hideOutliers = true;
     this.hideAllPlaylists = true;
+    this.hideInnerAllPlaylists = true;
+    this.appCompositeScore.hideMetrics = true;
+
 
     this.linkSubmitStr = this.parseID(this.linkSubmitStr);
 
     this.widgetSubmitStr = `https://open.spotify.com/embed/playlist/${this.linkSubmitStr}`;
 
     console.log('Calling to spotify api service');
-    this.appCompositeScore.hideMetrics = true;
+
+
 
     this.spotifyApi.GetPlaylistResults(this.linkSubmitStr, this.loginCallback.access_token)
     .subscribe({
@@ -216,15 +220,14 @@ export class MainPageComponent implements OnInit {
             this.ShowPlaylistElements();
 
             // Find and display outliers on the screen:
-            this.outlierList.getOutliers(
-              this.userPlaylist,
-              this.appCompositeScore.synergyAverage,
-              this.appCategorySelector.category
-            );
+            // this.outlierList.getOutliers(
+            //   this.userPlaylist,
+            //   this.appCompositeScore.synergyAverage,
+            //   this.appCategorySelector.category
+            // );
 
-            // this.getFeaturesSubscription.unsubscribe();
-            // this.getPlaylistSubscription.unsubscribe();
               this.appCompositeScore.hideMetrics = false;
+              this.appCompositeScore.setPlaylistToggleString();
           }
         });
       }
@@ -265,8 +268,8 @@ export class MainPageComponent implements OnInit {
   OnInnerPlaylistClicked(clicked: boolean)
   {
     this.hideOutliers = true;
-    this.appCompositeScore.hideMetrics = true;
-    this.hideInnerAllPlaylists = false;
+    this.appCompositeScore.hideMetrics = clicked;
+    this.hideInnerAllPlaylists = !clicked;
   }
 
 
