@@ -241,9 +241,15 @@ export class MainPageComponent implements OnInit {
     return linkSubmitStr;
   }
 
-  outliersButtonClicked(clicked: boolean) {
-    this.hideOutliers = !clicked;
+  outliersButtonClicked(metric: string) {
+    //this.hideOutliers = !clicked;
+    this.outlierList.getOutliers(this.userPlaylist, 1, metric);
+    this.hideOutliers = false;
+  }
 
+  metricsButtonClicked(clicked: boolean) {
+    this.hideOutliers = true;
+    this.appCompositeScore.hideMetrics = false;
   }
 
 

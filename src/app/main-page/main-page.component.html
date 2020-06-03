@@ -42,7 +42,7 @@
       <app-composite-score #appCompositeScore (OutliersRequested)="outliersButtonClicked($event)"></app-composite-score>
 
       <!-- Display the outliers: -->
-      <app-outliers #outlierList [hidden]="hideOutliers"></app-outliers>
+      <app-outliers #outlierList [hidden]="hideOutliers" (MetricsRequested)="metricsButtonClicked($event)"></app-outliers>
 
     </div>
   </div>

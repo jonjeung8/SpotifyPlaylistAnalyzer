@@ -67,16 +67,21 @@ export class CompositeScoreComponent implements OnInit {
   compositeTimeSignatureBar: string;  // The bar from the composite metrics
   compositeValenceBar: string;  // The bar from the composite metrics
 
-  @Output() OutliersRequested = new EventEmitter<boolean>();
+  hideMetrics: boolean;
 
-  getOutliers() {
-    this.OutliersRequested.emit(true);
+  @Output() OutliersRequested = new EventEmitter<string>();
+
+  getOutliers(metric: string) { 
+    this.hideMetrics = true;
+    this.OutliersRequested.emit(metric);
+    //this.hideMetrics = true;
     console.log('getOutliers has been called');
   }
 
   constructor() { }
 
   ngOnInit(): void {
+    this.hideMetrics = false;
   }
 
   CalculateAllMetrics(arrayOfMetrics: Array<RawMetrics>)

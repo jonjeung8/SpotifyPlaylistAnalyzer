@@ -64,6 +64,10 @@ vertical-align: middle;
   font-weight: bold;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 .metric-graph
 {
   padding-right: 30px;
@@ -71,6 +75,17 @@ vertical-align: middle;
   width: 30%;
   height: 475px;
   overflow: auto;
+}
+
+.outlierButton {
+  font-size: 100%;
+  font-family: inherit;
+  border: 0;
+  padding: 0;
+  background: none;
+  height: 100%;
+  width: 100%;
+  color: inherit;
 }
 
 ::-webkit-scrollbar {
