@@ -3,11 +3,9 @@
     <p #metricSelectedDisplay>
       Overall Playlist Synergy:
     </p>
-    <div class="circleBorder">
+    <div class="circleBorder" style="--c: {{synergyAverage}}">
       <div class="results">
-        <p id="averageDisplay" #averageDisplay *ngIf="synergyScore">
-          {{synergyScore}}
-        </p>
+        {{synergyScore}}
       </div>
     </div>
   </div>

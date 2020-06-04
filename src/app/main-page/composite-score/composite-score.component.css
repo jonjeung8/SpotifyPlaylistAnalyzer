@@ -29,27 +29,82 @@
   
 .circleBorder
 {
-  background-color: #1DB954; /* Green */
+  /* background-color: #1DB954;
   border-radius: 50%;
   border: none;
   color: white;
   width: 200px;
   height: 200px;
-  /* padding: 5px; */
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-family: 'Nunito';
   font-size: 30px;
+  font-weight: bold; */
+  
+  color: white;
+  /* width: 32rem;
+  min-width: 6.5rem;
+  max-width: calc(98vmin - 20px);
+  max-height: calc(98vmin - 20px);
+  height: 2em; */
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center; 
+  justify-content: center;
+  /* border-radius: 5px;
+  margin: 0; */
+  background: linear-gradient(#1DB954 calc(var(--c)*100%), #707070 0);
+  font-family: 'Nunito';
+  font-size: 50px;
   font-weight: bold;
+}
+
+/* .circleBorder:before
+{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 5px;
+  background: linear-gradient(#1DB954 calc(var(--c)*100%), #707070 0);
+}
+
+.circleBorder:after
+{
+  position: relative;
+counter-increment: p var(--c);
+content: counter(p) '%';
+} */
+
+@supports (background: conic-gradient(red, tan))
+{
+  .circleBorder
+  {
+  /* min-height: 6.5rem; */
+  height: 200px;
+  width: 200px;
+  margin: auto;
+  border-radius: 50%;
+  background: conic-gradient(#1DB954 calc(var(--c)*100%), #707070 0);
+  align-items: center; 
+  justify-content: center;
+  }
 }
 
 .results
 {
-height: 200px;
-/* margin-top: 100px; */
+/* height: 200px; */
+font-family: 'Nunito';
+font-size: 50px;
+font-weight: bold;
 vertical-align: middle;
-/* line-height: 200px; */
+text-align: center;
+align-items: center; 
+justify-content: center;
 }
 
 .all-metrics-title

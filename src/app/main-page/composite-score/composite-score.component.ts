@@ -296,7 +296,7 @@ export class CompositeScoreComponent implements OnInit {
     console.log("Synergy Average: " + this.synergyAverage);
 
     // TODO: Determine if this is x/10 or %. Using percent for now.
-    this.synergyScore = `${(this.synergyAverage*100).toFixed(2)}%`;
+    this.synergyScore = `${(this.synergyAverage*100).toFixed(0)}%`;
 
     // Cartman's 4-point plan:
     // start up
