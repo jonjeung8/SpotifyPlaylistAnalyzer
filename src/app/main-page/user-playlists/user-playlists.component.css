@@ -13,6 +13,7 @@
 {
   display: inline-block;
   padding: 15px;
+  border: 0.5px;
 }
 
 .left
@@ -29,6 +30,7 @@
   margin: auto;
   display: block;
 }
+
 .playlistContainer {
   color: white;
   /* padding: 20px; */
@@ -37,6 +39,7 @@
   display: block;
   font-family: 'Nunito';
   font-size: 20px;
+  font-weight: bold;
   max-width:95%;
   width: 400px;
   margin: 5px auto;
@@ -47,6 +50,9 @@
   /* box-sizing: border-box; */
   transition: 0.25s;
   border: 0.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .user-playlists

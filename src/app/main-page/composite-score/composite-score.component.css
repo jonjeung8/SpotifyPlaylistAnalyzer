@@ -101,6 +101,7 @@ vertical-align: middle;
   animation: fade-in-text 2.2s 0.1s forwards;
   opacity: 0;
   text-align: left;
+  font-weight: bold;
 }
 
 .title::after
