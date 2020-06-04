@@ -1,12 +1,13 @@
 .playlistsTitle {
   color: white;
-  padding-top: 20px;
+  padding-top: 30px;
+  padding-bottom: 20px;
   text-align: center;
   text-decoration: none;
-  display: block;
+  display: inline-block;
   font-family: 'Nunito';
   font-size: 30px;
-  font-weight: bold; 
+  font-weight: bold;
 }
 
 .left .right .playlistContainer
@@ -33,6 +34,9 @@
 
 .playlistContainer {
   color: white;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
   /* padding: 20px; */
   text-align: left;
   text-decoration: none;

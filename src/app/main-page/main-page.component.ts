@@ -49,11 +49,13 @@ export class MainPageComponent implements OnInit {
   hideOutliers = true;
   allPlaylists: Array<PlaylistNode>;
   hideAllPlaylists: boolean;
+  hideInnerAllPlaylists: boolean;
 
-  @ViewChild('appCategorySelector') appCategorySelector: CategorySelectorComponent;
+  //@ViewChild('appCategorySelector') appCategorySelector: CategorySelectorComponent;
   @ViewChild('appCompositeScore') appCompositeScore: CompositeScoreComponent;
   @ViewChild('outlierList') outlierList: OutliersComponent;
   @ViewChild('appUserPlaylists') appUserPlaylists: UserPlaylistsComponent;
+  @ViewChild('appInnerUserPlaylists') appInnerUserPlaylists: UserPlaylistsComponent;
 
   loginCallback: Callback;
 
@@ -71,6 +73,7 @@ export class MainPageComponent implements OnInit {
     this.userPlaylist.metrics = new Array<RawMetrics>();
     this.allPlaylists = new Array<PlaylistNode>();
     this.hideAllPlaylists = true;
+    this.hideInnerAllPlaylists = true;
   }
 
   ngOnInit(): void {
@@ -135,12 +138,17 @@ export class MainPageComponent implements OnInit {
     this.trackIDArray = '';
     this.hideOutliers = true;
     this.hideAllPlaylists = true;
+    this.hideInnerAllPlaylists = true;
+    this.appCompositeScore.hideMetrics = true;
+
 
     this.linkSubmitStr = this.parseID(this.linkSubmitStr);
 
     this.widgetSubmitStr = `https://open.spotify.com/embed/playlist/${this.linkSubmitStr}`;
 
     console.log('Calling to spotify api service');
+
+
 
     this.spotifyApi.GetPlaylistResults(this.linkSubmitStr, this.loginCallback.access_token)
     .subscribe({
@@ -212,15 +220,14 @@ export class MainPageComponent implements OnInit {
             this.ShowPlaylistElements();
 
             // Find and display outliers on the screen:
-            this.outlierList.getOutliers(
-              this.userPlaylist,
-              this.appCompositeScore.synergyAverage,
-              this.appCategorySelector.category
-            );
+            // this.outlierList.getOutliers(
+            //   this.userPlaylist,
+            //   this.appCompositeScore.synergyAverage,
+            //   this.appCategorySelector.category
+            // );
 
-            // this.getFeaturesSubscription.unsubscribe();
-            // this.getPlaylistSubscription.unsubscribe();
-
+              this.appCompositeScore.hideMetrics = false;
+              this.appCompositeScore.setPlaylistToggleString();
           }
         });
       }
@@ -241,9 +248,30 @@ export class MainPageComponent implements OnInit {
     return linkSubmitStr;
   }
 
-  outliersButtonClicked(clicked: boolean) {
-    this.hideOutliers = !clicked;
+  outliersButtonClicked(metric: string) 
+  {
+    //this.hideOutliers = !clicked;
+    this.hideInnerAllPlaylists = true;
+    this.outlierList.getOutliers(this.userPlaylist, 1, metric);
+    this.hideOutliers = false;
+    this.appCompositeScore.setPlaylistToggleString();
+    
+  }
 
+  metricsButtonClicked(clicked: boolean) 
+  {
+    this.hideOutliers = true;
+    this.hideInnerAllPlaylists = true;
+    this.appCompositeScore.hideMetrics = false;
+    this.appCompositeScore.setPlaylistToggleString();
+
+  }
+
+  OnInnerPlaylistClicked(clicked: boolean)
+  {
+    console.log("Clicked state: " + clicked);
+    this.hideOutliers = true;
+    this.hideInnerAllPlaylists = !clicked;
   }
 
 

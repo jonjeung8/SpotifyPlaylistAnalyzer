@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Track } from '../../_models/Track';
 import { Playlist } from '../../_models/Playlist';
 import { RawMetrics } from '../../_models/RawMetrics';
@@ -14,6 +14,13 @@ export class OutliersComponent implements OnInit {
 
   outlierTracks: Array<Track>;
 
+  @Output() MetricsRequested = new EventEmitter<boolean>();
+
+  showMetrics() { 
+    this.MetricsRequested.emit(true);
+    console.log('showMetrics has been called');
+  }
+
   constructor() { }
 
   ngOnInit(): void {
@@ -23,6 +30,13 @@ export class OutliersComponent implements OnInit {
 
     this.outlierTracks = new Array<Track>();
 
+
+    // There must be at least 2 songs to have outliers:
+    if(playlist.metrics.length < 2)
+    {
+      return;
+    }
+    
     // Special cases where we did some extra math to bend the average before hand:
     if (metric === 'instrumentalness')
     {

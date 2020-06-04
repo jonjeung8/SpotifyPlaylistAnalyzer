@@ -15,147 +15,170 @@
     <p></p>
   </div>
   <div class="outlier-button">
-    <button class="genericbutton" type="button" (click)="getOutliers()">Click To See Outliers</button>
+    <button class="genericbutton" type="button" (click)="getPlaylists()">{{playlistToggleString}}</button>
   </div>
 </div>
 
-<div class="all-metrics-title">
+<div class="all-metrics-title" [hidden]="hideMetrics">
   Metric Breakdown:
+  <div class='metric-outliers-title'>Click on Metric to See Outliers</div>
 </div>
 
-<section class="metric-graph metric-graph-horizontal metric-graph-one">
+<section class="metric-graph metric-graph-horizontal metric-graph-one" [hidden]="hideMetrics">
   
 
 
   <br>
 
-  <div class="acousticness">  
-    <div class="title">
-      {{compositeAcousticnessTitle}}: {{compositeAcousticnessScore}}
-    </div>
-    <div class="container">
-    <div class="bar" style="--c: {{compositeAcousticnessBar}}">
+  <div class="acousticness">
+    <button class="outlierButton" type="button" (click)="getOutliers('acousticness')"> 
+      <div class="title">
+        {{compositeAcousticnessTitle}}: {{compositeAcousticnessScore}}
       </div>
-    </div>
+      <div class="container">
+      <div class="bar" style="--c: {{compositeAcousticnessBar}}">
+        </div>
+      </div>
+    </button>  
   </div>
 
   <br>
 
   <div class="danceability"> 
-    <div class="title">
-      {{compositeDanceabilityTitle}}: {{compositeDanceabilityScore}}
-    </div>
-    <div class="container">
-      <div class="bar" style="--c: {{compositeDanceabilityBar}}">
+    <button class="outlierButton" type="button" (click)="getOutliers('danceability')">
+      <div class="title">
+        {{compositeDanceabilityTitle}}: {{compositeDanceabilityScore}}
       </div>
-    </div>
+      <div class="container">
+        <div class="bar" style="--c: {{compositeDanceabilityBar}}">
+        </div>
+      </div>
+    </button>    
   </div>
 
   <br>
 
   <div class="duration"> 
-    <div class="title">
-      {{compositeDurationTitle}}: {{compositeDurationScore}}
-    </div>
-    <div class="container">
-      <div class="bar" style="--c: {{compositeDurationBar}}">
+    <button class="outlierButton" type="button" (click)="getOutliers('duration_ms')">
+      <div class="title">
+        {{compositeDurationTitle}}: {{compositeDurationScore}}
       </div>
-    </div>
+      <div class="container">
+        <div class="bar" style="--c: {{compositeDurationBar}}">
+        </div>
+      </div>
+    </button>   
   </div>
 
   <br>
 
   <div class="energy"> 
-    <div class="title">
-      {{compositeEnergyTitle}}: {{compositeEnergyScore}}
-    </div>
-    <div class="container">
-      <div class="bar" style="--c: {{compositeEnergyBar}}">
+    <button class="outlierButton" type="button" (click)="getOutliers('energy')">
+      <div class="title">
+        {{compositeEnergyTitle}}: {{compositeEnergyScore}}
       </div>
-    </div>
+      <div class="container">
+        <div class="bar" style="--c: {{compositeEnergyBar}}">
+        </div>
+      </div>
+    </button>   
   </div>
 
   <br>
 
   <div class="instrumentalness"> 
-    <div class="title">
-      {{compositeInstrumentalnessTitle}}: {{compositeInstrumentalnessScore}}
-    </div>
-    <div class="container">
-      <div class="bar" style="--c: {{compositeInstrumentalnessBar}}">
+    <button class="outlierButton" type="button" (click)="getOutliers('instrumentalness')">
+      <div class="title">
+        {{compositeInstrumentalnessTitle}}: {{compositeInstrumentalnessScore}}
       </div>
-    </div>
+      <div class="container">
+        <div class="bar" style="--c: {{compositeInstrumentalnessBar}}">
+        </div>
+      </div>
+    </button>    
   </div>
 
   <br>
 
   <div class="liveness"> 
-    <div class="title">
-      {{compositeLivenessTitle}}: {{compositeLivenessScore}}
-    </div>
-    <div class="container">
-      <div class="bar" style="--c: {{compositeLivenessBar}}">
+    <button class="outlierButton" type="button" (click)="getOutliers('liveness')">
+      <div class="title">
+        {{compositeLivenessTitle}}: {{compositeLivenessScore}}
       </div>
-    </div>
+      <div class="container">
+        <div class="bar" style="--c: {{compositeLivenessBar}}">
+        </div>
+      </div>
+    </button>   
   </div>
 
   <br>
 
   <div class="mode"> 
-    <div class="title">
-      {{compositeModeTitle}}: {{compositeModeScore}}
-    </div>
-    <div class="container">
-      <div class="bar" style="--c: {{compositeModeBar}}">
+    <button class="outlierButton" type="button" (click)="getOutliers('mode')">
+      <div class="title">
+        {{compositeModeTitle}}: {{compositeModeScore}}
       </div>
-    </div>
+      <div class="container">
+        <div class="bar" style="--c: {{compositeModeBar}}">
+        </div>
+      </div>
+    </button>    
   </div>
 
   <br>
 
   <div class="speechiness"> 
-    <div class="title">
-      {{compositeSpeechinessTitle}}: {{compositeSpeechinessScore}}
-    </div>
-    <div class="container">
-      <div class="bar" style="--c: {{compositeSpeechinessBar}}">
+    <button class="outlierButton" type="button" (click)="getOutliers('speechiness')">
+      <div class="title">
+        {{compositeSpeechinessTitle}}: {{compositeSpeechinessScore}}
       </div>
-    </div>
+      <div class="container">
+        <div class="bar" style="--c: {{compositeSpeechinessBar}}">
+        </div>
+      </div>
+    </button>   
   </div>
 
   <br>
 
   <div class="tempo"> 
-    <div class="title">
-      {{compositeTempoTitle}}: {{compositeTempoScore}}
-    </div>
-    <div class="container">
-      <div class="bar" style="--c: {{compositeTempoBar}}">
+    <button class="outlierButton" type="button" (click)="getOutliers('tempo')">
+      <div class="title">
+        {{compositeTempoTitle}}: {{compositeTempoScore}}
       </div>
-    </div>
+      <div class="container">
+        <div class="bar" style="--c: {{compositeTempoBar}}">
+        </div>
+      </div>
+    </button>   
   </div>
 
   <br>
 
   <div class="time-signature"> 
-    <div class="title">
-      {{compositeTimeSignatureTitle}}: {{compositeTimeSignatureScore}}
-    </div>
-    <div class="container">
-      <div class="bar" style="--c: {{compositeTimeSignatureBar}}">
+    <button class="outlierButton" type="button" (click)="getOutliers('time_signature')">
+      <div class="title">
+        {{compositeTimeSignatureTitle}}: {{compositeTimeSignatureScore}}
       </div>
-    </div>
+      <div class="container">
+        <div class="bar" style="--c: {{compositeTimeSignatureBar}}">
+        </div>
+      </div>
+    </button>    
   </div>
 
   <br>
 
   <div class="valence"> 
-    <div class="title">
-      {{compositeValenceTitle}}: {{compositeValenceScore}}
-    </div>
-    <div class="container">
-      <div class="bar" style="--c: {{compositeValenceBar}}">
+    <button class="outlierButton" type="button" (click)="getOutliers('valence')">
+      <div class="title">
+        {{compositeValenceTitle}}: {{compositeValenceScore}}
       </div>
-    </div>
+      <div class="container">
+        <div class="bar" style="--c: {{compositeValenceBar}}">
+        </div>
+      </div>
+    </button>   
   </div>
 </section>
