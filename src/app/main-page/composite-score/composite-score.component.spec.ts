@@ -295,7 +295,7 @@ describe('CompositeScoreComponent', () => {
     // Act
     component.CalculateAllMetrics(rawMetricsMax);
     // Assert
-    expect(component.compositeModeScore).toBe('Major key');
+    expect(component.compositeModeScore).toBe('Major Key');
   });
 
   // Mode Convert To Value tests minimum
@@ -304,7 +304,7 @@ describe('CompositeScoreComponent', () => {
     // Act
     component.CalculateAllMetrics(rawMetricsMin);
     // Assert
-    expect(component.compositeModeScore).toBe('Minor key');
+    expect(component.compositeModeScore).toBe('Minor Key');
   });
 
   // Mode Convert To Value tests Boundary
@@ -313,7 +313,7 @@ describe('CompositeScoreComponent', () => {
     // Act
     component.CalculateAllMetrics(rawMetricsBoundary);
     // Assert
-    expect(component.compositeModeScore).toBe('Major key');
+    expect(component.compositeModeScore).toBe('Major Key');
   });
 
   // Mode Get Display Title
