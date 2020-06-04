@@ -12,7 +12,7 @@ import { SafePipe } from '../safe.pipe';
 // components
 import { CategorySelectorComponent } from '../main-page/category-selector/category-selector.component';
 import { CompositeScoreComponent } from '../main-page/composite-score/composite-score.component';
-import { OutliersComponent } from '../outliers/outliers.component';
+import { OutliersComponent } from './outliers/outliers.component';
 import { PlaylistNode } from '../_models/PlaylistNode';
 import { UserPlaylistsComponent } from '../main-page/user-playlists/user-playlists.component';
 
@@ -50,9 +50,9 @@ export class MainPageComponent implements OnInit {
   allPlaylists: Array<PlaylistNode>;
   hideAllPlaylists: boolean;
 
-  @ViewChild("appCategorySelector") appCategorySelector: CategorySelectorComponent;
-  @ViewChild("appCompositeScore") appCompositeScore: CompositeScoreComponent;
-  @ViewChild("outlierList") outlierList: OutliersComponent;
+  @ViewChild('appCategorySelector') appCategorySelector: CategorySelectorComponent;
+  @ViewChild('appCompositeScore') appCompositeScore: CompositeScoreComponent;
+  @ViewChild('outlierList') outlierList: OutliersComponent;
   @ViewChild('appUserPlaylists') appUserPlaylists: UserPlaylistsComponent;
 
   loginCallback: Callback;
@@ -103,7 +103,7 @@ export class MainPageComponent implements OnInit {
 
           // API call to get the user playlists
           this.GetAllUserPlaylists();
-          
+
         }
         else{
           console.log('login failed 1');
@@ -207,13 +207,14 @@ export class MainPageComponent implements OnInit {
           complete: () =>
           {
             // console.log(`hey, the category is verified: ${this.appCategorySelector.validateCategory()}`);
-            this.appCompositeScore.CalculateCompositeScore(this.userPlaylist.metrics, this.appCategorySelector.category);
+            // this.appCompositeScore.CalculateCompositeScore(this.userPlaylist.metrics, this.appCategorySelector.category);
+            this.appCompositeScore.CalculateAllMetrics(this.userPlaylist.metrics);
             this.ShowPlaylistElements();
 
             // Find and display outliers on the screen:
             this.outlierList.getOutliers(
               this.userPlaylist,
-              this.appCompositeScore.average,
+              this.appCompositeScore.synergyAverage,
               this.appCategorySelector.category
             );
 
@@ -256,12 +257,12 @@ export class MainPageComponent implements OnInit {
     .subscribe({
       next: (response: any) =>
       {
-        console.log("Got all user playlists returned");
+        console.log('Got all user playlists returned');
         // Parse the response:
-        if(response.items)
+        if (response.items)
         {
           // Iterate Playlist objects:
-          for(const item of response.items)
+          for (const item of response.items)
           {
             const node: PlaylistNode = new PlaylistNode();
             node.id = item.id;

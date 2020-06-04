@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Track } from '../_models/Track';
-import { Playlist } from '../_models/Playlist';
-import { RawMetrics } from '../_models/RawMetrics';
+import { Track } from '../../_models/Track';
+import { Playlist } from '../../_models/Playlist';
+import { RawMetrics } from '../../_models/RawMetrics';
 
 const VARIANCE = .05;
 

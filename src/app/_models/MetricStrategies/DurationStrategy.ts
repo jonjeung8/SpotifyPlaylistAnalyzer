@@ -21,4 +21,13 @@ export class DurationStrategy implements IMetricStrategy
     }
     return res;
   }
+
+  ConvertToBar(metric: number): string {
+    metric = Number((metric/600000 * 100).toFixed(0));
+    if (metric > 100)
+    {
+      metric = 100;
+    }
+    return `${metric}%`;
+  }
 }

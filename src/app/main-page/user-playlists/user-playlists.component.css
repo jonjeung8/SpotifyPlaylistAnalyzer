@@ -9,24 +9,72 @@
   font-weight: bold; 
 }
 
+.left .right .playlistContainer
+{
+  display: inline-block;
+  padding: 15px;
+}
+
+.left
+{
+  float: left;
+  width: 33.33%;
+  margin: auto;
+  display: block;
+}
+.right
+{
+  float: right;
+  width: 33.33%;
+  margin: auto;
+  display: block;
+}
 .playlistContainer {
   color: white;
-  padding: 20px;
+  /* padding: 20px; */
   text-align: left;
   text-decoration: none;
   display: block;
   font-family: 'Nunito';
   font-size: 20px;
-  max-width: 95%;
+  max-width:95%;
   width: 400px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 5px auto;
   background-color: #1DB954; /* Green */
   border-radius: 50px;
   cursor: pointer;
+  /* border: 1px solid #ffffff; */
+  /* box-sizing: border-box; */
   transition: 0.25s;
+  border: 0.5px;
+}
+
+.user-playlists
+{
+  display: block;
+  overflow: auto;
+  height: 475px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #707070; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: grey; 
 }
 
 .playlistContainer:hover

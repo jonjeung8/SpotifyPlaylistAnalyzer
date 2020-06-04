@@ -40,26 +40,6 @@
       </div>
 
       <app-composite-score #appCompositeScore (OutliersRequested)="outliersButtonClicked($event)"></app-composite-score>
-      <!-- <div class="composite-score">
-        <p #metricSelectedDisplay *ngIf="metricSelected">
-          {{metricSelected}} Score
-        </p>
-        <p #averageDisplay *ngIf="average">
-          {{average}}
-        </p>
-      </div> -->
-
-      <!-- <div class="tracklist">
-        <p>TrackNames:</p>
-        <div class="responseTrack" *ngFor="let track of userPlaylist.tracks">
-          <p>
-                Track Name: {{track.name}} 
-          </p>
-          <p>
-                Album: {{track.album.name}}
-          </p>
-        </div>
-      </div> -->
 
       <!-- Display the outliers: -->
       <app-outliers #outlierList [hidden]="hideOutliers"></app-outliers>
