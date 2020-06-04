@@ -1,6 +1,6 @@
 .outlierstitle
 {
-  padding-top: 20px;
+  padding-top: 35px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -25,4 +25,29 @@
   border: 1px solid #ffffff;
   box-sizing: border-box;
   max-width: 100%;
+}
+
+.genericButton
+{
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-family: 'Nunito';
+  font-size: 20px;
+  font-weight: bold;
+  margin: 5px auto;
+  background-color: #1DB954; /* Green */
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.25s;
+  border: 0.5px;
+}
+
+.genericButton:hover
+{
+  background-color: rgb(255, 174, 0);
 }

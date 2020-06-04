@@ -64,16 +64,28 @@ vertical-align: middle;
   font-weight: bold;
 }
 
+.metric-outliers-title
+{
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  text-decoration: none;
+  font-family: 'Nunito';
+  font-size: 20px;
+  font-weight: bold;
+
+}
+
 [hidden] {
   display: none !important;
 }
 
 .metric-graph
 {
-  padding-right: 30px;
+  padding-right: 55px;
   display: inline-block;
   width: 30%;
-  height: 475px;
+  height: 450px;
   overflow: auto;
 }
 
@@ -86,6 +98,13 @@ vertical-align: middle;
   height: 100%;
   width: 100%;
   color: inherit;
+  cursor: pointer;
+}
+
+.outlierButton:hover
+{
+  /* background-color: #1DB954; */
+  border: 2px solid white;
 }
 
 ::-webkit-scrollbar {
