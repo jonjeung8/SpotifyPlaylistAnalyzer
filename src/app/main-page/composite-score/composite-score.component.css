@@ -56,7 +56,7 @@
   justify-content: center;
   /* border-radius: 5px;
   margin: 0; */
-  background: linear-gradient(#1DB954 calc(var(--c)*100%), #707070 0);
+  background: linear-gradient(90deg, #1DB954 calc(var(--c)*100%), #707070 0);
   font-family: 'Nunito';
   font-size: 50px;
   font-weight: bold;
@@ -89,7 +89,7 @@ content: counter(p) '%';
   width: 200px;
   margin: auto;
   border-radius: 50%;
-  background: conic-gradient(#1DB954 calc(var(--c)*100%), #707070 0);
+  background: conic-gradient( #1DB954 calc(var(--c)*100%), #707070 0);
   align-items: center; 
   justify-content: center;
   }
