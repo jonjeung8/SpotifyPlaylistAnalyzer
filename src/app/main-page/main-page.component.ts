@@ -254,6 +254,7 @@ export class MainPageComponent implements OnInit {
     this.hideInnerAllPlaylists = true;
     this.outlierList.getOutliers(this.userPlaylist, 1, metric);
     this.hideOutliers = false;
+    this.appCompositeScore.setPlaylistToggleString();
     
   }
 
@@ -262,13 +263,14 @@ export class MainPageComponent implements OnInit {
     this.hideOutliers = true;
     this.hideInnerAllPlaylists = true;
     this.appCompositeScore.hideMetrics = false;
+    this.appCompositeScore.setPlaylistToggleString();
 
   }
 
   OnInnerPlaylistClicked(clicked: boolean)
   {
+    console.log("Clicked state: " + clicked);
     this.hideOutliers = true;
-    this.appCompositeScore.hideMetrics = clicked;
     this.hideInnerAllPlaylists = !clicked;
   }
 

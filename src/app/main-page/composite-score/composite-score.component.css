@@ -84,7 +84,7 @@ vertical-align: middle;
 {
   padding-right: 55px;
   display: inline-block;
-  width: 30%;
+  width: calc(30% - 55px);
   height: 450px;
   overflow: auto;
 }
