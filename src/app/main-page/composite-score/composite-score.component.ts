@@ -16,6 +16,10 @@ import { TempoStrategy } from 'src/app/_models/MetricStrategies/TempoStrategy';
 import { TimeSignatureStrategy } from 'src/app/_models/MetricStrategies/TimeSignatureStrategy';
 import { DurationStrategy } from 'src/app/_models/MetricStrategies/DurationStrategy';
 
+
+export const NUM_METRICS_SYNERGY : number = 10;
+
+
 // imports html and css files
 @Component({
   selector: 'app-composite-score',
@@ -26,10 +30,10 @@ import { DurationStrategy } from 'src/app/_models/MetricStrategies/DurationStrat
 export class CompositeScoreComponent implements OnInit {
   // declared variables
   metricsDisplay: string; // metric selected in dropdown
-  // TODO: (Sum of least squares variables needed)
+ 
   // HEY PAY ATTENTION TO THE COMMENTS HERE!!!
-  synergyScore: string; // TODO: overall playlist score (used in composite score html)
-  synergyAverage: number;  // TODO: overall playlist score (used in composite score html)
+  synergyScore: string; // overall playlist score (used in composite score html)
+  synergyAverage: number;  // overall playlist score (used in composite score html)
 
   compositeAcousticnessScore: string;  // The string from the composite metrics
   compositeDanceabilityScore: string;  // The string from the composite metrics
@@ -272,18 +276,19 @@ export class CompositeScoreComponent implements OnInit {
     let averageRatio = 0;
     averageRatio += varianceRatioPerMetric.acousticness;
     averageRatio += varianceRatioPerMetric.danceability;
+    // NOTICE: duration excluded:
     //averageRatio += varianceRatioPerMetric.duration_ms;
     averageRatio += varianceRatioPerMetric.energy;
     averageRatio += varianceRatioPerMetric.instrumentalness;
     averageRatio += varianceRatioPerMetric.liveness;
     averageRatio += varianceRatioPerMetric.mode;
     averageRatio += varianceRatioPerMetric.speechiness;
-    //averageRatio += varianceRatioPerMetric.tempo;
+    averageRatio += varianceRatioPerMetric.tempo;
     averageRatio += varianceRatioPerMetric.time_signature;
     averageRatio += varianceRatioPerMetric.valence;
 
-    // FIXME: Magic number alert: 11 == number of metrics we track
-    averageRatio /= 9;
+    // Divide ratio by the number of metrics we track for the synergy score:
+    averageRatio /= NUM_METRICS_SYNERGY;
 
     console.log("Average ratio: " + averageRatio);
 
@@ -295,7 +300,7 @@ export class CompositeScoreComponent implements OnInit {
     this.synergyAverage = this.SmoothStep(rawSynergy);
     console.log("Synergy Average: " + this.synergyAverage);
 
-    // TODO: Determine if this is x/10 or %. Using percent for now.
+    // Format the string:
     this.synergyScore = `${(this.synergyAverage*100).toFixed(2)}%`;
 
     // Cartman's 4-point plan:
@@ -329,6 +334,9 @@ export class CompositeScoreComponent implements OnInit {
     varianceOfMetrics.time_signature = 0;
     varianceOfMetrics.valence = 0;
 
+    // Normalize Tempo:
+    meanRawMetrics.tempo /= 200;
+
     // 2. For each metric in the array, sum  (current - mean) and square it.
     for(const track of arrayOfMetrics)
     {
@@ -340,14 +348,16 @@ export class CompositeScoreComponent implements OnInit {
       varianceOfMetrics.liveness +=( Math.pow((track.liveness - meanRawMetrics.liveness), 2));
       varianceOfMetrics.mode += (Math.pow((track.mode - meanRawMetrics.mode), 2));
       varianceOfMetrics.speechiness +=( Math.pow((track.speechiness - meanRawMetrics.speechiness), 2));
-      varianceOfMetrics.tempo +=( Math.pow((track.tempo - meanRawMetrics.tempo), 2));
+
       varianceOfMetrics.time_signature += (Math.pow((track.time_signature - meanRawMetrics.time_signature), 2));
       varianceOfMetrics.valence +=( Math.pow((track.valence - meanRawMetrics.valence), 2));
       
+      // NOTICE: divide tempo by 200 as a "soft limit normalization":
+      varianceOfMetrics.tempo +=( Math.pow(((track.tempo / 200 ) - meanRawMetrics.tempo), 2));
+
     }
 
     // 3. divide each metric by n - 1 number of elements:
-    // FIXME: What about a playlist of 0 or 1 songs? should it even make it to this point?
     const recipSongCount = 1 / (arrayOfMetrics.length - 1);
 
     varianceOfMetrics.acousticness *= recipSongCount;
