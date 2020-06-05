@@ -154,13 +154,63 @@ justify-content: center;
   width: 100%;
   color: inherit;
   cursor: pointer;
+  transition: all 0.5;
 }
 
-.outlierButton:hover
-{
-  /* background-color: #1DB954; */
-  border: 2px solid white;
+.outlierButton span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
 }
+
+.outlierButton span:after {
+  content: 'See Outliers \00bb';
+  font-style: italic;
+  color: white;
+  /* align-content: right; */
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+  border: 1px solid white;
+  padding: 0rem;
+}
+
+/* .outlierButton::before, .outlierButton::after {
+	content: '';
+	position: absolute;	
+	transition: inherit;
+	z-index: -1;
+} */
+
+.outlierButton:hover {
+	/* background-color: #1DB954; */
+  /* border: 2px solid white; */
+  border-bottom-right-radius: 10px;
+  /* border-top-right-radius: 10px; */
+  border-top-left-radius: 10px;
+  color: #1DB954;
+}
+
+.outlierButton:hover span{
+  padding-right: calc(50% - 3em);
+}
+
+.outlierButton:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+/* .outlierButton:hover::before {
+	transition-delay: 0s;
+}
+
+.outlierButton:hover::after {
+	background: #1DB954;
+	transition-delay: .35s;
+} */
 
 ::-webkit-scrollbar {
   width: 10px;
@@ -185,6 +235,7 @@ justify-content: center;
 
 .title
 {
+  padding-bottom: 5px;
   -webkit-animation: fade-in-text 2.2s 0.1s forwards;
   -moz-animation: fade-in-text 2.2s 0.1s forwards;
   animation: fade-in-text 2.2s 0.1s forwards;
