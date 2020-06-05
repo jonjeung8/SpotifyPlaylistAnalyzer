@@ -51,10 +51,10 @@
   background-color: transparent;
   /* border-radius: 50px; */
   cursor: pointer;
-  /* border: 1px solid #ffffff; */
+  border: 1px solid transparent;
   /* box-sizing: border-box; */
-  transition: 0.25s;
-  border: 0.5px;
+  /* transition: 0.25s; */
+  /* border: 0.5px; */
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -65,6 +65,11 @@
   display: block;
   overflow: auto;
   height: 475px;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+  /* border: 1px solid white; */
 }
 
 ::-webkit-scrollbar {
@@ -88,7 +93,7 @@
   background: grey; 
 }
 
-.playlistContainer::after,
+/* .playlistContainer::after,
 .playlistContainer::before
 {
       content: '';
@@ -99,9 +104,9 @@
       border: 2px solid;
       transition: all 0.5s ease;
       border-radius: 2px;
-}
+} */
 
-.playlistContainer:after
+/* .playlistContainer:after
 {
       bottom: 0;
       right: 0;
@@ -109,9 +114,9 @@
       border-left-color: transparent;
       border-bottom-color: white;
       border-right-color: white;
-}
+} */
 
-      .playlistContainer:before
+      /* .playlistContainer:before
       {
       top: 0;
       left: 0;
@@ -119,14 +124,14 @@
       border-right-color: transparent;
       border-top-color: white;
       border-left-color: white;
-      }
+      } */
 
-      .playlistContainer:hover::after,
+      /* .playlistContainer:hover::after
       .playlistContainer:hover::before
       {
       width: 0%;
       height: 0%;
-      }
+      } */
 
       .playlistContainer span {
         cursor: pointer;
@@ -136,8 +141,7 @@
       }
       
       .playlistContainer span:after {
-        content: '\00bb';
-        font-style: italic;
+        content: '\00bb ';
         color: white;
         /* align-content: right; */
         position: absolute;
@@ -154,6 +158,7 @@
   border-bottom-right-radius: 50px;
   border-top-right-radius: 50px; */
   color: #1DB954;
+  border: 1px solid white;
 }
 
 .playlistContainer:hover span{

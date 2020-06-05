@@ -136,12 +136,14 @@ justify-content: center;
 }
 
 .metric-graph
-{
+{ 
   padding-right: 55px;
   display: inline-block;
   width: calc(30% - 55px);
   height: 450px;
   overflow: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .outlierButton {
@@ -165,7 +167,7 @@ justify-content: center;
 }
 
 .outlierButton span:after {
-  content: 'See Outliers \00bb';
+  content: 'See Outliers \00bb ';
   font-style: italic;
   color: white;
   /* align-content: right; */
