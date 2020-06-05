@@ -168,7 +168,7 @@ justify-content: center;
 
 .outlierButton span:after {
   content: 'See Outliers \00bb ';
-  font-style: italic;
+  /* font-style: italic; */
   color: white;
   /* align-content: right; */
   position: absolute;
@@ -177,7 +177,9 @@ justify-content: center;
   right: -20px;
   transition: 0.5s;
   border: 1px solid white;
-  padding: 0rem;
+  /* padding: 0rem; */
+  padding-right: 5px;
+  padding-left: 5px;
 }
 
 /* .outlierButton::before, .outlierButton::after {
