@@ -10,6 +10,7 @@ describe('CompositeScoreComponent', () => {
   let rawMetricsMax: Array<RawMetrics>;
   let rawMetricsMin: Array<RawMetrics>;
   let rawMetricsBoundary: Array<RawMetrics>;
+  let rawMetricsSynergyMin: Array<RawMetrics>;
 
   beforeAll(() => {
     // rough maximum of each metric to reduce repeating loops
@@ -60,6 +61,21 @@ describe('CompositeScoreComponent', () => {
       tmpMetrics.valence = 0.51;
       rawMetricsBoundary.push(tmpMetrics);
     }
+
+    rawMetricsSynergyMin = new Array<RawMetrics>();
+    for(let i = 0; i < 1; i++)
+    {
+      const tmpMetrics = new RawMetrics();
+      tmpMetrics.duration_ms = 66000;
+      tmpMetrics.instrumentalness = 0.21;
+      tmpMetrics.liveness = 0.41;
+      tmpMetrics.mode = 0.51;
+      tmpMetrics.speechiness = 0.66;
+      tmpMetrics.valence = 0.51;
+      rawMetricsSynergyMin.push(tmpMetrics);
+
+    }
+
   });
 
   beforeEach(async(() => {
@@ -453,4 +469,44 @@ describe('CompositeScoreComponent', () => {
     // Assert
     expect(component.compositeValenceTitle).toBe('Valence');
   });
+
+  // =========================
+  //
+  // Synergy Score Tests
+  //
+  // =========================
+
+  // Single song score average
+  it('should result in 1.0 synergy with one song ', () => {
+    // Arrange
+    // Act
+    component.CalculateAllMetrics(rawMetricsSynergyMin);
+    // Assert
+    expect(component.synergyAverage).toBeCloseTo(1.0);
+  });
+  // Single song score output:
+  it('should display 100% syndergy with one song', () =>{
+    // Arrange
+    // Act
+    component.CalculateAllMetrics(rawMetricsSynergyMin);
+    // Assert
+    expect(component.synergyScore).toBe('100%');
+  });
+  // Multi-song score output:
+  it('should result in 1.0 synergy with all songs the same', () => {
+    // Arrange
+    // Act
+    component.CalculateAllMetrics(rawMetricsMax);
+    // Assert
+    expect(component.synergyAverage).toBeCloseTo(1.0);
+  });
+  // Multi-song score string:
+  it('should result in 1.0 synergy with all songs the same', () => {
+    // Arrange
+    // Act
+    component.CalculateAllMetrics(rawMetricsMax);
+    // Assert
+    expect(component.synergyScore).toBe('100.00%');
+  });
+
 });
