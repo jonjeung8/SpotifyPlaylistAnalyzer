@@ -152,13 +152,17 @@
         padding: 0rem;
       }
 
-.playlistContainer:hover
+/* .playlistContainer:hover
 {
-  /* background-color: #1DB954;
-  border-bottom-right-radius: 50px;
-  border-top-right-radius: 50px; */
+  Option 1
   color: #1DB954;
   border: 1px solid white;
+} */
+
+.playlistContainer:hover
+{
+  /* Option 2 */
+  background-color: grey;
 }
 
 .playlistContainer:hover span{
