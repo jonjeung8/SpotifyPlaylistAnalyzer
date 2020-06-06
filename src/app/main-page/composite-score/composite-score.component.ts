@@ -300,7 +300,6 @@ export class CompositeScoreComponent implements OnInit {
     this.synergyAverage = this.SmoothStep(rawSynergy);
     console.log("Synergy Average: " + this.synergyAverage);
 
-    // Format the string:
     this.synergyScore = `${(this.synergyAverage*100).toFixed(0)}%`;
 
     // Cartman's 4-point plan:
