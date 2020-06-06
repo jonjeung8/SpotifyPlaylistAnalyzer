@@ -17,7 +17,8 @@
   width: 30%;
   height: 475px;
   overflow: auto;
-  padding-right: 30px;
+  padding-right: auto;
+  padding-left: auto;
   margin-left: auto;
   margin-right: auto;
 }
