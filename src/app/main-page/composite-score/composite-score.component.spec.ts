@@ -506,7 +506,7 @@ describe('CompositeScoreComponent', () => {
     // Act
     component.CalculateAllMetrics(rawMetricsMax);
     // Assert
-    expect(component.synergyScore).toBe('100.00%');
+    expect(component.synergyScore).toBe('100%');
   });
 
 });
