@@ -131,7 +131,7 @@ export class MainPageComponent implements OnInit {
             this.spotifyApi.SetBearerToken(tmpAccessToken);
 
             // API call to get the user playlists
-            this.GetAllUserPlaylists();
+            this.GetAllUserPlaylists(this.userPlaylistsOffset);
             this.hideAllPlaylists = false;
 
           }
