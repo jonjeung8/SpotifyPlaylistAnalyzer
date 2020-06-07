@@ -87,4 +87,12 @@ describe('MainPageComponent', () => {
     let res: string = component.parseID(inputString);
     expect(res).toBe('7sHhUQShU4yDN53LqPGa2');
   })
+
+  //Properly formulates link strings
+  it('should format the widget submit string after the link submit string', () => {
+    component.linkSubmitStr = 'spotify:playlist:7sHhUQShU4yDN53LqPGa2F';
+    component.FormulateLinkStrings();
+    const expectedWidgetStr = `https://open.spotify.com/embed/playlist/${component.linkSubmitStr}`;
+    expect(component.widgetSubmitStr).toBe(expectedWidgetStr);
+  })
 });
