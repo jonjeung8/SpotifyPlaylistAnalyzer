@@ -54,6 +54,8 @@ export class MainPageComponent implements OnInit {
   allPlaylists: Array<PlaylistNode>;
   hideAllPlaylists: boolean;
   hideInnerAllPlaylists: boolean;
+  userPlaylistsOffset: number;
+  userHasMorePlaylists: boolean;
 
   //@ViewChild('appCategorySelector') appCategorySelector: CategorySelectorComponent;
   @ViewChild('appCompositeScore') appCompositeScore: CompositeScoreComponent;
@@ -79,7 +81,10 @@ export class MainPageComponent implements OnInit {
     this.allPlaylists = new Array<PlaylistNode>();
     this.hideAllPlaylists = true;
     this.hideInnerAllPlaylists = true;
+    this.userPlaylistsOffset = 0;
+    this.userHasMorePlaylists = false;
   }
+
 
   ngOnInit(): void 
   {
@@ -127,6 +132,7 @@ export class MainPageComponent implements OnInit {
 
             // API call to get the user playlists
             this.GetAllUserPlaylists();
+            this.hideAllPlaylists = false;
 
           }
           else 
@@ -138,11 +144,11 @@ export class MainPageComponent implements OnInit {
         }
         else 
         {
+
           console.log('login failed 3');
           this.router.navigate(['']);
           console.log('login failed 4');
         }
-
       }
     );
   }
@@ -153,6 +159,7 @@ export class MainPageComponent implements OnInit {
     this.authService.Logout();
     this.router.navigate(['']);
   }
+
 
   ShowPlaylistElements()
   {
@@ -169,17 +176,15 @@ export class MainPageComponent implements OnInit {
     this.hideAllPlaylists = true;
     this.hideInnerAllPlaylists = true;
     this.appCompositeScore.hideMetrics = true;
+    this.FormulateLinkStrings();
+    // this.linkSubmitStr = this.parseID(this.linkSubmitStr);
 
-
-    this.linkSubmitStr = this.parseID(this.linkSubmitStr);
-
-    this.widgetSubmitStr = `https://open.spotify.com/embed/playlist/${this.linkSubmitStr}`;
+    // this.widgetSubmitStr = `https://open.spotify.com/embed/playlist/${this.linkSubmitStr}`;
 
     console.log('Calling to spotify api service');
 
-
-
     this.spotifyApi.GetPlaylistResults(this.linkSubmitStr, this.authService.GetCallback().access_token)
+
     .subscribe({
       next: (response: any) => {
         console.log('I MADE IT TO the get playlist api response');
@@ -255,8 +260,8 @@ export class MainPageComponent implements OnInit {
             //   this.appCategorySelector.category
             // );
 
-              this.appCompositeScore.hideMetrics = false;
-              this.appCompositeScore.setPlaylistToggleString();
+            this.appCompositeScore.hideMetrics = false;
+            this.appCompositeScore.setPlaylistToggleString();
           }
         });
       }
@@ -304,13 +309,12 @@ export class MainPageComponent implements OnInit {
   }
 
 
-  GetAllUserPlaylists()
+  GetAllUserPlaylists(offset: number)
   {
-    this.hideAllPlaylists = true;
     this.allPlaylists = new Array<PlaylistNode>();
 
     // Make API call:
-    this.spotifyApi.GetUserPlaylists()
+    this.spotifyApi.GetUserPlaylists(offset)
     .subscribe({
       next: (response: any) =>
       {
@@ -329,10 +333,10 @@ export class MainPageComponent implements OnInit {
           }
         }
 
+        response.next ? this.userHasMorePlaylists = true : this.userHasMorePlaylists = false; 
       },
       complete: () =>
       {
-        this.hideAllPlaylists = false;
         console.log(this.allPlaylists);
       }
     });
@@ -343,4 +347,27 @@ export class MainPageComponent implements OnInit {
     this.linkSubmitStr = playlistID;
   }
 
+  GetNextPlaylists()
+  {
+    if (this.userHasMorePlaylists)
+    {
+      this.userPlaylistsOffset += 1;
+      this.GetAllUserPlaylists(this.userPlaylistsOffset);
+    }
+  }
+
+  GetPrevPlaylists()
+  {
+    if (this.userPlaylistsOffset > 0)
+    {
+      this.userPlaylistsOffset -= 1;
+      this.GetAllUserPlaylists(this.userPlaylistsOffset);
+    }
+  }
+
+  FormulateLinkStrings()
+  {
+    this.linkSubmitStr = this.parseID(this.linkSubmitStr);
+    this.widgetSubmitStr = `https://open.spotify.com/embed/playlist/${this.linkSubmitStr}`;
+  }
 }

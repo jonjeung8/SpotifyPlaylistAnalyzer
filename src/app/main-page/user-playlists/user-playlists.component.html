@@ -2,6 +2,15 @@
   Your Playlists:
 </div>
 
+<div class='playlist-nav'>
+  <button class='prev-button' (click)="PrevPlaylistsButton()">
+    <span>Prev Page</span>
+  </button>
+  <button class='next-button'(click)="NextPlaylistsButton()">
+    <span>Next Page</span>
+  </button>
+</div>
+
 <!-- <div class="left">
   <br>
 </div>
@@ -9,9 +18,18 @@
   <br>
 </div> -->
 <div *ngIf="userPlaylists" class="user-playlists">
-    <button *ngFor="let playlist of userPlaylists" class="playlistContainer" (click)="playlistButtonPressed(playlist.id)">
-      <!-- Playlist: {{playlist.name}} 
-      <br>ID: {{playlist.id}} -->
-      <span>&nbsp;{{playlist.name}}</span>
-    </button>
-  </div>
+  <button *ngFor="let playlist of userPlaylists" class="playlistContainer" (click)="playlistButtonPressed(playlist.id)">
+    <!-- Playlist: {{playlist.name}} 
+    <br>ID: {{playlist.id}} -->
+    <span>&nbsp;{{playlist.name}}</span>
+  </button>
+</div>
+
+<!-- <div class='playlist-nav'>
+  <button class='prev-button' (click)="PrevPlaylistsButton()">
+    <span>Prev Page</span>
+  </button>
+  <button class='next-button'(click)="NextPlaylistsButton()">
+    <span>Next Page</span>
+  </button>
+</div> -->

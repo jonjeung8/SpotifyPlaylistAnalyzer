@@ -9,7 +9,6 @@ import { map } from 'rxjs/operators';
 })
 
 export class SpotifyApiServiceService {
-
   httpOptions: Object;
   private bearToken: string;
 
@@ -111,11 +110,11 @@ export class SpotifyApiServiceService {
 
   }
 
-
-  GetUserPlaylists()
+  GetUserPlaylists(offset: number)
   {
+    const totalOffset = offset * 20;
     console.log('Getting User playlists');
-    const apiEndpoint = 'me/playlists';
+    const apiEndpoint = `me/playlists?offset=${totalOffset}&limit=20`;
     return this.getQuery(apiEndpoint);
   }
 

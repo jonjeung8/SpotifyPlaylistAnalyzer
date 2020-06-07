@@ -10,6 +10,8 @@ export class UserPlaylistsComponent implements OnInit {
   @Input() userPlaylists: Array<PlaylistNode>;
 
   @Output() onPlaylistSelected = new EventEmitter<string>();
+  @Output() onNextPlaylistsButtonClick = new EventEmitter<any>();
+  @Output() onPrevPlaylistsButtonClick = new EventEmitter<any>();
 
   playlistButtonPressed(playlistID: string)
   {
@@ -22,4 +24,13 @@ export class UserPlaylistsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  NextPlaylistsButton()
+  {
+    this.onNextPlaylistsButtonClick.emit();
+  }
+
+  PrevPlaylistsButton()
+  {
+    this.onPrevPlaylistsButtonClick.emit();
+  }
 }
