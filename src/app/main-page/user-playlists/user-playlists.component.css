@@ -227,7 +227,7 @@
 }
 
 .prev-button span:before {
-  content: '\00ab ';
+  content: '\2190 ';
   color: white;
   position: relative;
   opacity: 0;
@@ -250,7 +250,7 @@
 }
 
 .next-button span:after {
-  content: '\00bb ';
+  content: '\2192 ';
   color: white;
   position: relative;
   opacity: 0;
