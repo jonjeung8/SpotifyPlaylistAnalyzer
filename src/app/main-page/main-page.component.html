@@ -35,7 +35,7 @@
     <div class="right">
       <br>
     </div>
-    <app-user-playlists #appUserPlaylists [userPlaylists]="allPlaylists" (onPlaylistSelected)="OnPlaylistClicked($event)"></app-user-playlists>
+    <app-user-playlists #appUserPlaylists [userPlaylists]="allPlaylists" (onNextPlaylistsButtonClick)="GetNextPlaylists()" (onPrevPlaylistsButtonClick)="GetPrevPlaylists()" (onPlaylistSelected)="OnPlaylistClicked($event)"></app-user-playlists>
   </div>
 
   <div class="responseBox dropShadow" [hidden]="hidden">
@@ -50,7 +50,7 @@
       <!-- Display the outliers: -->
       <app-outliers #outlierList [hidden]="hideOutliers" (MetricsRequested)="metricsButtonClicked($event)"></app-outliers>
 
-      <app-user-playlists #appInnerUserPlaylists [userPlaylists]="allPlaylists" (onPlaylistSelected)="OnPlaylistClicked($event)" [hidden]="hideInnerAllPlaylists"></app-user-playlists>
+      <app-user-playlists #appInnerUserPlaylists [userPlaylists]="allPlaylists" (onPlaylistSelected)="OnPlaylistClicked($event)" (onNextPlaylistsButtonClick)="GetNextPlaylists()" (onPrevPlaylistsButtonClick)="GetPrevPlaylists()" [hidden]="hideInnerAllPlaylists"></app-user-playlists>
 
     </div>
   </div>
