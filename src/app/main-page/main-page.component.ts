@@ -81,54 +81,52 @@ export class MainPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  console.log(this.router.url);
+    console.log(this.router.url);
 
-  console.log(this.route.snapshot.fragment); // only update on component creation
-  this.route.fragment.subscribe(
-    fragment => {
-      // Convert to Url search params:
-      const params = new URLSearchParams('?' + fragment);
+    console.log(this.route.snapshot.fragment); // only update on component creation
+    this.route.fragment.subscribe(
+      fragment => {
+        // Convert to Url search params:
+        const params = new URLSearchParams('?' + fragment);
 
-      // console.log(params);
+        // console.log(params);
 
-      if (params.has('access_token') && params.has('expires_in') && params.has('state') )
-      {
-        this.loginCallback = new Callback();
-
-        const tmpAccessToken = params.get('access_token');
-        const tmpExpiresIn = params.get('expires_in');
-        const tmpState = params.get('state');
-
-        if (tmpAccessToken !== '' && tmpExpiresIn !== '' && tmpState !== '')
+        if (params.has('access_token') && params.has('expires_in') && params.has('state') )
         {
-          this.loginCallback.access_token = tmpAccessToken;
-          this.loginCallback.expires_in = Number(tmpExpiresIn);
-          this.loginCallback.state = tmpState;
+          this.loginCallback = new Callback();
 
-          // Supply the API service with the bearer token:
-          this.spotifyApi.SetBearerToken(this.loginCallback.access_token);
+          const tmpAccessToken = params.get('access_token');
+          const tmpExpiresIn = params.get('expires_in');
+          const tmpState = params.get('state');
 
-          // API call to get the user playlists
-          this.GetAllUserPlaylists(this.userPlaylistsOffset);
+          if (tmpAccessToken !== '' && tmpExpiresIn !== '' && tmpState !== '')
+          {
+            this.loginCallback.access_token = tmpAccessToken;
+            this.loginCallback.expires_in = Number(tmpExpiresIn);
+            this.loginCallback.state = tmpState;
 
+            // Supply the API service with the bearer token:
+            this.spotifyApi.SetBearerToken(this.loginCallback.access_token);
+
+            // API call to get the user playlists
+            this.GetAllUserPlaylists(this.userPlaylistsOffset);
+            this.hideAllPlaylists = false;
+          }
+          else{
+            console.log('login failed 1');
+            this.router.navigate(['']);
+            console.log('login failed 2');
+          }
         }
-        else{
-          console.log('login failed 1');
+        else {
+          console.log('login failed 3');
           this.router.navigate(['']);
-          console.log('login failed 2');
+          console.log('login failed 4');
         }
       }
-      else {
-        console.log('login failed 3');
-        this.router.navigate(['']);
-        console.log('login failed 4');
-      }
-
-
-
-    }
-  );
+    );
   }
+  
   ShowPlaylistElements()
   {
     this.hidden = false;
@@ -144,10 +142,10 @@ export class MainPageComponent implements OnInit {
     this.hideAllPlaylists = true;
     this.hideInnerAllPlaylists = true;
     this.appCompositeScore.hideMetrics = true;
+    this.FormulateLinkStrings();
+    // this.linkSubmitStr = this.parseID(this.linkSubmitStr);
 
-    this.linkSubmitStr = this.parseID(this.linkSubmitStr);
-
-    this.widgetSubmitStr = `https://open.spotify.com/embed/playlist/${this.linkSubmitStr}`;
+    // this.widgetSubmitStr = `https://open.spotify.com/embed/playlist/${this.linkSubmitStr}`;
 
     console.log('Calling to spotify api service');
 
@@ -227,8 +225,8 @@ export class MainPageComponent implements OnInit {
             //   this.appCategorySelector.category
             // );
 
-              this.appCompositeScore.hideMetrics = false;
-              this.appCompositeScore.setPlaylistToggleString();
+            this.appCompositeScore.hideMetrics = false;
+            this.appCompositeScore.setPlaylistToggleString();
           }
         });
       }
@@ -278,7 +276,6 @@ export class MainPageComponent implements OnInit {
 
   GetAllUserPlaylists(offset: number)
   {
-    this.hideAllPlaylists = true;
     this.allPlaylists = new Array<PlaylistNode>();
 
     // Make API call:
@@ -305,7 +302,6 @@ export class MainPageComponent implements OnInit {
       },
       complete: () =>
       {
-        this.hideAllPlaylists = false;
         console.log(this.allPlaylists);
       }
     });
@@ -332,5 +328,11 @@ export class MainPageComponent implements OnInit {
       this.userPlaylistsOffset -= 1;
       this.GetAllUserPlaylists(this.userPlaylistsOffset);
     }
+  }
+
+  FormulateLinkStrings()
+  {
+    this.linkSubmitStr = this.parseID(this.linkSubmitStr);
+    this.widgetSubmitStr = `https://open.spotify.com/embed/playlist/${this.linkSubmitStr}`;
   }
 }
