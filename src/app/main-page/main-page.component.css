@@ -162,6 +162,7 @@ nav
 {
 text-decoration: none;
 float: right;
+cursor: pointer;
 }
 
 nav a
