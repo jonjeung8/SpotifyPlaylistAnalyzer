@@ -9,9 +9,15 @@
   <br>
 </div> -->
 <div *ngIf="userPlaylists" class="user-playlists">
-    <button *ngFor="let playlist of userPlaylists" class="playlistContainer" (click)="playlistButtonPressed(playlist.id)">
-      <!-- Playlist: {{playlist.name}} 
-      <br>ID: {{playlist.id}} -->
-      {{playlist.name}}
-    </button>
-  </div>
+  <button *ngFor="let playlist of userPlaylists" class="playlistContainer" (click)="playlistButtonPressed(playlist.id)">
+    <!-- Playlist: {{playlist.name}} 
+    <br>ID: {{playlist.id}} -->
+    {{playlist.name}}
+  </button>
+  <button (click)="PrevPlaylistsButton()">
+    Prev page
+  </button>
+  <button (click)="NextPlaylistsButton()">
+    Next page
+  </button>
+</div>
