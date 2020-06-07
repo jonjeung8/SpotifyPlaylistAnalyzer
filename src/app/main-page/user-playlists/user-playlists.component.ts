@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PlaylistNode } from 'src/app/_models/PlaylistNode';
-import { SpotifyApiServiceService } from 'src/app/_services/spotify-api-service.service';
 
 @Component({
   selector: 'app-user-playlists',
@@ -20,7 +19,7 @@ export class UserPlaylistsComponent implements OnInit {
     console.log('playlist was selected from loaded playlists.');
   }
 
-  constructor(private spotifyApi: SpotifyApiServiceService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
