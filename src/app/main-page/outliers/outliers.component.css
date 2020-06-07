@@ -7,6 +7,8 @@
   font-family: 'Nunito';
   font-size: 30px;
   font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .allOutliersContainer
@@ -15,16 +17,22 @@
   width: 30%;
   height: 475px;
   overflow: auto;
-  padding-right: 30px;
+  padding-right: auto;
+  padding-left: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .outlierContainer
 {
   padding: 5px;
-  margin: 5px 0 5px 0;
+  margin-top: 5px;
+  margin-bottom: 5px;
   border: 1px solid #ffffff;
   box-sizing: border-box;
   max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .genericButton
@@ -39,7 +47,9 @@
   font-family: 'Nunito';
   font-size: 20px;
   font-weight: bold;
-  margin: 5px auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5px;
   background-color: #1DB954; /* Green */
   border-radius: 50px;
   cursor: pointer;

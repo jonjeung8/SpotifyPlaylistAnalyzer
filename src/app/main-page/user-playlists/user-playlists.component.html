@@ -12,8 +12,9 @@
   <button *ngFor="let playlist of userPlaylists" class="playlistContainer" (click)="playlistButtonPressed(playlist.id)">
     <!-- Playlist: {{playlist.name}} 
     <br>ID: {{playlist.id}} -->
-    {{playlist.name}}
+    <span>&nbsp;{{playlist.name}}</span>
   </button>
+
   <button (click)="PrevPlaylistsButton()">
     Prev page
   </button>
