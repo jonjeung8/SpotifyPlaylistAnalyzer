@@ -2,6 +2,15 @@
   Your Playlists:
 </div>
 
+<div class='playlist-nav'>
+  <button class='prev-button' (click)="PrevPlaylistsButton()">
+    <span>Prev Page</span>
+  </button>
+  <button class='next-button'(click)="NextPlaylistsButton()">
+    <span>Next Page</span>
+  </button>
+</div>
+
 <!-- <div class="left">
   <br>
 </div>
@@ -14,11 +23,13 @@
     <br>ID: {{playlist.id}} -->
     <span>&nbsp;{{playlist.name}}</span>
   </button>
-
-  <button (click)="PrevPlaylistsButton()">
-    Prev page
-  </button>
-  <button (click)="NextPlaylistsButton()">
-    Next page
-  </button>
 </div>
+
+<!-- <div class='playlist-nav'>
+  <button class='prev-button' (click)="PrevPlaylistsButton()">
+    <span>Prev Page</span>
+  </button>
+  <button class='next-button'(click)="NextPlaylistsButton()">
+    <span>Next Page</span>
+  </button>
+</div> -->
