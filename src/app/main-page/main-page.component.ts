@@ -1,6 +1,9 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+
 import { SpotifyApiServiceService } from '../_services/spotify-api-service.service';
+import { AuthService } from '../_services/auth.service';
+
 import { Playlist } from '../_models/Playlist';
 import { Track } from '../_models/Track';
 import { Album } from '../_models/album';
@@ -15,6 +18,7 @@ import { CompositeScoreComponent } from '../main-page/composite-score/composite-
 import { OutliersComponent } from './outliers/outliers.component';
 import { PlaylistNode } from '../_models/PlaylistNode';
 import { UserPlaylistsComponent } from '../main-page/user-playlists/user-playlists.component';
+
 
 export const CATEGORIES: Array<Category> = Array(
   new Category('Danceability', 'danceability'),
@@ -57,10 +61,11 @@ export class MainPageComponent implements OnInit {
   @ViewChild('appUserPlaylists') appUserPlaylists: UserPlaylistsComponent;
   @ViewChild('appInnerUserPlaylists') appInnerUserPlaylists: UserPlaylistsComponent;
 
-  loginCallback: Callback;
+  //loginCallback: Callback;
 
-  constructor(
+  constructor (
     private spotifyApi: SpotifyApiServiceService,
+    private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute
     ) {
@@ -76,55 +81,79 @@ export class MainPageComponent implements OnInit {
     this.hideInnerAllPlaylists = true;
   }
 
-  ngOnInit(): void {
-  console.log(this.router.url);
-
-  console.log(this.route.snapshot.fragment); // only update on component creation
-  this.route.fragment.subscribe(
-    fragment => {
-      // Convert to Url search params:
-      const params = new URLSearchParams('?' + fragment);
-
-      // console.log(params);
-
-      if (params.has('access_token') && params.has('expires_in') && params.has('state') )
-      {
-        this.loginCallback = new Callback();
-
-        const tmpAccessToken = params.get('access_token');
-        const tmpExpiresIn = params.get('expires_in');
-        const tmpState = params.get('state');
-
-        if (tmpAccessToken !== '' && tmpExpiresIn !== '' && tmpState !== '')
-        {
-          this.loginCallback.access_token = tmpAccessToken;
-          this.loginCallback.expires_in = Number(tmpExpiresIn);
-          this.loginCallback.state = tmpState;
-
-          // Supply the API service with the bearer token:
-          this.spotifyApi.SetBearerToken(this.loginCallback.access_token);
-
-          // API call to get the user playlists
-          this.GetAllUserPlaylists();
-
-        }
-        else{
-          console.log('login failed 1');
-          this.router.navigate(['']);
-          console.log('login failed 2');
-        }
-      }
-      else {
-        console.log('login failed 3');
-        this.router.navigate(['']);
-        console.log('login failed 4');
-      }
-
-
-
+  ngOnInit(): void 
+  {
+    
+    // Check with the auth service:
+    if(!this.authService.IsLoggedIn())
+    {
+      console.log('user not logged in, searching fragment');
+      this.GetURLFragment();
     }
-  );
+
   }
+
+  GetURLFragment()
+  {
+    console.log(this.router.url);
+
+    console.log(this.route.snapshot.fragment); // only update on component creation
+
+    this.route.fragment.subscribe(
+      fragment => 
+      {
+        // Convert to Url search params:
+        const params = new URLSearchParams('?' + fragment);
+
+        // console.log(params);
+
+        if (params.has('access_token') && params.has('expires_in') && params.has('state'))
+        {
+
+          const tmpAccessToken = params.get('access_token');
+          const tmpExpiresIn = params.get('expires_in');
+          const tmpState = params.get('state');
+
+          if (tmpAccessToken !== '' && tmpExpiresIn !== '' && tmpState !== '')
+          {
+            //this.loginCallback.access_token = tmpAccessToken;
+            //this.loginCallback.expires_in = Number(tmpExpiresIn);
+            //this.loginCallback.state = tmpState;
+
+            this.authService.SetCallback(tmpAccessToken, Number(tmpExpiresIn));
+
+            // Supply the API service with the bearer token:
+            this.spotifyApi.SetBearerToken(tmpAccessToken);
+
+            // API call to get the user playlists
+            this.GetAllUserPlaylists();
+
+          }
+          else 
+          {
+            console.log('login failed 1');
+            this.router.navigate(['']);
+            console.log('login failed 2');
+          }
+        }
+        else 
+        {
+          console.log('login failed 3');
+          this.router.navigate(['']);
+          console.log('login failed 4');
+        }
+
+      }
+    );
+  }
+
+  LogoutUser()
+  {
+    console.log('Logging out');
+    this.authService.Logout();
+    this.router.navigate(['']);
+  }
+
   ShowPlaylistElements()
   {
     this.hidden = false;
@@ -150,7 +179,7 @@ export class MainPageComponent implements OnInit {
 
 
 
-    this.spotifyApi.GetPlaylistResults(this.linkSubmitStr, this.loginCallback.access_token)
+    this.spotifyApi.GetPlaylistResults(this.linkSubmitStr, this.authService.GetCallback().access_token)
     .subscribe({
       next: (response: any) => {
         console.log('I MADE IT TO the get playlist api response');
