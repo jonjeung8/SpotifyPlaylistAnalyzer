@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -35,8 +36,18 @@ export class SpotifyApiServiceService {
     // api call
     console.log('Making api call');
     return this.http.get(url, { headers }).pipe(
-      map(response => response)
+      map(response => response),
+      catchError(this.handle404)
     );
+  }
+
+  handle404(error) 
+  {
+    if(error.status == 404) 
+    {
+      console.log('404 error encountered when making api call');
+    }
+    return EMPTY;
   }
 
 
