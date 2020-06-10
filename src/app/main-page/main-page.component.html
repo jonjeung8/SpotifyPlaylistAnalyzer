@@ -25,6 +25,9 @@
     <button class="infoBoxSubmitButton" (click)="AnalysisButtonClicked()">Analyze Playlist</button>
   </div>
 
+  <div class="inputExceptionMessage" [hidden]="hideValidPlaylistError">
+    <h3>Invalid URL, URI or ID</h3>
+  </div>
 
   <!-- <h2>Response:</h2> -->
   

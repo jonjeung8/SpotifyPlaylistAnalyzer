@@ -57,6 +57,17 @@
   border-bottom-left-radius: 50px;
 }
 
+.inputExceptionMessage
+{
+  color: #FF0000;
+  text-align: center;
+  margin: 0 auto;
+  width: 500px;
+  padding-top: 0%;
+  padding-bottom: 0%;
+  vertical-align: top;
+}
+
 .responseBox
 {
   width:85%;

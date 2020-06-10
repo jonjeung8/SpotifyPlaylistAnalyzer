@@ -56,6 +56,7 @@ export class MainPageComponent implements OnInit {
   hideInnerAllPlaylists: boolean;
   userPlaylistsOffset: number;
   userHasMorePlaylists: boolean;
+  hideValidPlaylistError: boolean;
 
   //@ViewChild('appCategorySelector') appCategorySelector: CategorySelectorComponent;
   @ViewChild('appCompositeScore') appCompositeScore: CompositeScoreComponent;
@@ -83,6 +84,7 @@ export class MainPageComponent implements OnInit {
     this.hideInnerAllPlaylists = true;
     this.userPlaylistsOffset = 0;
     this.userHasMorePlaylists = false;
+    this.hideValidPlaylistError = true;
   }
 
 
@@ -223,6 +225,9 @@ export class MainPageComponent implements OnInit {
 
             if (response.audio_features)
             {
+              //Check for empty observable from 404 error handler
+              this.validateResponse(response.audio_features);
+
               console.log(response.audio_features);
               for (const item of response.audio_features)
               {
@@ -369,5 +374,19 @@ export class MainPageComponent implements OnInit {
   {
     this.linkSubmitStr = this.parseID(this.linkSubmitStr);
     this.widgetSubmitStr = `https://open.spotify.com/embed/playlist/${this.linkSubmitStr}`;
+  }
+
+  validateResponse(audioFeatures: any) 
+  {
+    if(audioFeatures <= 1) {
+      this.hideValidPlaylistError = false;
+      if(this.hidden == true) {
+        this.hideAllPlaylists = false;
+      } else {
+        this.hideInnerAllPlaylists = false;
+      }
+    } else {
+      this.hideValidPlaylistError = true; 
+    }
   }
 }
