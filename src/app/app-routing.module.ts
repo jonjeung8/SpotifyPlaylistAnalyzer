@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'callback',
-    component: MainPageComponent // TODO: have this use the callback component
+    component: MainPageComponent
   }
 ];
 

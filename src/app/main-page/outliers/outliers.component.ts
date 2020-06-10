@@ -16,9 +16,8 @@ export class OutliersComponent implements OnInit {
 
   @Output() MetricsRequested = new EventEmitter<boolean>();
 
-  showMetrics() { 
+  showMetrics() {
     this.MetricsRequested.emit(true);
-    console.log('showMetrics has been called');
   }
 
   constructor() { }
@@ -30,42 +29,11 @@ export class OutliersComponent implements OnInit {
 
     this.outlierTracks = new Array<Track>();
 
-
     // There must be at least 2 songs to have outliers:
-    if(playlist.metrics.length < 2)
+    if (playlist.metrics.length < 2)
     {
       return;
     }
-    
-    // Special cases where we did some extra math to bend the average before hand:
-    if (metric === 'instrumentalness')
-    {
-      avg = this.recalculateAverage(playlist.metrics, metric);
-    }
-    else if (metric === 'liveness')
-    {
-      avg = this.recalculateAverage(playlist.metrics, metric);
-      console.log('Recalculating for liveness. New Avg: ' + avg);
-    }
-
-    // Old code: on remove block:
-    /*/
-    for(let m of playlist.metrics) {
-      var value: number = m.getMetric(metric);
-      var newAvg: number = null;
-      let n: number = 1 - value / avg;
-      if(n >= VARIANCE) {
-
-        this.outlierTracks.push(this.matchID(playlist, m.id));
-      }
-    }
-    console.log("Total outliers: " + this.outlierTracks.length);
-    //*/
-    /*
-     * TODO: Determine if we should boot playlists less than 3 elements (for outlier analysis)
-     * New Outlier calculation:
-     *  https://www.statisticshowto.com/find-outliers/
-     */
 
      // 1. Sort the array based on the metric being calculated
     const sortMetrics: RawMetrics[] = playlist.metrics.sort(
@@ -99,17 +67,12 @@ export class OutliersComponent implements OnInit {
       // Gives us IQR
       // 5. IQR * 1.5
     const quartile1 = sortMetrics[lowerMedianIndex].getMetric(metric);
-    // FIXME: Question for JMo: using 1.1 instead of 1.5 for outlier.. is this ok?
+
     const iqr = (sortMetrics[upperMedianIndex].getMetric(metric) - quartile1) * 1.5;
      // 6. Lower fence = Q1 - IQR
     const lowerFence = quartile1 - iqr;
 
      // 7. Look through sorted list, any value lower than the fence gets added to the outliers list
-
-    console.log('Metric array sorted on ' + metric);
-    console.log(sortMetrics);
-    console.log('lower fence: ' + lowerFence);
-    console.log('lowerMedianIndex: ' + lowerMedianIndex);
     for (let i = 0; i < sortMetrics.length; i++)
     {
       if (sortMetrics[i].getMetric(metric) < lowerFence)
@@ -122,11 +85,6 @@ export class OutliersComponent implements OnInit {
         break;
       }
     }
-
-    console.log('Number of outliers: ' + this.outlierTracks.length);
-
-
-
   }
 
   matchID(playlist: Playlist, id: string): Track {

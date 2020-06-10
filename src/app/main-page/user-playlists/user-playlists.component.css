@@ -34,11 +34,8 @@
 
 .playlistContainer {
   color: white;
-  /* padding-top: 5px;
-  padding-bottom: 5px; */
   padding-left: 0;
   padding-right: 0;
-  /* padding: 20px; */
   text-align: left;
   text-decoration: none;
   display: block;
@@ -49,12 +46,8 @@
   width: 400px;
   margin: 5px auto;
   background-color: transparent;
-  /* border-radius: 50px; */
   cursor: pointer;
   border: 1px solid transparent;
-  /* box-sizing: border-box; */
-  /* transition: 0.25s; */
-  /* border: 0.5px; */
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -93,46 +86,6 @@
   background: grey; 
 }
 
-/* .playlistContainer::after,
-.playlistContainer::before
-{
-      content: '';
-      display: block;
-      position: relative;
-      width: 100%;
-      height: 100%;
-      border: 2px solid;
-      transition: all 0.5s ease;
-      border-radius: 2px;
-} */
-
-/* .playlistContainer:after
-{
-      bottom: 0;
-      right: 0;
-      border-top-color: transparent;
-      border-left-color: transparent;
-      border-bottom-color: white;
-      border-right-color: white;
-} */
-
-      /* .playlistContainer:before
-      {
-      top: 0;
-      left: 0;
-      border-bottom-color: transparent;
-      border-right-color: transparent;
-      border-top-color: white;
-      border-left-color: white;
-      } */
-
-      /* .playlistContainer:hover::after
-      .playlistContainer:hover::before
-      {
-      width: 0%;
-      height: 0%;
-      } */
-
 .playlistContainer span {
   cursor: pointer;
   display: inline-block;
@@ -149,15 +102,8 @@
   top: 0;
   right: -20px;
   transition: 0.5s;
-  padding: 0rem;
+  padding: 0;
 }
-
-/* .playlistContainer:hover
-{
-  Option 1
-  color: #1DB954;
-  border: 1px solid white;
-} */
 
 .playlistContainer:hover
 {
@@ -172,11 +118,6 @@
 .playlistContainer:hover span:after {
   opacity: 1;
   right: 0;
-}
-
-.playlistContainer:focus
-{
-  outline: none;
 }
 
 .prev-button

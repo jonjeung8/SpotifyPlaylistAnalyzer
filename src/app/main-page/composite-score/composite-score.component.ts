@@ -17,7 +17,7 @@ import { TimeSignatureStrategy } from 'src/app/_models/MetricStrategies/TimeSign
 import { DurationStrategy } from 'src/app/_models/MetricStrategies/DurationStrategy';
 
 
-export const NUM_METRICS_SYNERGY : number = 10;
+export const NUM_METRICS_SYNERGY = 10;
 
 
 // imports html and css files
@@ -30,7 +30,7 @@ export const NUM_METRICS_SYNERGY : number = 10;
 export class CompositeScoreComponent implements OnInit {
   // declared variables
   metricsDisplay: string; // metric selected in dropdown
- 
+
   // HEY PAY ATTENTION TO THE COMMENTS HERE!!!
   synergyScore: string; // overall playlist score (used in composite score html)
   synergyAverage: number;  // overall playlist score (used in composite score html)
@@ -72,17 +72,15 @@ export class CompositeScoreComponent implements OnInit {
   compositeValenceBar: string;  // The bar from the composite metrics
 
 
-  playlistToggleString: string = '';
+  playlistToggleString = '';
   hideMetrics: boolean;
 
   @Output() OutliersRequested = new EventEmitter<string>();
   @Output() PlaylistsRequested = new EventEmitter<boolean>();
 
-  getOutliers(metric: string) { 
+  getOutliers(metric: string) {
     this.hideMetrics = true;
     this.OutliersRequested.emit(metric);
-    //this.hideMetrics = true;
-    console.log('getOutliers has been called');
   }
 
   getPlaylists()
@@ -90,7 +88,6 @@ export class CompositeScoreComponent implements OnInit {
     this.hideMetrics = !this.hideMetrics;
     this.setPlaylistToggleString();
     this.PlaylistsRequested.emit(this.hideMetrics);
-    console.log('getPlaylists has been called');
   }
 
   constructor() { }
@@ -103,7 +100,6 @@ export class CompositeScoreComponent implements OnInit {
   setPlaylistToggleString()
   {
     this.playlistToggleString = this.hideMetrics ? 'Show Playlist Metrics' : 'Show Your Playlists';
-    console.log("Setting playlist toggle string to " + this.playlistToggleString);
   }
 
   CalculateAllMetrics(arrayOfMetrics: Array<RawMetrics>)
@@ -160,9 +156,9 @@ export class CompositeScoreComponent implements OnInit {
     const averageTimeSignature = totalTimeSignature / lengthOfPlaylist;
     const averageValence = totalValence / lengthOfPlaylist;
 
-    // Helper for calculating the synergy score: this will be passed through as 
+    // Helper for calculating the synergy score: this will be passed through as
     // The data representing the mean of every metric:
-    let meanTrack = new RawMetrics();
+    const meanTrack = new RawMetrics();
     meanTrack.acousticness = averageAcousticness;
     meanTrack.danceability = averageDanceability;
     meanTrack.duration_ms = averageDuration;
@@ -217,67 +213,40 @@ export class CompositeScoreComponent implements OnInit {
     this.compositeTempoBar = TempoMetricStrategy.ConvertToBar(averageTempo);
     this.compositeTimeSignatureTitle = TimeSignatureMetricStrategy.GetDisplayTitle();
     this.compositeTimeSignatureScore = TimeSignatureMetricStrategy.ConvertToValue(averageTimeSignature);
-    this.compositeTimeSignatureBar =TimeSignatureMetricStrategy.ConvertToBar(averageTimeSignature);
+    this.compositeTimeSignatureBar = TimeSignatureMetricStrategy.ConvertToBar(averageTimeSignature);
     this.compositeValenceTitle = ValenceMetricStrategy.GetDisplayTitle();
     this.compositeValenceScore = ValenceMetricStrategy.ConvertToValue(averageValence);
     this.compositeValenceBar = ValenceMetricStrategy.ConvertToBar(averageValence);
 
-
     // Calculate the Synergy score:
     this.CalculateSynergyScore(meanTrack, arrayOfMetrics);
-
-    /*/
-    console.log(this.compositeAcousticnessScore);
-    console.log(this.compositeAcousticnessTitle);
-    console.log(this.compositeDanceabilityScore);
-    console.log(this.compositeDanceabilityTitle);
-    console.log(this.compositeDurationScore);
-    console.log(this.compositeDurationTitle);
-    console.log(this.compositeEnergyScore);
-    console.log(this.compositeEnergyTitle);
-    console.log(this.compositeInstrumentalnessScore);
-    console.log(this.compositeInstrumentalnessTitle);
-    console.log(this.compositeLivenessScore);
-    console.log(this.compositeLivenessTitle);
-    console.log(this.compositeModeScore);
-    console.log(this.compositeModeTitle);
-    console.log(this.compositeSpeechinessScore);
-    console.log(this.compositeSpeechinessTitle);
-    console.log(this.compositeTempoScore);
-    console.log(this.compositeTempoTitle);
-    console.log(this.compositeTimeSignatureScore);
-    console.log(this.compositeTimeSignatureTitle);
-    console.log(this.compositeValenceScore);
-    console.log(this.compositeValenceTitle);
-    //*/
+    
   }
 
 
-  CalculateSynergyScore(meanRawMetrics : RawMetrics, arrayOfMetrics: Array<RawMetrics>)
+  CalculateSynergyScore(meanRawMetrics: RawMetrics, arrayOfMetrics: Array<RawMetrics>)
   {
 
     // 0. If the length is only 1, save a divide by 0 headache and just make it 100%:
-    if(arrayOfMetrics.length < 2)
+    if (arrayOfMetrics.length < 2)
     {
       this.synergyAverage = 1;
-      this.synergyScore = "100%";
+      this.synergyScore = '100%';
       return;
     }
 
     // 1. Calculate the variance for all values:
-    const variancePerMetric : RawMetrics = this.CalculateVariance(meanRawMetrics, arrayOfMetrics);
+    const variancePerMetric: RawMetrics = this.CalculateVariance(meanRawMetrics, arrayOfMetrics);
 
     // 2. Calculate the ratio between a given variance and mean (variance / mean)
-    const varianceRatioPerMetric : RawMetrics = this.CalculateRatioPerVariance(variancePerMetric, meanRawMetrics);
-    console.log("=================");
-    console.log(varianceRatioPerMetric);
+    const varianceRatioPerMetric: RawMetrics = this.CalculateRatioPerVariance(variancePerMetric, meanRawMetrics);
 
     // 3. Average the ratios into one value
     let averageRatio = 0;
     averageRatio += varianceRatioPerMetric.acousticness;
     averageRatio += varianceRatioPerMetric.danceability;
     // NOTICE: duration excluded:
-    //averageRatio += varianceRatioPerMetric.duration_ms;
+    // averageRatio += varianceRatioPerMetric.duration_ms;
     averageRatio += varianceRatioPerMetric.energy;
     averageRatio += varianceRatioPerMetric.instrumentalness;
     averageRatio += varianceRatioPerMetric.liveness;
@@ -290,34 +259,24 @@ export class CompositeScoreComponent implements OnInit {
     // Divide ratio by the number of metrics we track for the synergy score:
     averageRatio /= NUM_METRICS_SYNERGY;
 
-    console.log("Average ratio: " + averageRatio);
-
     // 4. Subtract from 1
     const rawSynergy = 1 - averageRatio;
-    console.log("Raw Synergy: " + rawSynergy);
 
     // 5. Use a smoothstep / sigmoid-family function to make it pretty :)
     this.synergyAverage = this.SmoothStep(rawSynergy);
-    console.log("Synergy Average: " + this.synergyAverage);
+    this.synergyScore = `${(this.synergyAverage * 100).toFixed(0)}%`;
 
-    this.synergyScore = `${(this.synergyAverage*100).toFixed(0)}%`;
-
-    // Cartman's 4-point plan:
-    // start up
-    // cash in
-    // sell out
-    // bro down.
   }
 
-  private CalculateVariance(meanRawMetrics: RawMetrics, arrayOfMetrics: Array<RawMetrics>) : RawMetrics
+  private CalculateVariance(meanRawMetrics: RawMetrics, arrayOfMetrics: Array<RawMetrics>): RawMetrics
   {
-    //===============================
+    // ===============================
     //
     // Variance Calculation:
     //
     // SUM((Xi - Xmean)^2) / (n - 1)
     //
-    //===============================
+    // ===============================
 
     // 1. Form return data:
     const varianceOfMetrics: RawMetrics = new RawMetrics();
@@ -337,22 +296,22 @@ export class CompositeScoreComponent implements OnInit {
     meanRawMetrics.tempo /= 200;
 
     // 2. For each metric in the array, sum  (current - mean) and square it.
-    for(const track of arrayOfMetrics)
+    for (const track of arrayOfMetrics)
     {
       varianceOfMetrics.acousticness += (Math.pow((track.acousticness - meanRawMetrics.acousticness), 2));
-      varianceOfMetrics.danceability +=( Math.pow((track.danceability - meanRawMetrics.danceability), 2));
+      varianceOfMetrics.danceability += ( Math.pow((track.danceability - meanRawMetrics.danceability), 2));
       varianceOfMetrics.duration_ms += (Math.pow((track.duration_ms - meanRawMetrics.duration_ms), 2));
-      varianceOfMetrics.energy +=( Math.pow((track.energy - meanRawMetrics.energy), 2));
+      varianceOfMetrics.energy += ( Math.pow((track.energy - meanRawMetrics.energy), 2));
       varianceOfMetrics.instrumentalness += (Math.pow((track.instrumentalness - meanRawMetrics.instrumentalness), 2));
-      varianceOfMetrics.liveness +=( Math.pow((track.liveness - meanRawMetrics.liveness), 2));
+      varianceOfMetrics.liveness += ( Math.pow((track.liveness - meanRawMetrics.liveness), 2));
       varianceOfMetrics.mode += (Math.pow((track.mode - meanRawMetrics.mode), 2));
-      varianceOfMetrics.speechiness +=( Math.pow((track.speechiness - meanRawMetrics.speechiness), 2));
+      varianceOfMetrics.speechiness += ( Math.pow((track.speechiness - meanRawMetrics.speechiness), 2));
 
       varianceOfMetrics.time_signature += (Math.pow((track.time_signature - meanRawMetrics.time_signature), 2));
-      varianceOfMetrics.valence +=( Math.pow((track.valence - meanRawMetrics.valence), 2));
-      
+      varianceOfMetrics.valence += ( Math.pow((track.valence - meanRawMetrics.valence), 2));
+
       // NOTICE: divide tempo by 200 as a "soft limit normalization":
-      varianceOfMetrics.tempo +=( Math.pow(((track.tempo / 200 ) - meanRawMetrics.tempo), 2));
+      varianceOfMetrics.tempo += ( Math.pow(((track.tempo / 200 ) - meanRawMetrics.tempo), 2));
 
     }
 
@@ -375,9 +334,9 @@ export class CompositeScoreComponent implements OnInit {
     return varianceOfMetrics;
   }
 
-  private CalculateRatioPerVariance(varianceMetrics: RawMetrics, meanRawMetrics: RawMetrics) : RawMetrics
+  private CalculateRatioPerVariance(varianceMetrics: RawMetrics, meanRawMetrics: RawMetrics): RawMetrics
   {
-    const ratioMetrics : RawMetrics = new RawMetrics();
+    const ratioMetrics: RawMetrics = new RawMetrics();
 
     ratioMetrics.acousticness = varianceMetrics.acousticness / meanRawMetrics.acousticness;
     ratioMetrics.danceability = varianceMetrics.danceability / meanRawMetrics.danceability;
@@ -394,15 +353,15 @@ export class CompositeScoreComponent implements OnInit {
     return ratioMetrics;
   }
 
-  private SmoothStep(value : number) : number
+  private SmoothStep(value: number): number
   {
 
     // Early outs:
-    if(value >= 1)
+    if (value >= 1)
     {
       return 1;
     }
-    else if(value <= 0)
+    else if (value <= 0)
     {
       return 0;
     }
@@ -425,7 +384,7 @@ export class CompositeScoreComponent implements OnInit {
     let res = 0;
 
     // Lower half of the curve:
-    if(value < 0.5)
+    if (value < 0.5)
     {
       res = this.SmoothStepHelper(value, 0.5, curve);
     }
@@ -438,15 +397,15 @@ export class CompositeScoreComponent implements OnInit {
     return res;
   }
 
-  private SmoothStepHelper(x: number, centerPoint: number, curve :number)
+  private SmoothStepHelper(x: number, centerPoint: number, curve: number)
   {
-    //===================
+    // ===================
     //
     //    x^c
     //    ---
     //   n^(c - 1)
     //
-    //===================
+    // ===================
 
     return (Math.pow(x, curve) / Math.pow(centerPoint, curve - 1));
   }

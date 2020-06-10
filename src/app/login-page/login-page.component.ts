@@ -15,21 +15,12 @@ export class LoginPageComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute) {}
 
-  ngOnInit(): void {
-    console.log(this.router.url);
+  ngOnInit(): void 
+  {
   }
 
   LoginButtonClicked()
   {
-    console.log('Calling to spotify login api service');
-    /*this.spotifyApi.LoginRedirect()
-    .subscribe(
-      response => {
-        this.apiResponse = JSON.stringify(response);
-        console.log("Api call recieved");
-      }
-    )*/
     window.location.href = this.spotifyApi.LoginRedirect();
-
   }
 }

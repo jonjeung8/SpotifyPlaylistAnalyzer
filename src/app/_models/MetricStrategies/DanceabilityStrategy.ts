@@ -2,15 +2,18 @@ import { IMetricStrategy } from './IMetricStrategy';
 
 export class DanceabilityStrategy implements IMetricStrategy
 {
-  GetDisplayTitle(): string {
+  GetDisplayTitle(): string 
+  {
     return 'Danceability Rating';
   }
-  ConvertToValue(metric: number): string {
+  ConvertToValue(metric: number): string 
+  {
     metric = parseFloat((metric * 10).toFixed(1));
     return `${metric}/10`;
   }
 
-  ConvertToBar(metric: number): string {
+  ConvertToBar(metric: number): string 
+  {
     metric = parseFloat((metric * 100).toFixed(1));
     return `${metric}%`;
   }

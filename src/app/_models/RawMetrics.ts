@@ -15,10 +15,12 @@ export class RawMetrics
     time_signature: number;
     valence: number;
 
-    getMetric(metric: string): number {
+    getMetric(metric: string): number 
+    {
       let toReturn: number = Number.NEGATIVE_INFINITY;
 
-      switch (metric) {
+      switch (metric) 
+      {
         case 'acousticness':
           {
             toReturn = this.acousticness;
@@ -76,7 +78,6 @@ export class RawMetrics
           }
         default:
           {
-            console.log(metric + ' is not a valid category');
             break;
           }
       }

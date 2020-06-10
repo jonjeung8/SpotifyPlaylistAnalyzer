@@ -34,26 +34,20 @@ export class SpotifyApiServiceService {
     });
 
     // api call
-    console.log('Making api call');
     return this.http.get(url, { headers }).pipe(
       map(response => response),
       catchError(this.handle404)
     );
   }
 
-  handle404(error) 
+  handle404(error)
   {
-    if(error.status == 404) 
-    {
-      console.log('404 error encountered when making api call');
-    }
     return EMPTY;
   }
 
 
   GetPlaylistResults(playlist_id: string, bearerToken: string)
   {
-    console.log('GET PLAYLIST RESULTS API CALL');
     this.bearToken = `${bearerToken}`;
     const playlistResultsString = `playlists/${playlist_id}/tracks?market=ES&fields=items(added_by.id%2Ctrack(name%2Chref%2Calbum(name%2Chref)%2Cid))&limit=100&offset=0`;
     return this.getQuery(playlistResultsString);
@@ -61,7 +55,6 @@ export class SpotifyApiServiceService {
 
   GetFeatures(track_id: string)
   {
-    console.log('GET MY FEATURES API CALL');
     // grab track_id string url
     const tracksIdString = `audio-features?ids=${track_id}`;
     return this.getQuery(tracksIdString);
@@ -73,23 +66,18 @@ export class SpotifyApiServiceService {
     // client id:
     // ===================
     const client_id = environment.client_id_key;
-
     // ===================
     // redirect uri:
     // ===================
-    // var redirect_uri = 'http:%2F%2Flocalhost%3A4200%2F'
     const redirect_uri = environment.redirect_uri;
     // ===================
     // scope:
     // ===================
-    // var scope = 'user-read-private%20user-read-email';
     const scope = 'user-read-private user-read-email playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public';
     // ===================
     // state:
     // ===================
     const state = 123;
-
-
     // ===================
     // url:
     // ===================
@@ -99,34 +87,14 @@ export class SpotifyApiServiceService {
     url += '&scope=' + encodeURIComponent(scope);
     url += '&response_type=token';
     url += '&state=' + encodeURIComponent(state);
-    // ==================
-    // Header:
-    // ==================
-    // let httpOptions = { headers :new HttpHeaders({"Content-Type": "application/json", "Accept":"application/json"}) };
-
-
-    // ====================
-    // Actual API call:
-    // ====================
-    /*return this.http.get<any>(url, httpOptions)
-    .pipe(
-      map (
-        response => {
-          return response;
-        }
-      )
-    );*/
 
     return url;
-
   }
 
   GetUserPlaylists(offset: number)
   {
     const totalOffset = offset * 20;
-    console.log('Getting User playlists');
     const apiEndpoint = `me/playlists?offset=${totalOffset}&limit=20`;
     return this.getQuery(apiEndpoint);
   }
-
 }

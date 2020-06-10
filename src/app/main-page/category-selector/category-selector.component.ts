@@ -20,7 +20,6 @@ export class CategorySelectorComponent implements OnInit {
 
   onCategorySelect(event: any) {
     this.category = event.target.value;
-    console.log(this.category);
   }
 
   validateCategory(): boolean {

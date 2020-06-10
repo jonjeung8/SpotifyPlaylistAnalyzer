@@ -23,8 +23,6 @@ import { UserPlaylistsComponent } from '../main-page/user-playlists/user-playlis
 export const CATEGORIES: Array<Category> = Array(
   new Category('Danceability', 'danceability'),
   new Category('Energy', 'energy'),
-  // new Category("Key", "key"),
-  // new Category("Loudness","loudness"),
   new Category('Mode', 'mode'),
   new Category('Speechiness', 'speechiness'),
   new Category('Acousticness', 'acousticness'),
@@ -58,15 +56,14 @@ export class MainPageComponent implements OnInit {
   userHasMorePlaylists: boolean;
   hideValidPlaylistError: boolean;
 
-  //@ViewChild('appCategorySelector') appCategorySelector: CategorySelectorComponent;
   @ViewChild('appCompositeScore') appCompositeScore: CompositeScoreComponent;
   @ViewChild('outlierList') outlierList: OutliersComponent;
   @ViewChild('appUserPlaylists') appUserPlaylists: UserPlaylistsComponent;
   @ViewChild('appInnerUserPlaylists') appInnerUserPlaylists: UserPlaylistsComponent;
 
-  //loginCallback: Callback;
+  // loginCallback: Callback;
 
-  constructor (
+  constructor(
     private spotifyApi: SpotifyApiServiceService,
     private authService: AuthService,
     private router: Router,
@@ -88,13 +85,12 @@ export class MainPageComponent implements OnInit {
   }
 
 
-  ngOnInit(): void 
+  ngOnInit(): void
   {
-    
+
     // Check with the auth service:
-    if(!this.authService.IsLoggedIn())
+    if (!this.authService.IsLoggedIn())
     {
-      console.log('user not logged in, searching fragment');
       this.GetURLFragment();
     }
 
@@ -102,17 +98,11 @@ export class MainPageComponent implements OnInit {
 
   GetURLFragment()
   {
-    console.log(this.router.url);
-
-    console.log(this.route.snapshot.fragment); // only update on component creation
-
     this.route.fragment.subscribe(
-      fragment => 
+      fragment =>
       {
         // Convert to Url search params:
         const params = new URLSearchParams('?' + fragment);
-
-        // console.log(params);
 
         if (params.has('access_token') && params.has('expires_in') && params.has('state'))
         {
@@ -123,9 +113,6 @@ export class MainPageComponent implements OnInit {
 
           if (tmpAccessToken !== '' && tmpExpiresIn !== '' && tmpState !== '')
           {
-            //this.loginCallback.access_token = tmpAccessToken;
-            //this.loginCallback.expires_in = Number(tmpExpiresIn);
-            //this.loginCallback.state = tmpState;
 
             this.authService.SetCallback(tmpAccessToken, Number(tmpExpiresIn));
 
@@ -137,19 +124,14 @@ export class MainPageComponent implements OnInit {
             this.hideAllPlaylists = false;
 
           }
-          else 
+          else
           {
-            console.log('login failed 1');
             this.router.navigate(['']);
-            console.log('login failed 2');
           }
         }
-        else 
+        else
         {
-
-          console.log('login failed 3');
           this.router.navigate(['']);
-          console.log('login failed 4');
         }
       }
     );
@@ -157,7 +139,6 @@ export class MainPageComponent implements OnInit {
 
   LogoutUser()
   {
-    console.log('Logging out');
     this.authService.Logout();
     this.router.navigate(['']);
   }
@@ -179,18 +160,11 @@ export class MainPageComponent implements OnInit {
     this.hideInnerAllPlaylists = true;
     this.appCompositeScore.hideMetrics = true;
     this.FormulateLinkStrings();
-    // this.linkSubmitStr = this.parseID(this.linkSubmitStr);
-
-    // this.widgetSubmitStr = `https://open.spotify.com/embed/playlist/${this.linkSubmitStr}`;
-
-    console.log('Calling to spotify api service');
 
     this.spotifyApi.GetPlaylistResults(this.linkSubmitStr, this.authService.GetCallback().access_token)
 
     .subscribe({
       next: (response: any) => {
-        console.log('I MADE IT TO the get playlist api response');
-        console.log('Api call recieved for first');
 
         if (response.items)
         {
@@ -212,7 +186,6 @@ export class MainPageComponent implements OnInit {
             }
             this.userPlaylist.tracks.push(tmpTrack);
           }
-          // this.ShowPlaylistElements();
         }
       },
       complete: () =>
@@ -220,15 +193,12 @@ export class MainPageComponent implements OnInit {
         this.spotifyApi.GetFeatures(this.trackIDArray)
         .subscribe({
           next: (response: any) => {
-            console.log('I MADE IT TO the get features response');
-            console.log('Api call recieved for second');
 
             if (response.audio_features)
             {
-              //Check for empty observable from 404 error handler
+              // Check for empty observable from 404 error handler
               this.validateResponse(response.audio_features);
 
-              console.log(response.audio_features);
               for (const item of response.audio_features)
               {
                 const tmpMetrics = new RawMetrics();
@@ -249,21 +219,11 @@ export class MainPageComponent implements OnInit {
                 this.userPlaylist.metrics.push(tmpMetrics);
               }
             }
-            // this.JoinMetricToTracks(tmpMetrics, this.userPlaylist.metrics);
           },
           complete: () =>
           {
-            // console.log(`hey, the category is verified: ${this.appCategorySelector.validateCategory()}`);
-            // this.appCompositeScore.CalculateCompositeScore(this.userPlaylist.metrics, this.appCategorySelector.category);
             this.appCompositeScore.CalculateAllMetrics(this.userPlaylist.metrics);
             this.ShowPlaylistElements();
-
-            // Find and display outliers on the screen:
-            // this.outlierList.getOutliers(
-            //   this.userPlaylist,
-            //   this.appCompositeScore.synergyAverage,
-            //   this.appCategorySelector.category
-            // );
 
             this.appCompositeScore.hideMetrics = false;
             this.appCompositeScore.setPlaylistToggleString();
@@ -287,17 +247,16 @@ export class MainPageComponent implements OnInit {
     return linkSubmitStr;
   }
 
-  outliersButtonClicked(metric: string) 
+  outliersButtonClicked(metric: string)
   {
-    //this.hideOutliers = !clicked;
     this.hideInnerAllPlaylists = true;
     this.outlierList.getOutliers(this.userPlaylist, 1, metric);
     this.hideOutliers = false;
     this.appCompositeScore.setPlaylistToggleString();
-    
+
   }
 
-  metricsButtonClicked(clicked: boolean) 
+  metricsButtonClicked(clicked: boolean)
   {
     this.hideOutliers = true;
     this.hideInnerAllPlaylists = true;
@@ -308,7 +267,6 @@ export class MainPageComponent implements OnInit {
 
   OnInnerPlaylistClicked(clicked: boolean)
   {
-    console.log("Clicked state: " + clicked);
     this.hideOutliers = true;
     this.hideInnerAllPlaylists = !clicked;
   }
@@ -323,7 +281,6 @@ export class MainPageComponent implements OnInit {
     .subscribe({
       next: (response: any) =>
       {
-        console.log('Got all user playlists returned');
         // Parse the response:
         if (response.items)
         {
@@ -338,11 +295,11 @@ export class MainPageComponent implements OnInit {
           }
         }
 
-        response.next ? this.userHasMorePlaylists = true : this.userHasMorePlaylists = false; 
+        response.next ? this.userHasMorePlaylists = true : this.userHasMorePlaylists = false;
       },
       complete: () =>
       {
-        console.log(this.allPlaylists);
+
       }
     });
   }
@@ -376,17 +333,17 @@ export class MainPageComponent implements OnInit {
     this.widgetSubmitStr = `https://open.spotify.com/embed/playlist/${this.linkSubmitStr}`;
   }
 
-  validateResponse(audioFeatures: any) 
+  validateResponse(audioFeatures: any)
   {
-    if(audioFeatures <= 1) {
+    if (audioFeatures <= 1) {
       this.hideValidPlaylistError = false;
-      if(this.hidden == true) {
+      if (this.hidden === true) {
         this.hideAllPlaylists = false;
       } else {
         this.hideInnerAllPlaylists = false;
       }
     } else {
-      this.hideValidPlaylistError = true; 
+      this.hideValidPlaylistError = true;
     }
   }
 }

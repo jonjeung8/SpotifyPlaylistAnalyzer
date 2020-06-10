@@ -2,10 +2,12 @@ import { IMetricStrategy } from './IMetricStrategy';
 
 export class DurationStrategy implements IMetricStrategy
 {
-  GetDisplayTitle(): string {
+  GetDisplayTitle(): string 
+  {
     return 'Average Song Length';
   }
-  ConvertToValue(metric: number): string {
+  ConvertToValue(metric: number): string 
+  {
     // Convert number (ms) to mm:ss
     let seconds: number = metric / 1000;
     const minutes: number = Math.floor(seconds / 60);
@@ -22,8 +24,9 @@ export class DurationStrategy implements IMetricStrategy
     return res;
   }
 
-  ConvertToBar(metric: number): string {
-    metric = Number((metric/600000 * 100).toFixed(0));
+  ConvertToBar(metric: number): string 
+  {
+    metric = Number((metric / 600000 * 100).toFixed(0));
     if (metric > 100)
     {
       metric = 100;

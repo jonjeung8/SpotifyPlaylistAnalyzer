@@ -2,11 +2,13 @@ import { IMetricStrategy } from './IMetricStrategy';
 
 export class SpeechinessStrategy implements IMetricStrategy
 {
-  GetDisplayTitle(): string {
+  GetDisplayTitle(): string 
+  {
     return 'On Average, Tracks in this Playlist Contain';
   }
 
-  ConvertToValue(metric: number): string {
+  ConvertToValue(metric: number): string 
+  {
     let res = '';
     if (metric > 0.66)
     {
@@ -23,7 +25,8 @@ export class SpeechinessStrategy implements IMetricStrategy
     return res;
   }
 
-  ConvertToBar(metric: number): string {
+  ConvertToBar(metric: number): string 
+  {
     metric = parseFloat((metric * 100).toFixed(1));
     metric = 100 - metric;
     return `${metric}%`;
