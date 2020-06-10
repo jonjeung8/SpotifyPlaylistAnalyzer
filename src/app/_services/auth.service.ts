@@ -9,18 +9,17 @@ export class AuthService {
   private readonly TOKEN_TYPE = 'token';
 
   // Actual callback object:
-  logincallback: Callback
+  logincallback: Callback;
 
   private isLoggedIn: boolean;
 
-  constructor() { 
-
+  constructor() 
+  {
     this.isLoggedIn = false;
 
     this.logincallback = new Callback();
     this.logincallback.token_type = this.TOKEN_TYPE;
     this.logincallback.state = '';
-
   }
 
   SetCallback(token: string, expires_in: number)
@@ -31,19 +30,18 @@ export class AuthService {
     this.isLoggedIn = true;
   }
 
-  GetCallback() : Callback
+  GetCallback(): Callback
   {
     return this.logincallback;
   }
 
-  IsLoggedIn() : boolean
+  IsLoggedIn(): boolean
   {
     return this.isLoggedIn;
   }
 
   Logout()
   {
-
     this.isLoggedIn = false;
 
     // Nullify the user data:

@@ -16,7 +16,6 @@ export class UserPlaylistsComponent implements OnInit {
   playlistButtonPressed(playlistID: string)
   {
     this.onPlaylistSelected.emit(playlistID);
-    console.log('playlist was selected from loaded playlists.');
   }
 
   constructor() { }

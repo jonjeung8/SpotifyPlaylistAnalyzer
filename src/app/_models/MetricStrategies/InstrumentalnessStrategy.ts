@@ -2,15 +2,18 @@ import { IMetricStrategy } from './IMetricStrategy';
 
 export class InstrumentalnessStrategy implements IMetricStrategy
 {
-  GetDisplayTitle(): string {
+  GetDisplayTitle(): string 
+  {
     return 'Percent of Tracks that are Instrumental';
   }
-  ConvertToValue(metric: number): string {
+  ConvertToValue(metric: number): string 
+  {
     metric = parseFloat((metric * 100).toFixed(0));
     return `${metric}%`;
   }
 
-  ConvertToBar(metric: number): string {
+  ConvertToBar(metric: number): string 
+  {
     metric = parseFloat((metric * 100).toFixed(0));
     return `${metric}%`;
   }

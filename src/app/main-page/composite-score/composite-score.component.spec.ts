@@ -63,7 +63,7 @@ describe('CompositeScoreComponent', () => {
     }
 
     rawMetricsSynergyMin = new Array<RawMetrics>();
-    for(let i = 0; i < 1; i++)
+    for (let i = 0; i < 1; i++)
     {
       const tmpMetrics = new RawMetrics();
       tmpMetrics.duration_ms = 66000;
@@ -485,7 +485,7 @@ describe('CompositeScoreComponent', () => {
     expect(component.synergyAverage).toBeCloseTo(1.0);
   });
   // Single song score output:
-  it('should display 100% syndergy with one song', () =>{
+  it('should display 100% syndergy with one song', () => {
     // Arrange
     // Act
     component.CalculateAllMetrics(rawMetricsSynergyMin);
